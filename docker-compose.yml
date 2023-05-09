@@ -5,13 +5,16 @@ services:
     build:
       context: .
       dockerfile: config/Dockerfile
-
     ports:
       - "3000:3000"
     depends_on:
       - db
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/royalacademydb
+    volumes:
+      - /app/node_modules
+      - .:/app
+
   db:
     image: postgres
     restart: always
