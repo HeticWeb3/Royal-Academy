@@ -12,9 +12,7 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/royalacademydb
     volumes:
-      - /app/node_modules
-      - .:/app
-
+      - ./src/app:/usr/src/app/
   db:
     image: postgres
     restart: always
