@@ -1,22 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+First, run docker :
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```shell
+docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### To configure postgre database admin tab follow thoses steps :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Access to pgadmin : http://localhost:5050
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Click on "Add new server"
+
+- On the first tab of the new window, enter a name.
+- On the second tab "connection" :
+- Enter credentials entered in docker-compose
+- To find the db IP, run this command in shell: 
+  - ``` docker inspect <CONTAINER>> | grep IPAddress```
+  - to find container id : docker ps
+    
+
+
 
 ## Learn More
 
