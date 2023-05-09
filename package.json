@@ -1,12 +1,13 @@
 {
-  "name": "royal-academie",
+  "name": "royal-academy",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "npx prisma" : "prisma"
   },
   "dependencies": {
     "@types/node": "20.1.1",

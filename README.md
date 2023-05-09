@@ -7,6 +7,11 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 Access to pgadmin : http://localhost:5050
 
+>username : admin@admin.com
+> 
+> password : root
+
+
 Click on "Add new server"
 
 - On the first tab of the new window, enter a name.
@@ -15,7 +20,6 @@ Click on "Add new server"
 - To find the db IP, run this command in shell: 
   - ``` docker inspect <CONTAINER>> | grep IPAddress```
   - to find container id : docker ps
->>>>>>> Stashed changes
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
