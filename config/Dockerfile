@@ -10,6 +10,7 @@ WORKDIR /app
 
 # Installation des dépendances de l'application
 COPY package*.json ./
+COPY prisma ./prisma/
 RUN npm install
 
 # Copie des fichiers de l'application
