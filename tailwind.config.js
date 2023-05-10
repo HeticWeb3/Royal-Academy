@@ -14,6 +14,7 @@ module.exports = {
         blue:{
           extralight:'#F3F2F8',
           lighter:'#CACBDF',
+          lightbis:'#4D76C3',
           light:'#71739F',
           base :'#374077',
           dark:'#161C3D'
@@ -44,13 +45,17 @@ module.exports = {
         xl:'87px',
       },
       fontSize:{
-        sm:'16px',
+        sm:'0.94em',
         base: '17px',
-        lg:'22px',
-        xl:'26px',
-        xxl:'28px',
-        subheading:'40px',
-        heading:'56px'
+        lg:'1.29em',
+        xl:'1.52em',
+        xxl:'1.65em',
+        subheading:'2.35em',
+        heading:'3.29em'
+      },
+      borderRadius:{
+        sm:'2px',
+        base:'13px'
       },
     },
   },
