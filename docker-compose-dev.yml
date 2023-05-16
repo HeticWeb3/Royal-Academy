@@ -4,15 +4,18 @@
     app:
       build:
         context: .
-        dockerfile: config/Dockerfile
+        dockerfile: config/Dockerfile.dev
       ports:
         - "3000:3000"
       depends_on:
         - db
       environment:
         - DATABASE_URL=postgres://postgres:password@db:5432/royalacademydb
+        - NEXT_WEBPACK_USEPOLLING=1
       volumes:
-        - ./src:/usr/src/app
+        - ./:/app
+        - /app/node_modules
+        - /app/.next
     db:
       image: postgres
       restart: always
