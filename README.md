@@ -25,6 +25,12 @@ Click on "Add new server"
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 # Docker
+## Conteneurs
+| Nom      | Port Externe | Port Interne | Variables                                               |
+|----------|--------------|--------------|---------------------------------------------------------|
+| app      | 3000         | 3000         | DATABASE_URL<br/>NEXT_WEBPACK_USEPOLLING                |
+| db | 5432         | 5432         | PGUSER <br/>POSTGRES_USER<br/>POSTGRES_PASSWORD<br/>POSTGRES_DB |
+| pgadmin    | 5050         | 80           | PGADMIN_DEFAULT_EMAIL<br/>PGADMIN_DEFAULT_PASSWORD      |
 ## Commandes
 Pour lancer le build de l'environnement de développement
 ```shell
