@@ -2,7 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 =======
-
+# PostgreSQL
+## pgAdmin
 ### To configure postgre database admin tab follow thoses steps :
 
 Access to pgadmin : http://localhost:5050
@@ -22,6 +23,18 @@ Click on "Add new server"
   - to find container id : docker ps
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+# Docker
+## Commandes
+Pour lancer le build de l'environnement de développement
+```shell
+docker-compose -f .\docker-compose-dev.yml up -d --build
+```
+
+Pour lancer le build de l'environnement de production
+```shell
+docker-compose -f .\docker-compose.yml up -d --build
+```
 
 ## Learn More
 
