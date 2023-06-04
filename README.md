@@ -24,6 +24,18 @@ Click on "Add new server"
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Atomic Design
+
+On va utiliser L'atomic design pour avoir un code plus structure et propre et en cas de test unitaire cette architecture nous facilitera la vie pour pas avoir beaucoup de ligne de code a tester, pour en savoir plus et comprendre comment il faut l'utiliser je vous invite a regarder sur ce site [Atomic design documentation](https://blog-ux.com/quest-ce-que-latomic-design/)
+
+## Types
+
+Le dossier Type c'est pour mettre en place tout les interfaces et types de typescript pour ne pas avoir des code inutile dans le front, oublier pas de faire un export pour pouvoir l'utiliser
+
+exemple : 
+pour un User on cree un dossier User/user.ts puis on rajoute notre code ensuite on va dans index.ts on import User
+et on export:  export * from "User/user"
+
 # Docker
 ## Conteneurs
 | Nom      | Port Externe | Port Interne | Variables                                               |
@@ -43,13 +55,6 @@ docker-compose -f .\docker-compose.yml up -d --build
 ```
 
 ## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
