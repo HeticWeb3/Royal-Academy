@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/Components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -30,7 +30,7 @@ module.exports = {
           base :'#C62120',
           dark:'#9D1414'
         },
-        black:"#121525",
+        black:"#131525",
         white:"#ffffff",
         green:"#1CC12D",
       },
@@ -56,7 +56,8 @@ module.exports = {
       },
       borderRadius:{
         sm:'2px',
-        base:'13px'
+        base:'13px',
+        square:'100%',
       },
     },
   },
