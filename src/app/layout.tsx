@@ -1,4 +1,5 @@
 import './globals.css'
+import {ContainerWide} from "@/app/Components/Atoms/";
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={'body'}>{children}</body>
+      <body className={'body'}>
+          <ContainerWide>
+              {children}
+          </ContainerWide>
+      </body>
     </html>
   )
 }

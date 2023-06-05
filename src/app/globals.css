@@ -11,6 +11,10 @@
   .body{
     @apply font-main bg-blue-dark text-white;
   }
+
+  .grid-main{
+    @apply lg:grid grid-cols-12 lg:gap-4 mx-5 lg:mx-[77px];
+  }
 }
 
 
