@@ -2,7 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 =======
-
+# PostgreSQL
+## pgAdmin
 ### To configure postgre database admin tab follow thoses steps :
 
 Access to pgadmin : http://localhost:5050
@@ -35,7 +36,26 @@ exemple :
 pour un User on cree un dossier User/user.ts puis on rajoute notre code ensuite on va dans index.ts on import User
 et on export:  export * from "User/user"
 
+# Docker
+## Conteneurs
+| Nom      | Port Externe | Port Interne | Variables                                               |
+|----------|--------------|--------------|---------------------------------------------------------|
+| app      | 3000         | 3000         | DATABASE_URL<br/>NEXT_WEBPACK_USEPOLLING                |
+| db | 5432         | 5432         | PGUSER <br/>POSTGRES_USER<br/>POSTGRES_PASSWORD<br/>POSTGRES_DB |
+| pgadmin    | 5050         | 80           | PGADMIN_DEFAULT_EMAIL<br/>PGADMIN_DEFAULT_PASSWORD      |
+## Commandes
+Pour lancer le build de l'environnement de développement
+```shell
+docker-compose -f .\docker-compose-dev.yml up -d --build
+```
 
+Pour lancer le build de l'environnement de production
+```shell
+docker-compose -f .\docker-compose.yml up -d --build
+```
+
+## Learn More
+=======
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
