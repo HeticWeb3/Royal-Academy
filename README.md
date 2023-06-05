@@ -33,7 +33,7 @@ On va utiliser L'atomic design pour avoir un code plus structure et propre et en
 Le dossier Type c'est pour mettre en place tout les interfaces et types de typescript pour ne pas avoir des code inutile dans le front, oublier pas de faire un export pour pouvoir l'utiliser
 
 exemple : 
-pour un User on cree un dossier User/user.ts puis on rajoute notre code ensuite on va dans ContainerWide.tsx on import User
+pour un User on cree un dossier User/user.ts puis on rajoute notre code ensuite on va dans Icon.tsx on import User
 et on export:  export * from "User/user"
 
 # Docker
