@@ -32,6 +32,7 @@ module.exports = {
         },
         black:"#121525",
         white:"#ffffff",
+        green:"#1CC12D",
       },
       spacing:{
         1:'3px',
