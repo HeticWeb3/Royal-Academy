@@ -6,7 +6,7 @@ export default function Home() {
       <div className="button bg-blue-lightbis">
           Get started by editing&nbsp;
       </div>
-        <Icon containerClass={'bg-black text-white w-[52px] border-2 rounded-square'} iconContent="/icons/book-open.svg" iconSize={38} iconAlt="My Icon" />
+        <Icon containerClass={'bg-white text-black w-[52px] border-2 rounded-square'} iconContent="1" iconSize={38} iconAlt="My Icon" />
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
