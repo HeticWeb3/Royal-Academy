@@ -13,14 +13,14 @@ import {
 
 export const SignupSchema = () =>{
     return Yup.object().shape({
-    firstname: FirstNameValidationSchema(),
-    lastname: LastNameValidationSchema(),
-    birthdate: BirthdateValidationSchema(),
+    firstName: FirstNameValidationSchema(),
+    lastName: LastNameValidationSchema(),
+    birthDate: BirthdateValidationSchema(),
     email: EmailValidationSchema(),
-    confirm_email: EmailConfirmationValidationSchema('email'),
+    confirmEmail: EmailConfirmationValidationSchema('email'),
     password: PasswordValidationSchema(),
     confirmPassword: PasswordConfirmationValidationSchema('password'),
-    phone: PhoneValidationSchema(),
-    confirmPhone: PhoneConfirmationValidationSchema('phone'),
+    phoneNumber: PhoneValidationSchema(),
+    confirmPhoneNumber: PhoneConfirmationValidationSchema('phoneNumber'),
 });
 }

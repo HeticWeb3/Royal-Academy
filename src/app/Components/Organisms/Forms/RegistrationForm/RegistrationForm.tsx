@@ -1,11 +1,10 @@
 "use client"; // This is a client component 👈🏽
 
 import React, { useState } from 'react'
-import { Formik, Form, Field, FormikProps } from 'formik'
+import {Formik, Form, Field, FormikProps, ErrorMessage} from 'formik'
 import {IFormStatusProps, IFormStatusTypes, RegistrationInputTypes} from "@/app/Components/Types";
 import {SignupSchema} from "./ValidationSchema";
 import {FormikDatePicker} from "@/app/Components/Atoms/Forms";
-import {Button,TextField} from "@mui/material";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
@@ -69,8 +68,10 @@ const SignUp: React.FunctionComponent = () => {
                     phoneNumber: '',
                     confirmPhoneNumber: '',
                 }}
+
                 onSubmit={(values: RegistrationInputTypes, actions) => {
-                    createNewUser(values, actions.resetForm)
+                   // createNewUser(values, actions.resetForm)
+                    console.log(values)
                     setTimeout(() => {
                         actions.setSubmitting(false)
                     }, 500)
@@ -96,167 +97,111 @@ const SignUp: React.FunctionComponent = () => {
                                 label="First Name"
                                 value={values.firstName}
                                 type="text"
-                                helperText={
-                                    errors.firstName && touched.firstName
-                                        ? errors.firstName
-                                        : 'Enter your first name.'
-                                }
-                                error={
-                                    !!(errors.firstName && touched.firstName)
-                                }
+                                placeholder="First Name"
                                 onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
+                                onBlur={handleBlur}/>
+                            <ErrorMessage name="firstName" component="div" className="error-message" />
+
                             <Field
                                 name="lastName"
                                 id="lastName"
                                 label="Last Name"
                                 value={values.lastName}
                                 type="text"
-                                helperText={
-                                    errors.lastName && touched.lastName
-                                        ? errors.lastName
-                                        : 'Enter your last name.'
-                                }
-                                error={
-                                    !!(errors.lastName && touched.lastName)
-                                }
+                                placeholder="Last Name"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            <ErrorMessage name="lastName" component="div" className="error-message" />
 
                             <FormikDatePicker
                                 name="birthDate"
                                 id="birthDate"
-                                label="birthDate"
+                                label="Birthdate"
                                 value={values.birthDate}
-                                renderInput={(params) => (
-                                    <TextField {...params} label="birthDate" />
-                                )}
-                                helperText={
-                                    errors.birthDate && touched.birthDate
-                                        ? 'Please valid password. One uppercase, one lowercase, one special character and no spaces'
-                                        : 'One uppercase, one lowercase, one special character and no spaces'
-                                }
-                                error={
-                                    !!(errors.birthDate && touched.birthDate)
-                                }
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            <ErrorMessage name="birthDate" component="div" className="error-message" />
+
                             <Field
                                 name="email"
                                 id="email"
                                 label="Email"
                                 value={values.email}
                                 type="email"
-                                helperText={
-                                    errors.email && touched.email
-                                        ? errors.email
-                                        : 'Enter email-id'
-                                }
-                                error={
-                                    !!(errors.email && touched.email)
-                                }
+                                placeholder="Email"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            <ErrorMessage name="email" component="div" className="error-message" />
+
                             <Field
                                 name="confirmEmail"
                                 id="confirmEmail"
                                 label="Email"
                                 value={values.confirmEmail}
                                 type="email"
-                                helperText={
-                                    errors.confirmEmail && touched.confirmEmail
-                                        ? errors.confirmEmail
-                                        : 'Enter email-id'
-                                }
-                                error={
-                                    !!(errors.confirmEmail && touched.confirmEmail)
-                                }
+                                placeholder="Confirm Email"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            <ErrorMessage name="confirmEmail" component="div" className="error-message" />
+
                             <Field
                                 name="password"
                                 id="password"
                                 label="Password"
                                 value={values.password}
                                 type="password"
-                                helperText={
-                                    errors.password &&
-                                    touched.password
-                                        ? errors.password
-                                        : 'Re-enter password to confirm'
-                                }
-                                error={
-                                    !!(errors.password && touched.password)
-                                }
+                                placeholder="Password"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            <ErrorMessage name="password" component="div" className="error-message" />
+
                             <Field
                                 name="confirmPassword"
                                 id="confirmPassword"
                                 label="Confirm password"
                                 value={values.confirmPassword}
                                 type="password"
-                                helperText={
-                                    errors.confirmPassword &&
-                                    touched.confirmPassword
-                                        ? errors.confirmPassword
-                                        : 'Re-enter password to confirm'
-                                }
-                                error={
-                                    !!(errors.confirmPassword && touched.confirmPassword)
-                                }
+                                placeholder="Confirm Password"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            <ErrorMessage name="confirmPassword" component="div" className="error-message" />
+
                             <Field
                                 name="phoneNumber"
                                 id="phoneNumber"
                                 label="Phone Number"
                                 value={values.phoneNumber}
                                 type="text"
-                                helperText={
-                                    errors.phoneNumber &&
-                                    touched.phoneNumber
-                                        ? errors.phoneNumber
-                                        : 'Re-enter password to confirm'
-                                }
-                                error={
-                                    !!(errors.phoneNumber && touched.phoneNumber)
-                                }
+                                placeholder="Phone Number"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            <ErrorMessage name="phoneNumber" component="div" className="error-message" />
+
                             <Field
                                 name="confirmPhoneNumber"
                                 id="confirmPhoneNumber"
                                 label="Confirm Phone Number"
+                                placeholder="Confirm Phone Number"
                                 value={values.confirmPhoneNumber}
                                 type="text"
-                                helperText={
-                                    errors.confirmPhoneNumber &&
-                                    touched.confirmPhoneNumber
-                                        ? errors.confirmPhoneNumber
-                                        : 'Re-enter password to confirm'
-                                }
-                                error={
-                                    !!(errors.confirmPhoneNumber && touched.confirmPhoneNumber)
-                                }
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            <ErrorMessage name="confirmPhoneNumber" component="div" className="error-message" />
+
                             <button
                                 type="submit"
-                                variant="contained"
-                                color="secondary"
+                                className={'button bg-blue-lightbis text-white font-normal antialiased'}
                                 disabled={isSubmitting}
                             >
-                                Submit
+                                Choose your subscription
                             </button>
                             {displayFormStatus && (
                                 <div className="formStatus">
