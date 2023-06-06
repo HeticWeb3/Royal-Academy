@@ -24,19 +24,20 @@ model Utilisateur {
   prenom                String?
   password              String
   avatar                String?
-  style                 Style                  @relation(fields: [styleId], references: [id])
-  derniereLecon         Lecon                  @relation(fields: [leconId], references: [id])
+  style                 Style?                  @relation(fields: [styleId], references: [id])
+  derniereLecon         Lecon?                  @relation(fields: [leconId], references: [id])
   instrument            Instrument[]
-  rang                  Rang                   @relation(fields: [rangId], references: [id])
+  rang                  Rang?                   @relation(fields: [rangId], references: [id])
   badge                 Badge[]
   bio                   String?
   uploadFileUtilisateur UploadFileUtilsateur[]
-  Ecole                 Ecole?                 @relation(fields: [ecoleId], references: [id])
+  Ecole                 Ecole?                  @relation(fields: [ecoleId], references: [id])
   ecoleId               Int?
   Abonnement            Abonnement[]
-  styleId               Int
-  leconId               Int
-  rangId                Int
+  styleId               Int?
+  leconId               Int?
+  rangId                Int?
+  dateCreation          DateTime                @db.Date
 }
 
 model Professeur {
