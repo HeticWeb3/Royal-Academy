@@ -1,5 +1,7 @@
 import './globals.css'
 import {ContainerWide} from "@/app/Components/Atoms/";
+import RegistrationForm from "@/app/Components/Organisms/Forms/RegistrationForm/RegistrationForm";
+
 
 export const metadata = {
   title: 'Create Next App',
