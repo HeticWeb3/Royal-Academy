@@ -10,19 +10,20 @@ export async function POST(request: Request) {
     try {
         hashedPassword = await passwordValidation(res.password, res.confirmPassword)
     } catch(e: any){
-        return NextResponse.json({"error": {"message": e.message, "error": e.name}}, {status: e.status,});
+        return NextResponse.json({"error": {"type": e.name}}, {status: e.status,});
     }
 
     const users: Users = new Users()
     const user: User = await users.execute().signup(
         {
             email: res.email,
-            firstname: res.firstname,
-            lastname: res.lastname,
+            firstName: res.firstname,
+            lastName: res.lastname,
             phoneNumber: res.phoneNumber,
             password: hashedPassword,
-            dateCreation: res.dateCreation
+            birthDate: res.birthDate,
+            dateCreation: new Date().toJSON()
         }
     )
-    return NextResponse.json({"res": Users.exclude(user, ['password'])}, {status: 200,});
+    return NextResponse.json(Users.exclude(user, ['password']), {status: 200,});
 }
