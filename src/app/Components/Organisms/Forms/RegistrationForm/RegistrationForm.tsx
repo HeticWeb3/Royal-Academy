@@ -48,7 +48,7 @@ const SignUp: React.FunctionComponent = () => {
         } catch (error) {
             const response = error.response
             if (
-                response.error.type === 'ValidationError' &&
+                response.error.type === 'ValidationEmailError' &&
                 response.status === 400
             ) {
                 setFormStatus(formStatusProps.duplicate)
