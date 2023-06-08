@@ -34,7 +34,13 @@ const SignUp: React.FunctionComponent = () => {
 
     const createNewUser = async (data: RegistrationInputTypes, resetForm: Function) => {
         try {
-            // API call integration will be here. Handle success / error response accordingly.
+            await fetch('http://localhost:3000/api/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
             if (data) {
                 setFormStatus(formStatusProps.success)
                 resetForm({})
@@ -42,7 +48,7 @@ const SignUp: React.FunctionComponent = () => {
         } catch (error) {
             const response = error.response
             if (
-                response.data === 'user already exist' &&
+                response.error.type === 'ValidationError' &&
                 response.status === 400
             ) {
                 setFormStatus(formStatusProps.duplicate)
@@ -71,8 +77,7 @@ const SignUp: React.FunctionComponent = () => {
                 }}
 
                 onSubmit={(values: RegistrationInputTypes, actions) => {
-                   // createNewUser(values, actions.resetForm)
-                    console.log(values)
+                    createNewUser(values, actions.resetForm)
                     setTimeout(() => {
                         actions.setSubmitting(false)
                     }, 500)
@@ -93,7 +98,7 @@ const SignUp: React.FunctionComponent = () => {
                             <h1 className={''}>Sign up</h1>
 
                             <Field
-                                classname={'formInput'}
+                                className={'formInput'}
                                 name="firstName"
                                 id="firstName"
                                 label="First Name"
