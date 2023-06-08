@@ -9,3 +9,204 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model UploadFileUser {
+  id            Int          @id @default(autoincrement())
+  url           String?
+  User          User? @relation(fields: [userId], references: [id])
+  userId        Int?
+}
+
+model User {
+  id                    Int                    @id @default(autoincrement())
+  email                 String                 @unique
+  phoneNumber           String?
+  lastname              String?
+  firstname             String?
+  password              String
+  avatar                String?
+  style                 Style?                  @relation(fields: [styleId], references: [id])
+  lastLesson            Lecon?                  @relation(fields: [leconId], references: [id])
+  instrument            Instrument[]
+  rank                  Rang?                   @relation(fields: [rangId], references: [id])
+  badge                 Badge[]
+  bio                   String?
+  uploadFileUser        UploadFileUser[]
+  School                Ecole?                  @relation(fields: [ecoleId], references: [id])
+  ecoleId               Int?
+  Subscription          Abonnement[]
+  styleId               Int?
+  leconId               Int?
+  rangId                Int?
+  dateCreation          DateTime                @db.Date
+}
+
+model Professeur {
+  id              Int          @id @default(autoincrement())
+  email           String       @unique
+  nom             String?
+  prenom          String?
+  description     String?
+  ecole           String?
+  dateDeNaissance DateTime
+  titreGagne      String?
+  diplome         String?
+  photo           String[]
+  carriere        String?
+  cours           Cours[]
+  instrument      Instrument[]
+  style           Style[]
+}
+
+model Ecole {
+  id          Int           @id @default(autoincrement())
+  nom         String?
+  user        User[]
+  Rang        Rang[]
+}
+
+model Style {
+  id           Int           @id @default(autoincrement())
+  nom          String?
+  description  String?
+  Rang         Rang[]
+  Cours        Cours[]
+  Concours     Concours[]
+  User         User[]
+  Professeur   Professeur?   @relation(fields: [professeurId], references: [id])
+  professeurId Int?
+}
+
+model Rang {
+  id          Int           @id @default(autoincrement())
+  place       Int
+  style       Style         @relation(fields: [styleId], references: [id])
+  ecole       Ecole         @relation(fields: [ecoleId], references: [id])
+  point       Int
+  styleId     Int
+  ecoleId     Int
+  User        User[]
+}
+
+model Niveau {
+  id       Int        @id @default(autoincrement())
+  lecon    Lecon      @relation(fields: [leconId], references: [id])
+  nom      String?
+  leconId  Int
+  Cours    Cours[]
+  Badge    Badge[]
+  Concours Concours[]
+}
+
+model LeconFile {
+  id      Int      @id @default(autoincrement())
+  file    String[]
+  lecon   Lecon    @relation(fields: [leconId], references: [id])
+  leconId Int
+}
+
+model Video {
+  id          Int     @id @default(autoincrement())
+  nom         String?
+  description String?
+  lecon       Lecon   @relation(fields: [leconId], references: [id])
+  leconId     Int
+}
+
+model Lecon {
+  id          Int           @id @default(autoincrement())
+  nom         String?
+  description String?
+  Niveau      Niveau[]
+  LeconFile   LeconFile[]
+  Video       Video[]
+  Cours       Cours?        @relation(fields: [coursId], references: [id])
+  coursId     Int?
+  Badge       Badge[]
+  User        User[]
+}
+
+model Cours {
+  id           Int        @id @default(autoincrement())
+  nom          String?
+  description  String?
+  niveau       Niveau     @relation(fields: [niveauId], references: [id])
+  style        Style      @relation(fields: [styleId], references: [id])
+  instrument   Instrument @relation(fields: [instrumentId], references: [id])
+  lecon        Lecon[]
+  professeur   Professeur @relation(fields: [professeurId], references: [id])
+  niveauId     Int
+  styleId      Int
+  professeurId Int
+  instrumentId Int
+  Badge        Badge[]
+}
+
+model Instrument {
+  id            Int          @id @default(autoincrement())
+  nom           String?
+  description   String?
+  Cours         Cours[]
+  Concours      Concours[]
+  User          User? @relation(fields: [userId], references: [id])
+  userId        Int?
+  Professeur    Professeur?  @relation(fields: [professeurId], references: [id])
+  professeurId  Int?
+}
+
+model Badge {
+  id            Int          @id @default(autoincrement())
+  nom           String?
+  niveau        Niveau       @relation(fields: [niveauId], references: [id])
+  lecon         Lecon        @relation(fields: [leconId], references: [id])
+  cours         Cours        @relation(fields: [coursId], references: [id])
+  point         Int
+  certifie      Boolean
+  niveauId      Int
+  leconId       Int
+  coursId       Int
+  IconeBadge    IconeBadge[]
+  User          User? @relation(fields: [userId], references: [id])
+  userId        Int?
+}
+
+model IconeBadge {
+  id      Int    @id @default(autoincrement())
+  url     String
+  badge   Badge  @relation(fields: [badgeId], references: [id])
+  badgeId Int
+}
+
+model Abonnement {
+  id               Int            @id @default(autoincrement())
+  user             User    @relation(fields: [userId], references: [id])
+  expiration       DateTime
+  abonnementPlan   AbonnementPlan @relation(fields: [abonnementPlanId], references: [id])
+  userId           Int
+  abonnementPlanId Int
+}
+
+model AbonnementPlan {
+  id         Int          @id @default(autoincrement())
+  nom        String?
+  plan       String
+  prix       Float
+  duree      DateTime
+  Abonnement Abonnement[]
+}
+
+model Concours {
+  id           Int        @id @default(autoincrement())
+  nom          String?
+  description  String?
+  niveau       Niveau     @relation(fields: [niveauId], references: [id])
+  style        Style      @relation(fields: [styleId], references: [id])
+  instrument   Instrument @relation(fields: [instrumentId], references: [id])
+  date         DateTime
+  localisation String
+  prixEntrer   Int
+  prixGagne    Int
+  niveauId     Int
+  styleId      Int
+  instrumentId Int
+}
