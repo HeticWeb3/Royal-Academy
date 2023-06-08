@@ -1,22 +1,30 @@
 import { NextResponse } from 'next/server';
-import {Utilisateurs} from "../../../../../prisma/repository/utilisateur/utilisateur";
-import {passwordValidation} from "@/app/api/shared/utilisateur/validations";
-import {Utilisateur} from "@prisma/client";
+import {Users} from "../../../../../prisma/repository/user/user";
+import {passwordValidation} from "@/app/api/shared/user/validations";
+import {User} from "@prisma/client";
 
 export async function POST(request: Request) {
+    let hashedPassword: string = ''
     const res = await request.json()
 
-    const hashedPassword: string = await passwordValidation(res.password, res.confirmPassword)
+    try {
+        hashedPassword = await passwordValidation(res.password, res.confirmPassword)
+    } catch(e: any){
+        return NextResponse.json({"error": {"message": e.message, "error": e.name}}, {status: e.status,});
+    }
 
-    const utilisateurs: Utilisateurs = new Utilisateurs()
-    const utilisateur: Utilisateur = await utilisateurs.execute().signup(
+
+    const users: Users = new Users()
+    const user: User = await users.execute().signup(
         {
             email: res.email,
-            prenom: res.prenom,
-            nom: res.nom,
-            password: hashedPassword
+            firstname: res.firstname,
+            lastname: res.lastname,
+            phoneNumber: res.phoneNumber,
+            password: hashedPassword,
+            dateCreation: res.dateCreation
         }
     )
 
-    return NextResponse.json({"res": Utilisateurs.exclude(utilisateur, ['password'])}, {status: 200,});
+    return NextResponse.json({"res": Users.exclude(user, ['password'])}, {status: 200,});
 }
