@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model UploadFileUtilsateur {
+model UploadFileUser {
   id            Int          @id @default(autoincrement())
   url           String?
   User          User? @relation(fields: [userId], references: [id])
@@ -31,7 +31,7 @@ model User {
   rank                  Rang?                   @relation(fields: [rangId], references: [id])
   badge                 Badge[]
   bio                   String?
-  uploadFileUser        UploadFileUtilsateur[]
+  uploadFileUser        UploadFileUser[]
   School                Ecole?                  @relation(fields: [ecoleId], references: [id])
   ecoleId               Int?
   Subscription          Abonnement[]
