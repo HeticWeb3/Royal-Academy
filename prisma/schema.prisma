@@ -10,33 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model UploadFileUtilsateur {
+model UploadFileUser {
   id            Int          @id @default(autoincrement())
   url           String?
-  Utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
-  utilisateurId Int?
+  User          User? @relation(fields: [userId], references: [id])
+  userId        Int?
 }
 
-model Utilisateur {
+model User {
   id                    Int                    @id @default(autoincrement())
   email                 String                 @unique
-  nom                   String?
-  prenom                String?
+  phoneNumber           String?
+  lastname              String?
+  firstname             String?
   password              String
   avatar                String?
-  style                 Style                  @relation(fields: [styleId], references: [id])
-  derniereLecon         Lecon                  @relation(fields: [leconId], references: [id])
+  style                 Style?                  @relation(fields: [styleId], references: [id])
+  lastLesson            Lecon?                  @relation(fields: [leconId], references: [id])
   instrument            Instrument[]
-  rang                  Rang                   @relation(fields: [rangId], references: [id])
+  rank                  Rang?                   @relation(fields: [rangId], references: [id])
   badge                 Badge[]
   bio                   String?
-  uploadFileUtilisateur UploadFileUtilsateur[]
-  Ecole                 Ecole?                 @relation(fields: [ecoleId], references: [id])
+  uploadFileUser        UploadFileUser[]
+  School                Ecole?                  @relation(fields: [ecoleId], references: [id])
   ecoleId               Int?
-  Abonnement            Abonnement[]
-  styleId               Int
-  leconId               Int
-  rangId                Int
+  Subscription          Abonnement[]
+  styleId               Int?
+  leconId               Int?
+  rangId                Int?
+  dateCreation          DateTime                @db.Date
 }
 
 model Professeur {
@@ -59,7 +61,7 @@ model Professeur {
 model Ecole {
   id          Int           @id @default(autoincrement())
   nom         String?
-  utilisateur Utilisateur[]
+  user        User[]
   Rang        Rang[]
 }
 
@@ -70,7 +72,7 @@ model Style {
   Rang         Rang[]
   Cours        Cours[]
   Concours     Concours[]
-  Utilisateur  Utilisateur[]
+  User         User[]
   Professeur   Professeur?   @relation(fields: [professeurId], references: [id])
   professeurId Int?
 }
@@ -83,7 +85,7 @@ model Rang {
   point       Int
   styleId     Int
   ecoleId     Int
-  Utilisateur Utilisateur[]
+  User        User[]
 }
 
 model Niveau {
@@ -121,7 +123,7 @@ model Lecon {
   Cours       Cours?        @relation(fields: [coursId], references: [id])
   coursId     Int?
   Badge       Badge[]
-  Utilisateur Utilisateur[]
+  User        User[]
 }
 
 model Cours {
@@ -146,8 +148,8 @@ model Instrument {
   description   String?
   Cours         Cours[]
   Concours      Concours[]
-  Utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
-  utilisateurId Int?
+  User          User? @relation(fields: [userId], references: [id])
+  userId        Int?
   Professeur    Professeur?  @relation(fields: [professeurId], references: [id])
   professeurId  Int?
 }
@@ -164,8 +166,8 @@ model Badge {
   leconId       Int
   coursId       Int
   IconeBadge    IconeBadge[]
-  Utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
-  utilisateurId Int?
+  User          User? @relation(fields: [userId], references: [id])
+  userId        Int?
 }
 
 model IconeBadge {
@@ -177,10 +179,10 @@ model IconeBadge {
 
 model Abonnement {
   id               Int            @id @default(autoincrement())
-  utilsateur       Utilisateur    @relation(fields: [utilisateurId], references: [id])
+  user             User    @relation(fields: [userId], references: [id])
   expiration       DateTime
   abonnementPlan   AbonnementPlan @relation(fields: [abonnementPlanId], references: [id])
-  utilisateurId    Int
+  userId           Int
   abonnementPlanId Int
 }
 
