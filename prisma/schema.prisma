@@ -27,7 +27,6 @@ model User {
   avatar         String?
   style          Style?           @relation(fields: [styleId], references: [id])
   lastLesson     Lesson?          @relation(fields: [lessonId], references: [id])
-  instrument     Instrument[]
   rank           Rank?            @relation(fields: [rankId], references: [id])
   badge          Badge[]
   bio            String?
@@ -39,6 +38,8 @@ model User {
   lessonId       Int?
   rankId         Int?
   dateCreation   DateTime         @db.Date
+  Instrument     Instrument?      @relation(fields: [instrumentId], references: [id])
+  instrumentId   Int?
 }
 
 model Teacher {
@@ -148,8 +149,7 @@ model Instrument {
   description String?
   course      Course[]
   competition Competition[]
-  user        User?         @relation(fields: [userId], references: [id])
-  userId      Int?
+  user        User[]
   teacher     Teacher?      @relation(fields: [teacherId], references: [id])
   teacherId   Int?
 }
