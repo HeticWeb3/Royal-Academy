@@ -25,7 +25,8 @@ const formStatusProps: IFormStatusProps = {
 }
 
 const SignUp: React.FunctionComponent = () => {
-    const [displayFormStatus, setDisplayFormStatus] = useState(false)
+    const [displayFormStatus, setDisplayFormStatus] = useState(false);
+    const[registrationStepNumber, setRegistrationStepNumber] = useState(1);
     const [formStatus, setFormStatus] = useState<IFormStatusTypes>({
         message: '',
         type: '',
@@ -88,10 +89,11 @@ const SignUp: React.FunctionComponent = () => {
                         isSubmitting,
                     } = props
                     return (
-                        <Form>
+                        <Form className={'flex flex-col p-4'}>
                             <h1 className={''}>Sign up</h1>
 
                             <Field
+                                classname={'formInput'}
                                 name="firstName"
                                 id="firstName"
                                 label="First Name"
@@ -203,6 +205,8 @@ const SignUp: React.FunctionComponent = () => {
                             >
                                 Choose your subscription
                             </button>
+
+
                             {displayFormStatus && (
                                 <div className="formStatus">
                                     {formStatus.type === 'error' ? (

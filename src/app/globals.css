@@ -22,5 +22,8 @@
   .button{
     @apply p-3 text-sm font-bold rounded-sm;
   }
+  .formInput{
+    @apply border border-gray-200 dark:border-gray-200;
+  }
 }
 
