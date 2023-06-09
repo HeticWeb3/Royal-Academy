@@ -1,6 +1,6 @@
 import './globals.css'
 import {ContainerWide} from "@/app/Components/Atoms/";
-import RegistrationForm from "@/app/Components/Organisms/Forms/RegistrationForm/RegistrationForm";
+import RegistrationForm from "@/app/Components/Templates/Forms/SignUp/SignUp";
 
 
 export const metadata = {

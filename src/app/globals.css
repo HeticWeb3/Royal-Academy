@@ -19,11 +19,15 @@
 
 
 @layer components {
-  .button{
+  .button {
     @apply p-3 text-sm font-bold rounded-sm;
   }
-  .formInput{
-    @apply border border-gray-200 dark:border-gray-200;
+
+  .formInput {
+    @apply text-white bg-transparent border-b-grey-lighter border-b-[1px] py-3 text-sm font-normal placeholder:text-sm placeholder:font-light placeholder:font-main antialiased;
+  }
+  .DateInput > *,.DateInput > * > * {
+    @apply text-grey-lighter bg-transparent border-grey-lighter  py-3 text-sm font-normal antialiased;
   }
 }
 
