@@ -1,6 +1,7 @@
-import type {User} from "@prisma/client";
 import jwt from "jsonwebtoken"
 
-export const generateToken = (user: Omit<User | null, never>, tokenSecret: string, expires: string) => {
-    return jwt.sign(user, tokenSecret, {expiresIn: expires})
+export const generateTokens = (userID: number, expires: {'expireAccess': string, 'expireRefresh': string}) => {
+    const accessToken: string =  jwt.sign({id: userID}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: expires.expireAccess})
+    const refreshToken: string =  jwt.sign({id: userID}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: expires.expireAccess})
+    return [accessToken, refreshToken]
 }

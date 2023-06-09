@@ -3,8 +3,9 @@ import { cookies } from 'next/headers'
 import { redirect } from "next/navigation";
 import jwt from "jsonwebtoken"
 
-import {generateToken} from "@/app/api/shared/api/jwt";
+import {generateTokens} from "@/app/api/shared/api/jwt";
 import {Users} from "../../../../../prisma/repository/user/user";
+import {getFutureDate} from "@/app/api/shared/utils";
 
 
 export async function GET(request: Request){
@@ -26,11 +27,9 @@ export async function GET(request: Request){
     delete user.iat;
     delete user.exp;
 
-    const accessToken = generateToken(user, process.env.ACCESS_TOKEN_SECRET, '8h')
-    const newRefreshToken = generateToken(user, process.env.REFRESH_TOKEN_SECRET, '30d')
+    const [accessToken, newRefreshToken] = generateTokens(user.id, {'expireAccess': '8h', 'expireRefresh': '30d'})
 
-    const today: Date = new Date()
-    const expireDate: string = new Date(new Date().setDate(today.getDate() + 30)).toUTCString()
+    const expireDate: string = getFutureDate(30)
 
     return NextResponse.json(
         {'accessToken': accessToken},
