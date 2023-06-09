@@ -25,7 +25,7 @@ export async function POST(request: Request){
 
             return NextResponse.json(
                 {'accessToken': accessToken},
-                {status: 200, headers: {'Set-Cookie': `refreshCookie=${refreshToken};Domain=${process.env.HOST};Path=/api/auth/refreshtoken;Expires=${expireDate};HttpOnly;SameSite=Strict`}}
+                {status: 200, headers: {'Set-Cookie': `refreshToken=${refreshToken};Domain=${process.env.HOST};Path=/api/auth/refreshtoken;Expires=${expireDate};HttpOnly;SameSite=Strict`}}
             );
     }
 }
