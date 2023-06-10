@@ -1,15 +1,14 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers'
 import { redirect } from "next/navigation";
-import jwt from "jsonwebtoken"
+import * as jose from "jose"
 
-import {generateTokens} from "@/app/api/shared/api/jwt";
-import {Users} from "../../../../../prisma/repository/user/user";
+import {generateTokens} from "@/app/api/shared/api/auth";
 import {getFutureDate} from "@/app/api/shared/utils";
 
 
 export async function GET(request: Request){
-    let user
+    let jwt
 
     const cookieStore = cookies()
     const refreshToken = cookieStore.get('refreshToken')
@@ -18,16 +17,15 @@ export async function GET(request: Request){
         return redirect('/login')
     }
 
+    const refreshSecret = new TextEncoder().encode(process.env.REFRESH_TOKEN_SECRET)
+
     try {
-        user = jwt.verify(refreshToken.value, process.env.REFRESH_TOKEN_SECRET)
+        jwt = await jose.jwtVerify(refreshToken.value, refreshSecret)
     } catch(e){
         return redirect('/login')
     }
 
-    delete user.iat;
-    delete user.exp;
-
-    const [accessToken, newRefreshToken] = generateTokens(user.id, {'expireAccess': '8h', 'expireRefresh': '30d'})
+    const [accessToken, newRefreshToken] = await generateTokens(jwt.payload.id, {'expireAccess': '8h', 'expireRefresh': '30d'})
 
     const expireDate: string = getFutureDate(30)
 

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Users } from "../../../../../prisma/repository/user/user";
 import bcrypt from "bcrypt";
-import {generateTokens} from "@/app/api/shared/api/jwt";
+import {generateTokens} from "@/app/api/shared/api/auth";
 import {getFutureDate} from "@/app/api/shared/utils";
 
 export async function POST(request: Request){
@@ -16,7 +16,7 @@ export async function POST(request: Request){
     })
 
     if(bcrypt.compareSync(res.password, user.password)){
-        const [accessToken, refreshToken] = generateTokens(user.id, {'expireAccess': '8h', 'expireRefresh': '30d'})
+        const [accessToken, refreshToken] = await generateTokens(user.id, {'expireAccess': '8h', 'expireRefresh': '30d'})
 
         const expireDate: string = getFutureDate(30)
 
