@@ -23,6 +23,7 @@ model User {
   phoneNumber    String?
   lastName       String?
   firstName      String?
+  birthDate      DateTime?         @db.Date
   password       String
   avatar         String?
   style          Style?           @relation(fields: [styleId], references: [id])
