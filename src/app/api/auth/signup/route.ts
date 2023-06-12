@@ -13,7 +13,6 @@ export async function POST(request: Request) {
         return NextResponse.json({"error": {"message": e.message, "error": e.name}}, {status: e.status,});
     }
 
-
     const users: Users = new Users()
     const user: User = await users.execute().signup(
         {
@@ -25,6 +24,5 @@ export async function POST(request: Request) {
             dateCreation: res.dateCreation
         }
     )
-
     return NextResponse.json({"res": Users.exclude(user, ['password'])}, {status: 200,});
 }
