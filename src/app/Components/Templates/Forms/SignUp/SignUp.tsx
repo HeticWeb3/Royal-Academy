@@ -25,6 +25,9 @@ const SignUp: React.FunctionComponent = () => {
             {registrationStepNumber === 2 && (
                 <UserSubscriptionForm setRegistrationStepNumber={setRegistrationStepNumber}/>
                 )}
+            {/*{registrationStepNumber === 3 && (
+                <UserPaymentForm setRegistrationStepNumber={setRegistrationStepNumber}/>
+                )}*/}
         </>
     )
 }
