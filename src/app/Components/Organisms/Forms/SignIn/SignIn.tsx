@@ -29,28 +29,40 @@ const UserLogin: React.FunctionComponent = () => {
 
     const connectUser = async (data: LoginInputTypes, resetForm: Function) => {
         try {
-            await fetch('http://localhost:3000/api/auth/signup', {
+            const response = await fetch('http://localhost:3000/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
-            })
-            if (data) {
-                setFormStatus(formStatusProps.success)
-                resetForm({})
+            });
+
+            if (response.ok) {
+                const token = await response.text();
+                console.log(token);
+
+                res.cookie('token', 'my-secret-token', { maxAge: 900000, httpOnly: true });
+
+                setFormStatus(formStatusProps.success);
+                resetForm({});
+            } else {
+                // Gérer les erreurs de réponse
+                if (response.status === 400) {
+                    const responseBody = await response.json();
+                    if (responseBody.error.type === 'ValidationEmailError') {
+                        setFormStatus(formStatusProps.duplicate);
+                    }
+                } else {
+                    setFormStatus(formStatusProps.error);
+                }
             }
         } catch (error) {
-            const response = error.response
-            if (
-                response.status === 400
-            ) {
-                setFormStatus(formStatusProps.error);
-            }
+            // Gérer les erreurs de requête
+            setFormStatus(formStatusProps.error);
         } finally {
             setDisplayFormStatus(true);
         }
-    }
+    };
 
     return (
             <div className=''>

@@ -5,7 +5,8 @@ import SignIn from "@/app/Components/Organisms/Forms/SignIn/SignIn";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col col-span-full ">
-    <SignIn/>
+      <SignUp/>
+      <SignIn/>
     </main>
   )
 }

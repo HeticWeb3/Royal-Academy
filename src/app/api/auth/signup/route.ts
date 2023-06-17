@@ -17,8 +17,8 @@ export async function POST(request: Request) {
     const user: User = await users.execute().signup(
         {
             email: res.email,
-            firstName: res.firstname,
-            lastName: res.lastname,
+            firstName: res.firstName,
+            lastName: res.lastName,
             phoneNumber: res.phoneNumber,
             password: hashedPassword,
             birthDate: res.birthDate,
