@@ -10,3 +10,5 @@ export * from './PasswordConfirmationValidationSchema'
 
 export * from './PhoneValidationSchema'
 export * from './PhoneConfirmationValidationSchema'
+
+export * from './ValidationObjects'

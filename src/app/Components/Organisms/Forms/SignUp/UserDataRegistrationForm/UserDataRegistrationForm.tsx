@@ -8,7 +8,7 @@ import {
     IFormStatusTypes,
     RegistrationInputTypes
 } from "@/app/Components/Types";
-import {SignupSchema} from "./ValidationSchema";
+import {SignupSchema} from "@/app/Components/Atoms/Forms";
 import {FormikDatePicker} from "@/app/Components/Atoms/Forms";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from '@mui/x-date-pickers';
