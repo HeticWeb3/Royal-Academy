@@ -2,8 +2,9 @@ import { PrismaClient, User } from '@prisma/client'
 
 type Signup = {
     email: string,
-    firstname: string,
-    lastname: string,
+    firstName: string,
+    lastName: string,
+    birthDate: string,
     phoneNumber: string,
     password: string,
     dateCreation: string

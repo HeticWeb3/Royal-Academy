@@ -28,6 +28,7 @@
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "formik": "^2.4.1",
+    "jose": "^4.14.4",
     "next": "13.4.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
