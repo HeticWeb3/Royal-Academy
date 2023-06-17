@@ -41,20 +41,10 @@ const UserLogin: React.FunctionComponent = () => {
                 const token = await response.text();
                 console.log(token);
 
-                res.cookie('token', 'my-secret-token', { maxAge: 900000, httpOnly: true });
+                // document.cookie('token', 'my-secret-token', { maxAge: 900000, httpOnly: true });
 
                 setFormStatus(formStatusProps.success);
                 resetForm({});
-            } else {
-                // Gérer les erreurs de réponse
-                if (response.status === 400) {
-                    const responseBody = await response.json();
-                    if (responseBody.error.type === 'ValidationEmailError') {
-                        setFormStatus(formStatusProps.duplicate);
-                    }
-                } else {
-                    setFormStatus(formStatusProps.error);
-                }
             }
         } catch (error) {
             // Gérer les erreurs de requête
