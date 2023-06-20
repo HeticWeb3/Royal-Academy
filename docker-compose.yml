@@ -10,27 +10,23 @@
       depends_on:
         - db
       environment:
-        - DATABASE_URL=postgres://postgres:password@db:5432/royalacademydb
+        - DATABASE_URL=${DATABASE_DOCKER_URL}
+        - NEXT_WEBPACK_USEPOLLING=0
+        - ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}
+        - REFRESH_TOKEN_SECRET=${REFRESH_TOKEN_SECRET}
+        - HOST=${HOST}
       volumes:
         - ./src:/usr/src/app
     db:
       image: postgres
       restart: always
       environment:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: password
-        POSTGRES_DB: royalacademydb
+        PGUSER: ${POSTGRES_USER}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
       volumes:
         - db-data:/var/lib/postgresql/data
 
-    pgadmin:
-      container_name: pgadmin4_container
-      image: dpage/pgadmin4
-      restart: always
-      environment:
-        PGADMIN_DEFAULT_EMAIL: admin@admin.com
-        PGADMIN_DEFAULT_PASSWORD: root
-      ports:
-        - "5050:80"
   volumes:
     db-data:
