@@ -16,6 +16,8 @@ COPY . .
 
 RUN npx prisma generate
 
+RUN npx prisma migrate deploy
+
 # Build de l'application
 RUN npm run build
 
