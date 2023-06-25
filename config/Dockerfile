@@ -27,12 +27,15 @@ FROM node:16-alpine as runtime
 # Création du répertoire de travail
 WORKDIR /app
 
-# Copie des fichiers de l'étape de construction pour l'environnement de production
-COPY --from=production /app .
+COPY --from=production /app/public ./public
+COPY --from=production /app/.next/standalone ./
+COPY --from=production /app/.next/static ./.next/static
+COPY --from=production /app/prisma ./prisma
+COPY --from=production /app/config/startup.sh ./
 
 EXPOSE 80
 
 ENV PORT=80
 
 # Commande de démarrage de l'application
-CMD ["node", ".next/standalone/server.js"]
+CMD ["./startup.sh"]
