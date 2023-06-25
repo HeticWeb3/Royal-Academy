@@ -5,7 +5,7 @@ import {headers} from "next/headers";
 
 export async function GET(request: Request) {
     const headersList = headers()
-    const userID: string = headersList.get('userID')
+    const userID: string = <string>headersList.get('userID')
 
     const users = new Users()
     const user = await users.execute().findUnique({

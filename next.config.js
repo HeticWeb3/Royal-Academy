@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   eslint: {
     dirs: ['src'],
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   webpack: (config, context) => {
     if(process.env.NEXT_WEBPACK_USEPOLLING) {

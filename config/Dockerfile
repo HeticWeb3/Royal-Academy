@@ -1,22 +1,21 @@
 FROM node:16-alpine as production
 
 # Installation des dépendances pour PostgreSQL
-RUN apk update
+RUN apk update && apk add libressl-dev ca-certificates
 
 # Création du répertoire de travail
 WORKDIR /app
+RUN export NODE_ENV=production
 
 # Installation des dépendances de l'application
 COPY package*.json ./
 COPY prisma ./prisma/
-RUN npm install --only=production
+RUN npm install --production
 
 # Copie des fichiers de l'application
 COPY . .
 
 RUN npx prisma generate
-
-RUN npx prisma migrate deploy
 
 # Build de l'application
 RUN npm run build
@@ -31,8 +30,9 @@ WORKDIR /app
 # Copie des fichiers de l'étape de construction pour l'environnement de production
 COPY --from=production /app .
 
-# Exposition du port 3000 utilisé par l'application
 EXPOSE 80
 
+ENV PORT=80
+
 # Commande de démarrage de l'application
-CMD ["npm", "start"]
+CMD ["node", ".next/standalone/server.js"]
