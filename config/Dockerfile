@@ -31,7 +31,7 @@ COPY --from=production /app/public ./public
 COPY --from=production /app/.next/standalone ./
 COPY --from=production /app/.next/static ./.next/static
 COPY --from=production /app/prisma ./prisma
-COPY --from=production /app/config/startup.sh ./
+COPY --from=production --chmod=0755 /app/config/startup.sh ./
 
 EXPOSE 80
 
