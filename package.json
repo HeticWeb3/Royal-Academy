@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "dotenv -e .env.development --next dev",
+    "dev": "dotenv -e .env.development -- next dev",
     "build-css": "tailwindcss build style.css -o css/style.css",
     "build": "dotenv -e .env.production -- next build",
     "start": "next start",
