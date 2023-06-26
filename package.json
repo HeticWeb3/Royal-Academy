@@ -7,6 +7,7 @@
     "build-css": "tailwindcss build style.css -o css/style.css",
     "build": "dotenv -e .env.production -- next build",
     "start": "next start",
+    "type-check": "tsc --noemit",
     "lint": "next lint",
     "test": "jest --watch",
     "test:ci": "jest --ci --passWithNoTests",

@@ -4,9 +4,6 @@ const nextConfig = {
   eslint: {
     dirs: ['src'],
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   reactStrictMode: false,
   swcMinify: true,
   webpack: (config, context) => {

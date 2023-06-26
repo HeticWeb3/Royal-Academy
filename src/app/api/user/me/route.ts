@@ -1,4 +1,3 @@
-import {PrismaClient} from "@prisma/client";
 import {NextResponse} from "next/server";
 import {Users} from "../../../../../prisma/repository/user/user";
 import {headers} from "next/headers";
@@ -14,5 +13,5 @@ export async function GET(request: Request) {
         }
     })
 
-    return NextResponse.json(Users.exclude(user, ["password"]), {status: 200,})
+    return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
 }
