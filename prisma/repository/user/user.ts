@@ -22,9 +22,9 @@ export class Users {
         })
     }
 
-    static exclude<User, Key extends keyof User>(user: User, keys: Key[]): Omit<User, Key> {
+    static exclude<User, Key extends keyof User>(user: User, keys: string[]): Omit<User, Key> {
         for (let key of keys) {
-            delete user[key]
+            delete user[key as keyof User]
         }
         return user
     }

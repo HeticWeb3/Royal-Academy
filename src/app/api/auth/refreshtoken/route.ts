@@ -5,10 +5,11 @@ import * as jose from "jose"
 
 import {generateTokens} from "@/app/api/shared/api/auth";
 import {getFutureDate} from "@/app/api/shared/utils";
+import type {JWTVerifyResult} from "jose";
 
 
 export async function GET(request: Request){
-    let jwt
+    let jwt: JWTVerifyResult
 
     const cookieStore = cookies()
     const refreshToken = cookieStore.get('refreshToken')

@@ -16,10 +16,12 @@ export async function GET() {
             id: Number(userID)
         }
     })
+
+
     const course = await getCourse.course.findMany({
         //TODO : On peut ajouter le niveau dans la querry (niveau du user)
         where: {
-            instrumentId: user.instrumentId,
+            instrumentId: user.instrumentId != null ? user.instrumentId : undefined,
         },
     });
     return NextResponse.json(course, {status: 200,})

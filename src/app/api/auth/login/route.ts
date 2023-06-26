@@ -8,14 +8,13 @@ export async function POST(request: Request){
     const res = await request.json()
     const users: Users = new Users()
 
-
     const user = await users.execute().findUnique({
         where: {
             email: res.email
         }
     })
 
-    if(bcrypt.compareSync(res.password, user.password)){
+    if(user !== null && bcrypt.compareSync(res.password, user.password)){
         const [accessToken, refreshToken] = await generateTokens(user.id, {'expireAccess': '8h', 'expireRefresh': '30d'})
 
         const expireDate: string = getFutureDate(30)

@@ -4,7 +4,7 @@ import {Teachers} from "../../../../../prisma/repository/user/teacher";
 /*
     Récupère les informations des professeurs
  */
-export async function GET(request: Request, {params}: { teacherId: number }) {
+export async function GET(request: Request, params: { teacherId: number }) {
 
     const teachers = new Teachers()
 

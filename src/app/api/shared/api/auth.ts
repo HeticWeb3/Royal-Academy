@@ -1,7 +1,7 @@
 import * as jose from "jose"
 import {TokenError} from "@/app/api/shared/api/apiError";
 
-export const generateTokens = async (userID: number, expires: {'expireAccess': string, 'expireRefresh': string}) => {
+export const generateTokens = async (userID: unknown, expires: {'expireAccess': string, 'expireRefresh': string}) => {
     const accessSecret = new TextEncoder().encode(process.env.ACCESS_TOKEN_SECRET)
     const refreshSecret = new TextEncoder().encode(process.env.REFRESH_TOKEN_SECRET)
     const alg = 'HS256'
