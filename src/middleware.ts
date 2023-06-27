@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import {isLogged} from "@/app/api/shared/api/auth";
 
+
 export async function middleware(request: NextRequest) {
     let user
     const requestHeaders = new Headers(request.headers)
@@ -25,5 +26,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/api/user/:path*'],
+    matcher: ['/api/user/:path*', '/api/competition/:path*'],
 }

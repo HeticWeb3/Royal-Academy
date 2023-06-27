@@ -1,8 +1,13 @@
-import {PrismaClient} from "@prisma/client";
 import {NextResponse} from "next/server";
 import {Users} from "../../../../../prisma/repository/user/user";
 import {headers} from "next/headers";
 
+/**
+ * Récupère le user connecter
+ *
+ * @param request
+ * @return Promise<NextResponse>
+ */
 export async function GET(request: Request) {
     const headersList = headers()
     const userID: string = headersList.get('userID')

@@ -1,8 +1,12 @@
 import {NextResponse} from "next/server";
 import {Teachers} from "../../../../../prisma/repository/user/teacher";
 
-/*
-    Récupère les informations des professeurs
+/**
+ * Récupère les informations des professeurs
+ *
+ * @param request
+ * @param params
+ * @return Promise<NextResponse>
  */
 export async function GET(request: Request, {params}: { teacherId: number }) {
 

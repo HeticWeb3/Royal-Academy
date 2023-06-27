@@ -1,14 +1,11 @@
 import {PrismaClient, User} from "@prisma/client";
 import {NextResponse} from "next/server";
 
-
-
-
 export class Teachers {
     constructor(private prisma: PrismaClient['teacher'] = new PrismaClient().teacher) {}
 
-    execute(prismaUser = this.prisma) {
-        return Object.assign(prismaUser, {
+    execute(prismaTeacher = this.prisma) {
+        return Object.assign(prismaTeacher, {
 
         })
     }

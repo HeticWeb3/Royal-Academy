@@ -3,8 +3,12 @@ import {NextResponse} from "next/server";
 
 //TODO : Add logged user
 
-/*
-    Update du user connecter
+/**
+ * Update du user connecter
+ *
+ * @param request
+ * @param params
+ * @return Promise<NextResponse>
  */
 export async function PATCH(request: Request, params: { userId: number }) {
     const res = await request.json()
@@ -21,8 +25,12 @@ export async function PATCH(request: Request, params: { userId: number }) {
     return NextResponse.json(user, {status: 200,})
 }
 
-/*
-    Supprime le user connecter
+/**
+ * Supprime le user connecter
+ *
+ * @param request
+ * @param params
+ * @return Promise<NextResponse>
  */
 export async function DELETE(request: Request, params: { userId: number }) {
     const deleteUser = new PrismaClient()
@@ -35,15 +43,18 @@ export async function DELETE(request: Request, params: { userId: number }) {
     return NextResponse.json(user, {status: 200,})
 }
 
-/*
-    Récupère toutes les données du user en fonction de l'id connecter
+/**
+ * Récupère toutes les données du user pour le profil
+ *
+ * @param request
+ * @param params
+ * @return Promise<NextResponse>
  */
-export async function GET(request: Request, params: { userId: number }) {
+export async function GET(request: Request, {params}: { userId: number }) {
     const getUser = new PrismaClient()
     const user = await getUser.user.findUnique({
         where: {
             id: params.userId,
-            email: "test@test.com"
         }
     })
     return NextResponse.json(user, {status: 200,})
