@@ -1,0 +1,31 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ feature/PFR-TACHES-58_docker_deployment ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: alex-ac/github-action-ssh-docker-compose@master
+        name: Docker-Compose Remote Deployment
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
+          ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+          REFRESH_TOKEN_SECRET: ${{secrets.REFRESH_TOKEN_SECRET}}
+          HOST: ${{secrets.HOST}}
+          PORT: ${{secrets.PORT}}
+          PGUSER: ${{secrets.PGUSER}}
+          POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+          POSTGRES_DB: ${{secrets.POSTGRES_DB}}
+        with:
+          ssh_host: hetic-projects.arcplex.tech
+          ssh_port: 9119
+          ssh_private_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          ssh_user: ${{ secrets.DEPLOY_USER }}
+          docker_compose_prefix: ./
