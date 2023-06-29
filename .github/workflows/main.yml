@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: alex-ac/github-action-ssh-docker-compose@master
+      - uses: HeticWeb3/github-action-ssh-docker-compose@master
         name: Docker-Compose Remote Deployment
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
@@ -29,4 +29,4 @@ jobs:
           ssh_port: 9119
           ssh_private_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
           ssh_user: ${{ secrets.DEPLOY_USER }}
-          docker_compose_prefix: ./
+          docker_compose_prefix: royal_academy
