@@ -1,2 +1,2 @@
 - name: ssh-docker-compose
-  uses: djnotes/github-action-ssh-docker-compose@v2.0.1
+  uses: HeticWeb3/github-action-ssh-docker-compose@v2.0.2
