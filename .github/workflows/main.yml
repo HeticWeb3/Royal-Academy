@@ -2,7 +2,8 @@ name: Deploy
 
 on:
   push:
-    branches: [ feature/PFR-TACHES-58_docker_deployment ]
+    branches:
+      - feature/PFR-TACHES-58_docker_deployment
 
 jobs:
   deploy:
