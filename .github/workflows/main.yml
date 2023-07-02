@@ -3,14 +3,24 @@ name: Deploy
 on:
   push:
     branches:
-      - feature/PFR-TACHES-58_docker_deployment
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        name: Setup Node
+        with:
+          node-version: 20
+
+      - run: npm install
+      - run: npm run lint
+      - run: npm run type-check
+      - run: npm run test:ci
 
       - uses: SpicyPizza/create-envfile@v2.0
         name: Make envfile
@@ -35,4 +45,3 @@ jobs:
           ssh_private_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
           ssh_user: ${{ secrets.DEPLOY_USER }}
           docker_compose_prefix: royal_academy
-
