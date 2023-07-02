@@ -20,6 +20,12 @@ jobs:
           paths:
             - ./node_modules
       - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Type check
+          command: npm run type-check
+      - run:
           name: Run tests
           command: npm run test:ci
 

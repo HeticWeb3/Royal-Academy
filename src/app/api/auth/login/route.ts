@@ -14,7 +14,7 @@ export async function POST(request: Request){
         }
     })
 
-    if(user !== null && bcrypt.compareSync(res.password, user.password)){
+    if(bcrypt.compareSync(res.password, user.password)){
         const [accessToken, refreshToken] = await generateTokens(user.id, {'expireAccess': '8h', 'expireRefresh': '30d'})
 
         const expireDate: string = getFutureDate(30)
