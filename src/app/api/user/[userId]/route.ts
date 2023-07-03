@@ -3,8 +3,12 @@ import {NextResponse} from "next/server";
 
 //TODO : Add logged user
 
-/*
-    Update du user connecter
+/**
+ *  Update d'un utilisateur connecté
+ *
+ * @param request
+ * @param params
+ * @return Promise<NextResponse> (Utilisateur update)
  */
 export async function PATCH(request: Request, params: { userId: number }) {
     const res = await request.json()
