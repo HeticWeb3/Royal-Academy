@@ -1,7 +1,8 @@
 "use client"
 import {authContextType,providerPropsType} from "@/app/Components/Types";
-import {createContext,useContext,useState} from "react";
-import { hasCookie } from 'cookies-next';
+import {createContext,useContext,useState,useLayoutEffect} from "react";
+import {hasCookie, setCookie} from 'cookies-next';
+import {getAccessToken} from '@/Utils/Hooks/User/getAccessToken'
 
 const authContextDefaultValues: authContextType = {
     userConnected: false,
@@ -19,6 +20,18 @@ export function AuthProvider({ children }: providerPropsType) {
 
     const [userConnected, setUserConnected] = useState<boolean>(hasCookie('accesstoken'));
 
+    useLayoutEffect(() => {
+            if (!userConnected) {
+                getAccessToken()
+                    .then(response=> {
+                        response.json().then((data) => {
+                             setCookie('accesstoken', data.accessToken,{maxAge:60 * 60 * 24,sameSite:true});
+                        })
+                    })
+            }
+            []
+    });
+    
     const login = () => {
         setUserConnected(true);
     };
