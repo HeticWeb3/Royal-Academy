@@ -1,5 +1,5 @@
 
 export interface LoginInputTypes {
-    email : string,
-    password : string
+    loginEmail : string,
+    loginPassword : string
 }

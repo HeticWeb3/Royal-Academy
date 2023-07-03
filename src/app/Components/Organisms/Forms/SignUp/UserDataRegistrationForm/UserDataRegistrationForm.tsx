@@ -113,7 +113,8 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                                 <ErrorMessage name="firstName" component="div" className="error-message" />
 
                                 <Field
-                                    className={'formInput col-span-1'}                                name="lastName"
+                                    className={'formInput col-span-1'}
+                                    name="lastName"
                                     id="lastName"
                                     label="Last Name"
                                     value={values.lastName}

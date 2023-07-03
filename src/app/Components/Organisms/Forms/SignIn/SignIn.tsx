@@ -55,11 +55,10 @@ const UserLogin: React.FunctionComponent = () => {
     };
 
     return (
-            <div className=''>
                 <Formik
                     initialValues={{
-                        email: '',
-                        password: ''
+                        loginEmail: '',
+                        loginPassword: ''
                     }}
 
                     onSubmit={(values: LoginInputTypes, actions) => {
@@ -81,29 +80,29 @@ const UserLogin: React.FunctionComponent = () => {
                             <Form className={'p-4 grid grid-cols-2 gap-x-[12px] gap-y-[31px]'}>
                                 <Field
                                     className={'formInput col-span-2'}
-                                    name="email"
-                                    id="email"
+                                    name="loginEmail"
+                                    id="loginEmail"
                                     label="Email"
-                                    value={values.email}
+                                    value={values.loginEmail}
                                     type="email"
                                     placeholder="Email"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
-                                <ErrorMessage name="email" component="div" className="error-message" />
+                                <ErrorMessage name="loginEmail" component="div" className="error-message" />
 
                                 <Field
                                     className={'formInput col-span-2'}
-                                    name="password"
-                                    id="password"
+                                    name="loginPassword"
+                                    id="loginPassword"
                                     label="Password"
-                                    value={values.password}
+                                    value={values.loginPassword}
                                     type="password"
                                     placeholder="Password"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
-                                <ErrorMessage name="password" component="div" className="error-message" />
+                                <ErrorMessage name="loginPassword" component="div" className="error-message" />
 
                                 <button
                                     type="submit"
@@ -132,7 +131,7 @@ const UserLogin: React.FunctionComponent = () => {
                         )
                     }}
                 </Formik>
-            </div>
+
     )
 }
 
