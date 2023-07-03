@@ -1,6 +1,6 @@
 import './globals.css'
 import {ContainerWide} from "@/app/Components/Atoms/";
-import RegistrationForm from "@/app/Components/Templates/Forms/SignUp/SignUp";
+import {AuthProvider} from "@/Utils/Contexts/AuthContext";
 
 
 export const metadata = {
@@ -17,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={'body'}>
           <ContainerWide>
-              {children}
+              <AuthProvider>
+                  {children}
+              </AuthProvider>
           </ContainerWide>
       </body>
     </html>

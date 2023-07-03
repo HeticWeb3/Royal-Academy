@@ -1,6 +1,6 @@
 "use client"; // This is a client component 👈🏽
-
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
+import { setCookie } from 'cookies-next';
 import {Formik, Form, Field, ErrorMessage, FormikProps} from 'formik';
 import {
     IFormStatusProps,
@@ -8,6 +8,7 @@ import {
     LoginInputTypes,
 } from "@/app/Components/Types";
 import {SigninSchema} from "@/app/Components/Atoms";
+import {useAuth} from "@/Utils/Contexts/AuthContext";
 
 const formStatusProps: IFormStatusProps = {
     success: {
@@ -20,7 +21,9 @@ const formStatusProps: IFormStatusProps = {
     },
 }
 
-const UserLogin: React.FunctionComponent = () => {
+const UserLogin: React.FunctionComponent = ({req,res}) => {
+
+    const { login } = useAuth();
     const [displayFormStatus, setDisplayFormStatus] = useState(false);
     const [formStatus, setFormStatus] = useState<IFormStatusTypes>({
         message: '',
@@ -34,25 +37,23 @@ const UserLogin: React.FunctionComponent = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({loginEmail:'test@test7.com',loginPassword:'test1234'}),
             });
 
             if (response.ok) {
                 const token = await response.text();
                 console.log(token);
-                // document.cookie('token', 'my-secret-token', { maxAge: 900000, httpOnly: true });
-
+                login();
+                setCookie('accesstoken', token,{maxAge:60 * 60 * 24,sameSite:true});
                 setFormStatus(formStatusProps.success);
                 resetForm({});
             }
         } catch (error) {
-            // Gérer les erreurs de requête
             setFormStatus(formStatusProps.error);
         } finally {
             setDisplayFormStatus(true);
         }
     };
-
     return (
                 <Formik
                     initialValues={{
@@ -61,7 +62,7 @@ const UserLogin: React.FunctionComponent = () => {
                     }}
 
                     onSubmit={(values: LoginInputTypes, actions) => {
-                        connectUser(values, actions.resetForm).then(r => console.log(r))
+                        connectUser(values, actions.resetForm)
                         setTimeout(() => {
                             actions.setSubmitting(false)
                         }, 500)
