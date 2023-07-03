@@ -40,7 +40,6 @@ const UserLogin: React.FunctionComponent = () => {
             if (response.ok) {
                 const token = await response.text();
                 console.log(token);
-
                 // document.cookie('token', 'my-secret-token', { maxAge: 900000, httpOnly: true });
 
                 setFormStatus(formStatusProps.success);
@@ -62,7 +61,7 @@ const UserLogin: React.FunctionComponent = () => {
                     }}
 
                     onSubmit={(values: LoginInputTypes, actions) => {
-                        connectUser(values, actions.resetForm)
+                        connectUser(values, actions.resetForm).then(r => console.log(r))
                         setTimeout(() => {
                             actions.setSubmitting(false)
                         }, 500)
@@ -77,7 +76,7 @@ const UserLogin: React.FunctionComponent = () => {
                             isSubmitting,
                         } = props
                         return (
-                            <Form className={'p-4 grid grid-cols-2 gap-x-[12px] gap-y-[31px]'}>
+                            <Form id={"loginForm"} className={'p-4 grid grid-cols-2 gap-x-[12px] gap-y-[31px]'}>
                                 <Field
                                     className={'formInput col-span-2'}
                                     name="loginEmail"
@@ -106,6 +105,7 @@ const UserLogin: React.FunctionComponent = () => {
 
                                 <button
                                     type="submit"
+                                    form={'loginForm'}
                                     className={'button bg-blue-lightbis text-white font-normal antialiased col-span-full'}
                                     disabled={isSubmitting}
                                 >

@@ -27,6 +27,6 @@ export const SignupSchema = () =>{
 
 export const SigninSchema = () =>{
     return Yup.object().shape({
-        email: EmailValidationSchema(),
+        loginEmail: EmailValidationSchema(),
     });
 }
