@@ -10,3 +10,7 @@ export interface RegistrationInputTypes {
     phoneNumber : string,
     confirmPhoneNumber : string
 }
+
+export interface SubscriptionInputTypes {
+    subscription : string,
+}

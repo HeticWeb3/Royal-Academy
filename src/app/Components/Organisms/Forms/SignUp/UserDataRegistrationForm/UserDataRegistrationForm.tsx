@@ -38,6 +38,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
     const changeRegistrationStepNumber = (number: number) => {
         setRegistrationStepNumber(number)
     };
+
     const createNewUser = async (data: RegistrationInputTypes, resetForm: Function) => {
         try {
             await fetch('http://localhost:3000/api/auth/signup', {
@@ -47,10 +48,13 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                 },
                 body: JSON.stringify(data),
             })
-            if (data) {
-                setFormStatus(formStatusProps.success)
-                resetForm({})
-            }
+                .then(response => {
+                    if(response.ok) {
+                        setFormStatus(formStatusProps.success)
+                        resetForm({})
+                        changeRegistrationStepNumber(2);
+                    }
+                })
         } catch (error) {
             const response = error.response
             if (
@@ -63,7 +67,6 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
             }
         } finally {
             setDisplayFormStatus(true);
-            changeRegistrationStepNumber(2);
         }
     }
 
@@ -97,123 +100,146 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                             handleBlur,
                             handleChange,
                             isSubmitting,
+                            errors,
+                            touched
                         } = props
+
                         return (
                             <Form className={'p-4 grid grid-cols-2 gap-x-[12px] gap-y-[31px]'}>
-                                <Field
-                                    className={'formInput col-span-1'}
-                                    name="firstName"
-                                    id="firstName"
-                                    label="First Name"
-                                    value={values.firstName}
-                                    type="text"
-                                    placeholder="First Name"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}/>
-                                <ErrorMessage name="firstName" component="div" className="error-message" />
 
-                                <Field
-                                    className={'formInput col-span-1'}
-                                    name="lastName"
-                                    id="lastName"
-                                    label="Last Name"
-                                    value={values.lastName}
-                                    type="text"
-                                    placeholder="Last Name"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="lastName" component="div" className="error-message" />
+                                <div className={`${errors.firstName && touched.firstName?'error':''} formInput__wrapper`}>
+                                    <Field
+                                        className={'formInput w-full'}
+                                        name="firstName"
+                                        id="firstName"
+                                        label="First Name"
+                                        value={values.firstName}
+                                        type="text"
+                                        placeholder="First Name"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}/>
+                                    <ErrorMessage name="firstName" component="div" className="formInput__error" />
+                                </div>
 
-                                <FormikDatePicker
-                                    className={'formInput DateInput col-span-1'}
-                                    name="birthDate"
-                                    id="birthDate"
-                                    label="Birthdate"
-                                    value={values.birthDate}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="birthDate" component="div" className="error-message" />
+                                <div className={`${errors.lastName && touched.lastName?'error':''} formInput__wrapper`}>
+                                    <Field
+                                        className={'formInput w-full'}
+                                        name="lastName"
+                                        id="lastName"
+                                        label="Last Name"
+                                        value={values.lastName}
+                                        type="text"
+                                        placeholder="Last Name"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    <ErrorMessage name="lastName" component="div" className="formInput__error" />
+                                </div>
+
+                                <div className={`${errors.birthDate && touched.birthDate?'error':''} formInput__wrapper`}>
+                                    <FormikDatePicker
+                                        className={'formInput DateInput w-full'}
+                                        name="birthDate"
+                                        id="birthDate"
+                                        label="Birthdate"
+                                        value={values.birthDate}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    <ErrorMessage name="birthDate" component="div" className="formInput__error" />
+                                </div>
+
                                 <div></div>
 
-                                <Field
-                                    className={'formInput'}
-                                    name="email"
-                                    id="email"
-                                    label="Email"
-                                    value={values.email}
-                                    type="email"
-                                    placeholder="Email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="email" component="div" className="error-message" />
+                                <div className={`${errors.email && touched.email?'error':''} formInput__wrapper`}>
+                                    <Field
+                                        className={'formInput w-full'}
+                                        name="email"
+                                        id="email"
+                                        label="Email"
+                                        value={values.email}
+                                        type="email"
+                                        placeholder="Email"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    <ErrorMessage name="email" component="div" className="formInput__error" />
+                                </div>
 
-                                <Field
-                                    className={'formInput'}
-                                    name="confirmEmail"
-                                    id="confirmEmail"
-                                    label="Email"
-                                    value={values.confirmEmail}
-                                    type="email"
-                                    placeholder="Confirm Email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="confirmEmail" component="div" className="error-message" />
+                                <div className={`${errors.confirmEmail && touched.confirmEmail?'error':''} formInput__wrapper`}>
+                                    <Field
+                                        className={'formInput w-full'}
+                                        name="confirmEmail"
+                                        id="confirmEmail"
+                                        label="Email"
+                                        value={values.confirmEmail}
+                                        type="email"
+                                        placeholder="Confirm Email"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    <ErrorMessage name="confirmEmail" component="div" className="formInput__error" />
+                                </div>
 
-                                <Field
-                                    className={'formInput'}
-                                    name="password"
-                                    id="password"
-                                    label="Password"
-                                    value={values.password}
-                                    type="password"
-                                    placeholder="Password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="password" component="div" className="error-message" />
+                                <div className={`${errors.password && touched.password?'error':''} formInput__wrapper`}>
+                                    <Field
+                                        className={'formInput w-full'}
+                                        name="password"
+                                        id="password"
+                                        label="Password"
+                                        value={values.password}
+                                        type="password"
+                                        placeholder="Password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    <ErrorMessage name="password" component="div" className="formInput__error" />
+                                </div>
 
-                                <Field
-                                    className={'formInput'}
-                                    name="confirmPassword"
-                                    id="confirmPassword"
-                                    label="Confirm password"
-                                    value={values.confirmPassword}
-                                    type="password"
-                                    placeholder="Confirm Password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="confirmPassword" component="div" className="error-message" />
+                                <div className={`${errors.confirmPassword && touched.confirmPassword?'error':''} formInput__wrapper`}>
+                                    <Field
+                                        className={'formInput w-full'}
+                                        name="confirmPassword"
+                                        id="confirmPassword"
+                                        label="Confirm password"
+                                        value={values.confirmPassword}
+                                        type="password"
+                                        placeholder="Confirm Password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    <ErrorMessage name="confirmPassword" component="div" className="formInput__error" />
+                                </div>
 
-                                <Field
-                                    className={'formInput'}
-                                    name="phoneNumber"
-                                    id="phoneNumber"
-                                    label="Phone Number"
-                                    value={values.phoneNumber}
-                                    type="text"
-                                    placeholder="Phone Number"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="phoneNumber" component="div" className="error-message" />
+                                <div className={`${errors.phoneNumber && touched.phoneNumber?'error':''} formInput__wrapper`}>
+                                    <Field
+                                        className={'formInput w-full'}
+                                        name="phoneNumber"
+                                        id="phoneNumber"
+                                        label="Phone Number"
+                                        value={values.phoneNumber}
+                                        type="text"
+                                        placeholder="Phone Number"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    <ErrorMessage name="phoneNumber" component="div" className="formInput__error" />
+                                </div>
 
-                                <Field
-                                    className={'formInput'}
-                                    name="confirmPhoneNumber"
-                                    id="confirmPhoneNumber"
-                                    label="Confirm Phone Number"
-                                    placeholder="Confirm Phone Number"
-                                    value={values.confirmPhoneNumber}
-                                    type="text"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="confirmPhoneNumber" component="div" className="error-message" />
+                                <div className={`${errors.confirmPhoneNumber && touched.confirmPhoneNumber?'error':''} formInput__wrapper`}>
+                                    <Field
+                                        className={'formInput w-full'}
+                                        name="confirmPhoneNumber"
+                                        id="confirmPhoneNumber"
+                                        label="Confirm Phone Number"
+                                        placeholder="Confirm Phone Number"
+                                        value={values.confirmPhoneNumber}
+                                        type="text"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    <ErrorMessage name="confirmPhoneNumber" component="div" className="formInput__error" />
+                                </div>
 
                                 <button
                                     type="submit"
