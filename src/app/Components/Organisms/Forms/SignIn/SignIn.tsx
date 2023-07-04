@@ -37,7 +37,7 @@ const UserLogin: React.FunctionComponent = ({req,res}) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({loginEmail:'test@test7.com',loginPassword:'test1234'}),
+                body: JSON.stringify(data),
             });
 
             if (response.ok) {
@@ -75,60 +75,70 @@ const UserLogin: React.FunctionComponent = ({req,res}) => {
                             handleBlur,
                             handleChange,
                             isSubmitting,
+                            errors,
+                            touched
                         } = props
                         return (
-                            <Form id={"loginForm"} className={'p-4 grid grid-cols-2 gap-x-[12px] gap-y-[31px]'}>
-                                <Field
-                                    className={'formInput col-span-2'}
-                                    name="loginEmail"
-                                    id="loginEmail"
-                                    label="Email"
-                                    value={values.loginEmail}
-                                    type="email"
-                                    placeholder="Email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="loginEmail" component="div" className="error-message" />
+                            <div className={'col-span-full lg:col-start-5 lg:col-end-9'}>
 
-                                <Field
-                                    className={'formInput col-span-2'}
-                                    name="loginPassword"
-                                    id="loginPassword"
-                                    label="Password"
-                                    value={values.loginPassword}
-                                    type="password"
-                                    placeholder="Password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="loginPassword" component="div" className="error-message" />
+                                <Form id={"loginForm"} className={'p-4 grid grid-cols-2 gap-x-[12px] gap-y-[31px]'}>
 
-                                <button
-                                    type="submit"
-                                    form={'loginForm'}
-                                    className={'button bg-blue-lightbis text-white font-normal antialiased col-span-full'}
-                                    disabled={isSubmitting}
-                                >
-                                    Login
-                                </button>
-
-
-                                {displayFormStatus && (
-                                    <div className="formStatus">
-                                        {formStatus.type === 'error' ? (
-                                            <p>
-                                                {formStatus.message}
-                                            </p>
-                                        ) : formStatus.type ===
-                                        'success' ? (
-                                            <p>
-                                                {formStatus.message}
-                                            </p>
-                                        ) : null}
+                                    <div className={`${errors.loginEmail && touched.loginEmail?'error':''} formInput__wrapper col-span-2`}>
+                                        <Field
+                                            className={'formInput w-full'}
+                                            name="loginEmail"
+                                            id="loginEmail"
+                                            label="Email"
+                                            value={values.loginEmail}
+                                            type="email"
+                                            placeholder="Email"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                        />
+                                        <ErrorMessage name="loginEmail" component="div" className="formInput__error" />
                                     </div>
-                                )}
-                            </Form>
+
+                                    <div className={`${errors.loginPassword && touched.loginPassword?'error':''} formInput__wrapper col-span-2`}>
+                                        <Field
+                                            className={'formInput w-full'}
+                                            name="loginPassword"
+                                            id="loginPassword"
+                                            label="Password"
+                                            value={values.loginPassword}
+                                            type="password"
+                                            placeholder="Password"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                        />
+                                        <ErrorMessage name="loginPassword" component="div" className="error-message" />
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        form={'loginForm'}
+                                        className={'button bg-blue-lightbis text-white font-normal antialiased col-span-full'}
+                                        disabled={isSubmitting}
+                                    >
+                                        Login
+                                    </button>
+
+
+                                    {displayFormStatus && (
+                                        <div className="formStatus">
+                                            {formStatus.type === 'error' ? (
+                                                <p>
+                                                    {formStatus.message}
+                                                </p>
+                                            ) : formStatus.type ===
+                                            'success' ? (
+                                                <p>
+                                                    {formStatus.message}
+                                                </p>
+                                            ) : null}
+                                        </div>
+                                    )}
+                                </Form>
+                            </div>
                         )
                     }}
                 </Formik>

@@ -2,10 +2,10 @@ import * as Yup from 'yup';
 
 export const PasswordValidationSchema = () => {
     return Yup.string()
-        .required('Password is required')
-        .min(8, 'Password must be at least 8 characters long')
+        .required('Required')
+        .min(8, 'At least 8 characters long')
         .matches(
             /^(?=.*[A-Z])(?=.*\d).*$/,
-            'Password must contain at least one uppercase letter and one digit'
+            'Need A-Z  & 1-9'
         )
 };
