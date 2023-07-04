@@ -3,8 +3,12 @@ import {NextResponse} from "next/server";
 
 //TODO : Add logged user
 
-/*
-    Update du user connecter
+/**
+ *  Update d'un utilisateur connecté
+ *
+ * @param request
+ * @param params
+ * @return Promise<NextResponse> (Utilisateur update)
  */
 export async function PATCH(request: Request, params: { userId: number }) {
     const res = await request.json()
@@ -21,8 +25,12 @@ export async function PATCH(request: Request, params: { userId: number }) {
     return NextResponse.json(user, {status: 200,})
 }
 
-/*
-    Supprime le user connecter
+/**
+ * Supprime le user connecter
+ *
+ * @param request
+ * @param params
+ * @return Promise<NextResponse>
  */
 export async function DELETE(request: Request, params: { userId: number }) {
     const deleteUser = new PrismaClient()
@@ -35,8 +43,12 @@ export async function DELETE(request: Request, params: { userId: number }) {
     return NextResponse.json(user, {status: 200,})
 }
 
-/*
-    Récupère toutes les données du user en fonction de l'id connecter
+/**
+ * Récupère toutes les données du user en fonction de l'id connecter
+ *
+ * @param request
+ * @param params
+ * @return Promise<NextResponse> (les informations de l'utilisateur)
  */
 export async function GET(request: Request, params: { userId: number }) {
     const getUser = new PrismaClient()

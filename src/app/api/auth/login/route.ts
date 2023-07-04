@@ -4,6 +4,13 @@ import bcrypt from "bcrypt";
 import {generateTokens} from "@/app/api/shared/api/auth";
 import {getFutureDate} from "@/app/api/shared/utils";
 
+/**
+ * Log un utilisateur s'il existe
+ *
+ * @param request
+ * @constructor
+ * @return Promise<NextResponse> (Access token et refresh cookie dans l'header de la requête)
+ */
 export async function POST(request: Request){
     const res = await request.json()
     const users: Users = new Users()

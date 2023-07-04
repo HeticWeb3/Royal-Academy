@@ -7,7 +7,13 @@ import {generateTokens} from "@/app/api/shared/api/auth";
 import {getFutureDate} from "@/app/api/shared/utils";
 import type {JWTVerifyResult} from "jose";
 
-
+/**
+ * Actualise le token d'un utilisateur
+ *
+ * @param request
+ * @constructor
+ * @return Promise<NextResponse> (Access token et refresh cookie dans l'header de la requête)
+ */
 export async function GET(request: Request){
     let jwt: JWTVerifyResult
 

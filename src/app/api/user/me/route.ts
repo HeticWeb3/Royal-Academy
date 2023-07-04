@@ -2,6 +2,11 @@ import {NextResponse} from "next/server";
 import {Users} from "../../../../../prisma/repository/user/user";
 import {headers} from "next/headers";
 
+/**
+ *
+ * @param request
+ * @return Promise<NextResponse> (Informations d'un utilisateur)
+ */
 export async function GET(request: Request) {
     const headersList = headers()
     const userID: string = <string>headersList.get('userID')

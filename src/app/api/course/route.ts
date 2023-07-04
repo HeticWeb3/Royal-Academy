@@ -3,8 +3,9 @@ import {NextResponse} from "next/server";
 import {headers} from "next/headers";
 import {ReadonlyHeaders} from "next/dist/server/web/spec-extension/adapters/headers";
 
-/*
-    Récupère les cours en fonction de l'instrument du user
+/**
+ * Récupère les cours en fonction de l'instrument d'un utilisateur
+ *
  */
 export async function GET() {
     const headersList: ReadonlyHeaders = headers()
