@@ -23,4 +23,5 @@ COPY . .
 EXPOSE 3000
 
 # Commande de démarrage de l'application
-CMD ["npm", "run", "dev"]
+CMD ["./config/startup_dev.sh"]
+

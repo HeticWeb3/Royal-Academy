@@ -3,9 +3,10 @@ import { redirect } from "next/navigation";
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import {isLogged} from "@/app/api/shared/api/auth";
+import {JWTPayload} from "jose";
 
 export async function middleware(request: NextRequest) {
-    let user
+    let user: JWTPayload
     const requestHeaders = new Headers(request.headers)
     const authorization: string | null = requestHeaders.get('Authorization')
 
@@ -15,7 +16,7 @@ export async function middleware(request: NextRequest) {
         return  NextResponse.json({"error": {"type": e.name}}, {status: e.status,});
     }
 
-    requestHeaders.set('userID', user.id)
+    requestHeaders.set('userID', <string>user.id)
 
     return NextResponse.next({
         request: {

@@ -1,11 +1,10 @@
-import {PrismaClient} from "@prisma/client";
 import {NextResponse} from "next/server";
 import {Users} from "../../../../../prisma/repository/user/user";
 import {headers} from "next/headers";
 
 export async function GET(request: Request) {
     const headersList = headers()
-    const userID: string = headersList.get('userID')
+    const userID: string = <string>headersList.get('userID')
 
     const users = new Users()
     const user = await users.execute().findUnique({
@@ -14,5 +13,5 @@ export async function GET(request: Request) {
         }
     })
 
-    return NextResponse.json(Users.exclude(user, ["password"]), {status: 200,})
+    return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
 }
