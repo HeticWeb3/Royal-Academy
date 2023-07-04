@@ -48,10 +48,13 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                 },
                 body: JSON.stringify(data),
             })
-            if (data) {
-                setFormStatus(formStatusProps.success)
-                resetForm({})
-            }
+                .then(response => {
+                    if(response.ok) {
+                        setFormStatus(formStatusProps.success)
+                        resetForm({})
+                        changeRegistrationStepNumber(2);
+                    }
+                })
         } catch (error) {
             const response = error.response
             if (
@@ -64,7 +67,6 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
             }
         } finally {
             setDisplayFormStatus(true);
-            changeRegistrationStepNumber(2);
         }
     }
 

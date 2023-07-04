@@ -19,10 +19,10 @@ const SignUp: React.FunctionComponent = () => {
                 <Icon iconContent={'./icons/arrow-right.svg'} iconSize={25} iconAlt={''} containerClass={'flex flex-col justify-center mx-2  max-w-[25px]'}/>
                 <Icon iconContent={'3'} iconSize={54} iconAlt={''} containerClass={`${registrationStepNumber === 3?'':'opacity-30'} block bg-white w-[54px] text-blue-dark rounded-square text-[30px]`}/>
             </div>
-                {registrationStepNumber === 2 && (
+                {registrationStepNumber === 1 && (
                     <UserDataRegistrationForm setRegistrationStepNumber={setRegistrationStepNumber}/>
                     )}
-                {registrationStepNumber === 1 && (
+                {registrationStepNumber === 2 && (
                     <UserSubscriptionForm setRegistrationStepNumber={setRegistrationStepNumber}/>
                     )}
                 {/*{registrationStepNumber === 3 && (
