@@ -31,4 +31,9 @@ export async function POST(request: Request){
                 {status: 200, headers: {'Set-Cookie': `refreshToken=${refreshToken};Domain=${process.env.HOST};Path=/api/auth/refreshtoken;Expires=${expireDate};HttpOnly;SameSite=Strict`}}
             );
     }
+
+    return NextResponse.json(
+        {'error': 'Authentication error'},
+        {status: 401}
+    );
 }

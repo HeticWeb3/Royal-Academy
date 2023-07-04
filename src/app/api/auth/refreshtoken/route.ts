@@ -21,7 +21,7 @@ export async function GET(request: Request){
     const refreshToken = cookieStore.get('refreshToken')
 
     if (refreshToken == undefined){
-        return redirect('/login')
+        return NextResponse.json({'error': {'type': 'TokenError'}}, {status: 400})
     }
 
     const refreshSecret = new TextEncoder().encode(process.env.REFRESH_TOKEN_SECRET)
@@ -29,7 +29,7 @@ export async function GET(request: Request){
     try {
         jwt = await jose.jwtVerify(refreshToken.value, refreshSecret)
     } catch(e){
-        return redirect('/login')
+        return NextResponse.json({'error': {'type': 'TokenError'}}, {status: 400})
     }
 
     const [accessToken, newRefreshToken] = await generateTokens(jwt.payload.id, {'expireAccess': '8h', 'expireRefresh': '30d'})

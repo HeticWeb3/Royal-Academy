@@ -5,7 +5,7 @@ export class ValidationError extends Error {
     constructor(message?: string, status?: string) {
         super(message);
         this.name = "ValidationError"
-        this.status = 400
+        this.status = 401
     }
 }
 
