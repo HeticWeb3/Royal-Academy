@@ -4,8 +4,3 @@ export interface authContextType  {
     logout: () => void;
 };
 
-export interface providerPropsType  {
-    userConnected: boolean;
-    login: () => void;
-    logout: () => void;
-};

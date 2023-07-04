@@ -21,7 +21,7 @@ const formStatusProps: IFormStatusProps = {
     },
 }
 
-const UserLogin: React.FunctionComponent = ({req,res}) => {
+const UserLogin: React.FunctionComponent = () => {
 
     const { login } = useAuth();
     const [displayFormStatus, setDisplayFormStatus] = useState(false);

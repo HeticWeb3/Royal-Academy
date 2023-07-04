@@ -1,14 +1,17 @@
 "use client"; // This is a client component 👈🏽
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect,MouseEventHandler} from 'react'
 import {FormRegisterComponent} from "@/app/Components/Types";
 import {SubscriptionInputTypes} from "@/app/Components/Types";
 
 const UserSubscriptionForm: React.FunctionComponent<FormRegisterComponent> = ({setRegistrationStepNumber}) => {
 
-    const [subscriptionPlan,setSubscriptionPlan] = useState('')
+    const [subscriptionPlan,setSubscriptionPlan] = useState<string|null>('')
 
-    const chooseSubscriptionPlan = (event) => {
-        setSubscriptionPlan(event.currentTarget.value);
+    const chooseSubscriptionPlan = (event:any) => {
+
+        if(event.currentTarget){
+            setSubscriptionPlan(event?.currentTarget.value);
+        }
     }
 
     useEffect(() => {

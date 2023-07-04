@@ -1,6 +1,6 @@
 export * from './FirstNameValidationSchema'
 export * from './LastNameValidationSchema'
-export * from './birthdateValidationSchema'
+export * from './BirthdateValidationSchema'
 
 export * from './EmailValidationSchema'
 export * from './EmailConfirmationValidationSchema'
