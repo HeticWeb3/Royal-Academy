@@ -20,7 +20,7 @@ const formStatusProps: IFormStatusProps = {
         type: 'success',
     },
     duplicate: {
-        message: 'Email-id already exist. Please use different email-id.',
+        message: 'Email-id already exist. Please use different email.',
         type: 'error',
     },
     error: {
@@ -54,19 +54,22 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                         resetForm({})
                         changeRegistrationStepNumber(2);
                     }
+                    else {
+                        response.json().then(json => {
+                            if (
+                                json.error.type === 'ValidationEmailError' &&
+                                response.status === 401
+                            ) {
+                                setFormStatus(formStatusProps.duplicate)
+                            } else {
+                                setFormStatus(formStatusProps.error)
+                            }
+                            setDisplayFormStatus(true);
+                        })
+                    }
                 })
         } catch (error:any) {
-            const response = error.response
-            if (
-                response.error.type === 'ValidationEmailError' &&
-                response.status === 400
-            ) {
-                setFormStatus(formStatusProps.duplicate)
-            } else {
-                setFormStatus(formStatusProps.error)
-            }
         } finally {
-            setDisplayFormStatus(true);
         }
     }
 
@@ -250,7 +253,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
 
 
                                 {displayFormStatus && (
-                                    <div className="formStatus">
+                                    <div className="formStatus col-span-2">
                                         {formStatus.type === 'error' ? (
                                             <p>
                                                 {formStatus.message}

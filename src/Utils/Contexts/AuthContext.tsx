@@ -21,13 +21,19 @@ export function AuthProvider({ children }: any) {
     const [userConnected, setUserConnected] = useState<boolean>(hasCookie('accesstoken'));
 
     useLayoutEffect(() => {
-            if (!userConnected) {
+            if (!userConnected && window.location.pathname !== '/login' && window.location.pathname !== '/register' ) {
                 getAccessToken()
                     .then(response => {
-                        response?.json().then((data) => {
-                             setCookie('accesstoken', data.accessToken,{maxAge:60 * 60 * 24,sameSite:true});
-                        })
+                        if (response.ok) {
+                            response?.json().then((data) => {
+                                 setCookie('accesstoken', data.accessToken,{maxAge:60 * 60 * 24,sameSite:true});
+                            })
+                        }
+                        else {
+                            window.location.href = '/login';
+                        }
                     })
+
             }
             []
     });

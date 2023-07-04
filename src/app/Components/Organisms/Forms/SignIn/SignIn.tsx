@@ -42,16 +42,17 @@ const UserLogin: React.FunctionComponent = () => {
 
             if (response.ok) {
                 const token = await response.text();
-                console.log(token);
                 login();
                 setCookie('accesstoken', token,{maxAge:60 * 60 * 8,sameSite:true});
                 setFormStatus(formStatusProps.success);
                 resetForm({});
+                window.location.href = '/';
             }
-        } catch (error) {
-            setFormStatus(formStatusProps.error);
+            if (!response.ok) {
+                setFormStatus(formStatusProps.error);
+                setDisplayFormStatus(true);
+            }
         } finally {
-            setDisplayFormStatus(true);
         }
     };
     return (
@@ -124,7 +125,7 @@ const UserLogin: React.FunctionComponent = () => {
 
 
                                     {displayFormStatus && (
-                                        <div className="formStatus">
+                                        <div className="formStatus col-span-2">
                                             {formStatus.type === 'error' ? (
                                                 <p>
                                                     {formStatus.message}

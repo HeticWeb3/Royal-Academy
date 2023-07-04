@@ -86,7 +86,7 @@ const UserSubscriptionForm: React.FunctionComponent<FormRegisterComponent> = ({s
             <button
                 type="submit"
                 className={'button bg-blue-lightbis text-white font-normal antialiased col-span-full'}
-            >
+                >
                 Finalize your payment
             </button>
         </div>

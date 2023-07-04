@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col col-span-full ">
         <div className={'grid grid-cols-12 gap-[12px]'}>
-          <SignUp/>
+            <p>HOMEPAGE WEWEWE</p>
         </div>
     </div>
   )
