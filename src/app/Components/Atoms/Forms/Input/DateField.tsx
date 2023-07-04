@@ -15,7 +15,7 @@ export const FormikDatePicker = <TInputDate, TDate = TInputDate>(props: IDateInp
     return (
         <DatePicker
             {...restProps}
-            value={field.value ?? null}
+            value={dayjs(field.value ?? null) as TInputDate}
             onChange={(val) => setFieldValue(name, val)}
         />
     );
