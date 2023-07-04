@@ -2,25 +2,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 =======
-# PostgreSQL
-## pgAdmin
-### To configure postgre database admin tab follow thoses steps :
-
-Access to pgadmin : http://localhost:5050
-
->username : admin@admin.com
-> 
-> password : root
-
-
-Click on "Add new server"
-
-- On the first tab of the new window, enter a name.
-- On the second tab "connection" :
-- Enter credentials entered in docker-compose
-- To find the db IP, run this command in shell: 
-  - ``` docker inspect <CONTAINER>> | grep IPAddress```
-  - to find container id : docker ps
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
@@ -38,11 +19,11 @@ et on export:  export * from "User/user"
 
 # Docker
 ## Conteneurs
-| Nom      | Port Externe | Port Interne | Variables                                               |
-|----------|--------------|--------------|---------------------------------------------------------|
-| app      | 3000         | 3000         | DATABASE_URL<br/>NEXT_WEBPACK_USEPOLLING                |
-| db | 5432         | 5432         | PGUSER <br/>POSTGRES_USER<br/>POSTGRES_PASSWORD<br/>POSTGRES_DB |
-| pgadmin    | 5050         | 80           | PGADMIN_DEFAULT_EMAIL<br/>PGADMIN_DEFAULT_PASSWORD      |
+| Nom      | Port Externe | Port Interne | Variables                                                                               | Env              |
+|----------|--------------|--------------|-----------------------------------------------------------------------------------------|------------------|
+| app      | 3000         | 3000         | DATABASE_URL<br/>NEXT_WEBPACK_USEPOLLING<br/>HOST<br/>PORT<br/>ACCESS_TOKEN_SECRET<br/>REFRESH_TOKEN_SECRET | .env.development |
+| db | 5432         | 5432         | PGUSER <br/>POSTGRES_USER<br/>POSTGRES_PASSWORD<br/>POSTGRES_DB                         | .env.development |
+| pgadmin    | 5050         | 80           | PGADMIN_DEFAULT_EMAIL<br/>PGADMIN_DEFAULT_PASSWORD                                      |
 ## Commandes
 Pour lancer le build de l'environnement de développement
 ```shell
