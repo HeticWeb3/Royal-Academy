@@ -1,5 +1,5 @@
 #!/bin/sh
 
-npx prisma migrate dev
+prisma migrate dev
 
 npm run dev
