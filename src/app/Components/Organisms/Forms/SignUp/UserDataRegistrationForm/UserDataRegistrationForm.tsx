@@ -55,7 +55,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                         changeRegistrationStepNumber(2);
                     }
                 })
-        } catch (error) {
+        } catch (error:any) {
             const response = error.response
             if (
                 response.error.type === 'ValidationEmailError' &&
@@ -140,7 +140,6 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                                     <FormikDatePicker
                                         className={'formInput DateInput w-full'}
                                         name="birthDate"
-                                        id="birthDate"
                                         label="Birthdate"
                                         value={values.birthDate}
                                         onChange={handleChange}

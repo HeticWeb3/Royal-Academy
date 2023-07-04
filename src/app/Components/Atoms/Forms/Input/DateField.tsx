@@ -7,8 +7,7 @@ import {DatePicker} from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 
 
-export const FormikDatePicker = <TInputDate, TDate = TInputDate>(
-    props: IDateInput<TInputDate, TDate>
+export const FormikDatePicker = <TInputDate, TDate = TInputDate>(props: IDateInput<TInputDate, TDate>
 ) => {
     const { name, ...restProps } = props;
     const [field] = useField(name);
@@ -16,7 +15,7 @@ export const FormikDatePicker = <TInputDate, TDate = TInputDate>(
     return (
         <DatePicker
             {...restProps}
-            value={dayjs(field.value ?? null)}
+            value={field.value ?? null}
             onChange={(val) => setFieldValue(name, val)}
         />
     );
