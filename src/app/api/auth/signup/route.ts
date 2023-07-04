@@ -3,6 +3,13 @@ import {Users} from "../../../../../prisma/repository/user/user";
 import {passwordValidation} from "@/app/api/shared/user/validations";
 import {User} from "@prisma/client";
 
+/**
+ * Enregistre un utilisateur dans la base de donnée
+ *
+ * @param request
+ * @constructor
+ * @return Promise<NextResponse> (Données de l'utilisateur enregistré)
+ */
 export async function POST(request: Request) {
     let hashedPassword: string = ''
     const res = await request.json()

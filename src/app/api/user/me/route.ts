@@ -5,7 +5,7 @@ import {headers} from "next/headers";
 /**
  *
  * @param request
- * @return
+ * @return Promise<NextResponse> (Informations d'un utilisateur)
  */
 export async function GET(request: Request) {
     const headersList = headers()
