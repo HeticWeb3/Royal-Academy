@@ -26,7 +26,7 @@ test('should create new user ', async () => {
     await expect(createUser(user, ctx)).resolves.toEqual({
         id: 3,
         firstName: 'James',
-        lastName: 'Test',
+        lastName: 'Test',k
         birthDate: '2003-07-01',
         phoneNumber: '0787989834',
         email: 'hellotest@prisma.io',
