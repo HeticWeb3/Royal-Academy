@@ -9,7 +9,7 @@
 
 @layer base {
   .body{
-    @apply font-main bg-black text-white;
+    @apply font-main bg-black text-white text-base antialiased;
   }
 
   .grid-main{
@@ -23,9 +23,22 @@
     @apply p-3 text-sm font-bold rounded-sm;
   }
 
+  .formInput__wrapper{
+    @apply col-span-1 relative;
+  }
+
+  .formInput__error{
+    @apply absolute bottom-[-1.5em] text-[0.74em] text-red-base;
+  }
+
+  .formInput__wrapper.error .formInput{
+    @apply text-red-base border-b-red-base;
+  }
+
   .formInput {
     @apply text-white bg-transparent border-b-grey-lighter border-b-[1px] py-3 text-sm font-normal placeholder:text-sm placeholder:font-light placeholder:font-main antialiased;
   }
+
   .DateInput > *,.DateInput > * > * {
     @apply text-grey-lighter bg-transparent border-grey-lighter  py-3 text-sm font-normal antialiased;
   }

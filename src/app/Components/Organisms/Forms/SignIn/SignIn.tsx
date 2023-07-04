@@ -44,7 +44,7 @@ const UserLogin: React.FunctionComponent = ({req,res}) => {
                 const token = await response.text();
                 console.log(token);
                 login();
-                setCookie('accesstoken', token,{maxAge:60 * 60 * 24,sameSite:true});
+                setCookie('accesstoken', token,{maxAge:60 * 60 * 8,sameSite:true});
                 setFormStatus(formStatusProps.success);
                 resetForm({});
             }
