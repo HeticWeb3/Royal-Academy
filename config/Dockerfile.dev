@@ -14,8 +14,6 @@ COPY prisma ./prisma/
 
 RUN npm install
 
-RUN npm install -g prisma@4.16.2
-
 RUN npx prisma generate
 
 # Copie des fichiers de l'application
@@ -25,5 +23,5 @@ COPY . .
 EXPOSE 3000
 
 # Commande de démarrage de l'application
-CMD ["./config/startup_dev.sh"]
+CMD ["npm", "run", "dev"]
 
