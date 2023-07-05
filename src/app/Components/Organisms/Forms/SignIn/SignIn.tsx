@@ -9,6 +9,7 @@ import {
 } from "@/app/Components/Types";
 import {SigninSchema} from "@/app/Components/Atoms";
 import {useAuth} from "@/Utils/Contexts/AuthContext";
+import {useRouter} from "next/navigation";
 
 const formStatusProps: IFormStatusProps = {
     success: {
@@ -24,6 +25,7 @@ const formStatusProps: IFormStatusProps = {
 const UserLogin: React.FunctionComponent = () => {
 
     const { login } = useAuth();
+    const router = useRouter();
     const [displayFormStatus, setDisplayFormStatus] = useState(false);
     const [formStatus, setFormStatus] = useState<IFormStatusTypes>({
         message: '',
@@ -123,7 +125,6 @@ const UserLogin: React.FunctionComponent = () => {
                                         Login
                                     </button>
 
-
                                     {displayFormStatus && (
                                         <div className="formStatus col-span-2">
                                             {formStatus.type === 'error' ? (
@@ -139,6 +140,17 @@ const UserLogin: React.FunctionComponent = () => {
                                         </div>
                                     )}
                                 </Form>
+
+                                <div className={'p-4 grid grid-cols-2 gap-x-[12px] gap-y-[31px] mt-lg'}>
+                                    <div className={'separator border-b-white border-b-[1px] col-span-2 mx-lg mb-lg'}></div>
+                                    <button
+                                        onClick={() => router.push('/register')}
+                                        type="button"
+                                        className={'button bg-red-light text-white font-normal antialiased col-span-full'}
+                                    >
+                                        Start your free trial
+                                    </button>
+                                </div>
                             </div>
                         )
                     }}

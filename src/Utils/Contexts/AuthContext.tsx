@@ -25,7 +25,7 @@ export function AuthProvider({ children }: any) {
             if (!userConnected && window.location.pathname !== '/login' && window.location.pathname !== '/register' ) {
                 getAccessToken()
                     .then(response => {
-                        if (response.ok) {
+                        if (response?.ok) {
                             response?.json().then((data) => {
                                  setCookie('accesstoken', data.accessToken,{maxAge:60 * 60 * 24,sameSite:true});
                             })
