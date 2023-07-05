@@ -1,6 +1,7 @@
 "use client"
 import {authContextType} from "@/app/Components/Types";
 import {createContext,useContext,useState,useLayoutEffect} from "react";
+import { useRouter } from "next/navigation";
 import {hasCookie, setCookie} from 'cookies-next';
 import {getAccessToken} from '@/Utils/Hooks/User/getAccessToken'
 
@@ -17,7 +18,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }: any) {
-
+    const router = useRouter();
     const [userConnected, setUserConnected] = useState<boolean>(hasCookie('accesstoken'));
 
     useLayoutEffect(() => {
@@ -30,7 +31,7 @@ export function AuthProvider({ children }: any) {
                             })
                         }
                         else {
-                            window.location.href = '/login';
+                           router.push('/login')
                         }
                     })
 
