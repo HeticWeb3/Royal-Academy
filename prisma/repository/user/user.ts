@@ -11,7 +11,7 @@ type Signup = {
     dateCreation: string
 }
 
-export class Users{
+export class Users {
     constructor(private prismaService: PrismaClient['user'] = prismaClient.user) {}
 
     /**
