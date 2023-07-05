@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
   eslint: {
     dirs: ['src'],
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
   swcMinify: true,
   webpack: (config, context) => {
     if(process.env.NEXT_WEBPACK_USEPOLLING) {

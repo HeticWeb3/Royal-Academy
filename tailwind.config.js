@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/Components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -22,8 +22,7 @@ module.exports = {
         grey:{
           lighter:'#DDDDDD',
           base :'#C1C1C1',
-          dark:'#AAAAAA',
-          darker:'#302F2F'
+          dark:'#AAAAAA'
         },
         red: {
           lighter:'#E2A4A4',
@@ -31,7 +30,7 @@ module.exports = {
           base :'#C62120',
           dark:'#9D1414'
         },
-        black:"#131525",
+        black:"#121525",
         white:"#ffffff",
         green:"#1CC12D",
       },
@@ -47,7 +46,7 @@ module.exports = {
         xl:'87px',
       },
       fontSize:{
-        sm:'9px',
+        sm:'0.94em',
         base: '17px',
         lg:'1.29em',
         xl:'1.52em',
@@ -57,8 +56,7 @@ module.exports = {
       },
       borderRadius:{
         sm:'2px',
-        base:'13px',
-        square:'100%',
+        base:'13px'
       },
     },
   },

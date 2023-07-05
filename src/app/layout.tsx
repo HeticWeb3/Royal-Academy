@@ -1,7 +1,5 @@
 import './globals.css'
 import {ContainerWide} from "@/app/Components/Atoms/";
-import {AuthProvider} from "@/Utils/Contexts/AuthContext";
-
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,9 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={'body'}>
           <ContainerWide>
-              <AuthProvider>
-                  {children}
-              </AuthProvider>
+              {children}
           </ContainerWide>
       </body>
     </html>
