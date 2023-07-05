@@ -1,2 +1,0 @@
-- name: ssh-docker-compose
-  uses: HeticWeb3/github-action-ssh-docker-compose@master
