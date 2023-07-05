@@ -32,8 +32,16 @@ Pour lancer le build de l'environnement de développement
 ```shell
 docker-compose -f .\docker-compose-dev.yml up -d --build
 ```
+Mac :
+```shell
+docker-compose -f docker-compose-dev.yml up -d --build
+```
 
 Pour lancer le build de l'environnement de production
+```shell
+docker-compose -f .\docker-compose.yml up -d --build
+```
+Mac :
 ```shell
 docker-compose -f .\docker-compose.yml up -d --build
 ```

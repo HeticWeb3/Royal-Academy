@@ -245,7 +245,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
 
                                 <button
                                     type="submit"
-                                    className={'button bg-blue-lightbis text-white font-normal antialiased col-span-full'}
+                                    className={'button bg-blue-lightbis lg:text-base text-white font-normal antialiased col-span-full'}
                                     disabled={isSubmitting}
                                 >
                                     Choose your subscription

@@ -36,11 +36,11 @@
   }
 
   .formInput {
-    @apply text-white bg-transparent border-b-grey-lighter border-b-[1px] py-3 text-sm font-normal placeholder:text-sm placeholder:font-light placeholder:font-main antialiased;
+    @apply text-white bg-transparent border-b-grey-lighter border-b-[1px] py-3 text-sm lg:text-base font-normal placeholder:text-sm lg:placeholder:text-base placeholder:font-light placeholder:font-main antialiased;
   }
 
   .DateInput > *,.DateInput > * > * {
-    @apply text-grey-lighter bg-transparent border-grey-lighter  py-3 text-sm font-normal antialiased;
+    @apply text-grey-lighter bg-transparent border-grey-lighter  py-3 text-sm lg:text-base font-normal antialiased;
   }
 }
 

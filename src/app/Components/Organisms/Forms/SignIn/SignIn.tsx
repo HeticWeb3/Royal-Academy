@@ -119,7 +119,7 @@ const UserLogin: React.FunctionComponent = () => {
                                     <button
                                         type="submit"
                                         form={'loginForm'}
-                                        className={'button bg-blue-lightbis text-white font-normal antialiased col-span-full'}
+                                        className={'button bg-blue-lightbis text-white lg:text-base font-normal antialiased col-span-full'}
                                         disabled={isSubmitting}
                                     >
                                         Login
@@ -146,7 +146,7 @@ const UserLogin: React.FunctionComponent = () => {
                                     <button
                                         onClick={() => router.push('/register')}
                                         type="button"
-                                        className={'button bg-red-light text-white font-normal antialiased col-span-full'}
+                                        className={'button bg-red-light text-white font-normal lg:text-base antialiased col-span-full'}
                                     >
                                         Start your free trial
                                     </button>
