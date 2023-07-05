@@ -1,6 +1,7 @@
 "use client"
 import Image from 'next/image'
 import headImage from '/public/images/home/studyfrombest.png'
+import startFreeImage from '/public/images/home/startfree.svg'
 import RCMImage from '/public/images/home/partners/RCM-Primary.png'
 import RIAMImage from '/public/images/home/partners/RIAM.png'
 import ColburnImage from '/public/images/home/partners/Colburn.png'
@@ -50,8 +51,18 @@ export default function Home() {
         </section>
 
         <section id={'homeStartLearning'} className={'flex flex-col gap-lg'}>
-            <div>
-                <div className={'text-center py-7 px-lg from-blue-light bg-gradient-to-r'}>
+            <div className={'relative'}>
+                <Image
+                    alt={''}
+                    src={startFreeImage}
+                    fill={true}
+                    style={{
+                        zIndex:0,
+                        objectFit: 'cover',
+                        objectPosition:'center',
+                    }}
+                />
+                <div className={'text-center py-7 px-lg z-10 relative'}>
                     <h3 className={'mb-5'}>On smartphone, tablet or computer</h3>
                     <p className={'text-sm mb-4'}>Watch the 300+ tutorials video on the app available on App Store and Play Store</p>
 
