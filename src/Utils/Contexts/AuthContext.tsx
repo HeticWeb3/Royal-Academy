@@ -22,7 +22,7 @@ export function AuthProvider({ children }: any) {
     const [userConnected, setUserConnected] = useState<boolean>(hasCookie('accesstoken'));
 
     useLayoutEffect(() => {
-            if (!userConnected && window.location.pathname !== '/login' && window.location.pathname !== '/register' ) {
+            if (!userConnected && (window.location.pathname !== '/login'|| window.location.pathname !== '/register') ) {
                 getAccessToken()
                     .then(response => {
                         if (response?.ok) {
@@ -35,6 +35,9 @@ export function AuthProvider({ children }: any) {
                         }
                     })
 
+            }
+            else if (userConnected && (window.location.pathname == '/login' || window.location.pathname == '/register') ){
+                router.push('/');
             }
             []
     });
