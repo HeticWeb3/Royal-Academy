@@ -1,5 +1,6 @@
 import {PrismaClient} from "@prisma/client";
 import {NextResponse} from "next/server";
+import {prismaClient} from "../../../../../prisma/prisma";
 
 //TODO : Add logged user
 
@@ -12,8 +13,8 @@ import {NextResponse} from "next/server";
  */
 export async function PATCH(request: Request, params: { userId: number }) {
     const res = await request.json()
-    const updateUser = new PrismaClient()
-    const user = await updateUser.user.update({
+
+    const user = await prismaClient.user.update({
         where: {
             id: params.userId,
             email: "test@test.com"
@@ -33,8 +34,8 @@ export async function PATCH(request: Request, params: { userId: number }) {
  * @return Promise<NextResponse>
  */
 export async function DELETE(request: Request, params: { userId: number }) {
-    const deleteUser = new PrismaClient()
-    const user = await deleteUser.user.delete({
+
+    const user = await prismaClient.user.delete({
         where: {
             id: params.userId,
             email: "test@test.com"
@@ -51,8 +52,7 @@ export async function DELETE(request: Request, params: { userId: number }) {
  * @return Promise<NextResponse> (les informations de l'utilisateur)
  */
 export async function GET(request: Request, params: { userId: number }) {
-    const getUser = new PrismaClient()
-    const user = await getUser.user.findUnique({
+    const user = await prismaClient.user.findUnique({
         where: {
             id: params.userId,
             email: "test@test.com"

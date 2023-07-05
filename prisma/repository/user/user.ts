@@ -1,4 +1,5 @@
 import { PrismaClient, User } from '@prisma/client'
+import { prismaClient } from "../../prisma";
 
 type Signup = {
     email: string,
@@ -10,19 +11,19 @@ type Signup = {
     dateCreation: string
 }
 
-export class Users {
-    constructor(private prisma: PrismaClient['user'] = new PrismaClient().user) {}
+export class Users{
+    constructor(private prismaService: PrismaClient['user'] = prismaClient.user) {}
 
     /**
      * Fonction qui execute l'inscription d'un utilisateur
-     * @param prismaUser
+     * @param service
      * @return user (data)
      */
-    execute(prismaUser = this.prisma) {
-        return Object.assign(prismaUser, {
+    execute(service = this.prismaService) {
+        return Object.assign(service, {
 
             async signup(data: Signup): Promise<User> {
-                return prismaUser.create({ data })
+                return service.create({ data })
             },
         })
     }
