@@ -22,7 +22,8 @@ module.exports = {
         grey:{
           lighter:'#DDDDDD',
           base :'#C1C1C1',
-          dark:'#AAAAAA'
+          dark:'#AAAAAA',
+          darker:'#302F2F'
         },
         red: {
           lighter:'#E2A4A4',
@@ -46,7 +47,7 @@ module.exports = {
         xl:'87px',
       },
       fontSize:{
-        sm:'0.94em',
+        sm:'9px',
         base: '17px',
         lg:'1.29em',
         xl:'1.52em',

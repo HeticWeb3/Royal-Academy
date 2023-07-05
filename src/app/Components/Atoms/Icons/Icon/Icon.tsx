@@ -3,10 +3,10 @@ import {iconProps} from "@/app/Components/Types";
 
 export const Icon  : React.FC<iconProps> = ({ iconContent, iconSize,iconAlt,containerClass }) => {
         return (
-            <span className={containerClass +' aspect-square'}>
+            <div className={containerClass +' aspect-square'}>
                 {iconContent.substr(-4) ==='.svg'
                     ? <Image
-                        priority
+                        quality={100}
                         src={iconContent}
                         height={iconSize}
                         width={iconSize}
@@ -16,7 +16,7 @@ export const Icon  : React.FC<iconProps> = ({ iconContent, iconSize,iconAlt,cont
                         <span className={'m-auto text-center'}>{iconContent}</span>
                         </div>
                 }
-            </span>
+            </div>
         )
 };
 
