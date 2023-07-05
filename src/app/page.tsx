@@ -103,7 +103,7 @@ export default function Home() {
 
                 <h2 className={'text-sm lg:text-base lg:py-xl text-center'}>They trust us</h2>
 
-                <div className={'grid grid-cols-4 gap-[30px] mx-xl justify-center'}>
+                <div className={'grid grid-cols-4 gap-[30px] mx-xl justify-center lg:items-center'}>
                     <div className={'relative col-span-1'}>
                         <Image
                             src={RCMImage}
