@@ -2,14 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import {UserDataProps} from "@/app/Components/Types";
 
-const ProfilHomePage : React.FC<UserDataProps> = ({props}) => {
+const ProfilHomePage = (user: { user: UserDataProps }) => {
 
+    const userInfo = user.user
 
     return (
         <div className={'col-span-full'}>
-            <h1>Profil de {props.firstName}</h1>
-            <p>Email : {props.email}</p>
-            <p>ID : {props.id}</p>
+            <h1>Profil de {userInfo.firstName}</h1>
+            <p>Email : {userInfo.email}</p>
+            <p>ID : {userInfo.id}</p>
             {/* Ajoutez d'autres informations spécifiques à l'utilisateur */}
         </div>
     );
