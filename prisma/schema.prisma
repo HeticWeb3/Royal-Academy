@@ -81,11 +81,12 @@ model Style {
 }
 
 model Rank {
-  id      Int    @id @default(autoincrement())
+  id      Int     @id @default(autoincrement())
   place   Int
-  style   Style  @relation(fields: [styleId], references: [id])
-  ecole   School @relation(fields: [ecoleId], references: [id])
+  style   Style   @relation(fields: [styleId], references: [id])
+  ecole   School  @relation(fields: [ecoleId], references: [id])
   point   Int
+  badge   Badge[]
   styleId Int
   ecoleId Int
   user    User[]
@@ -93,12 +94,12 @@ model Rank {
 
 model Level {
   id          Int           @id @default(autoincrement())
-  lesson      Lesson        @relation(fields: [lessonId], references: [id])
   nom         String?
   lessonId    Int
   cours       Course[]
   badge       Badge[]
   competition Competition[]
+  Lesson      Lesson[]
 }
 
 model LessonFile {
@@ -109,24 +110,26 @@ model LessonFile {
 }
 
 model Video {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   nom         String?
   description String?
-  lesson      Lesson  @relation(fields: [lessonId], references: [id])
   lessonId    Int
+  Lesson      Lesson[]
 }
 
 model Lesson {
   id          Int          @id @default(autoincrement())
   nom         String?
   description String?
-  niveau      Level[]
+  level       Level?       @relation(fields: [levelId], references: [id])
+  video       Video?       @relation(fields: [videoId], references: [id])
   lessonFile  LessonFile[]
-  video       Video[]
   course      Course?      @relation(fields: [courseId], references: [id])
   courseId    Int?
   badge       Badge[]
   user        User[]
+  levelId     Int?
+  videoId     Int?
 }
 
 model Course {
@@ -171,8 +174,10 @@ model Badge {
   lessonId  Int
   courseId  Int
   iconBadge IconBadge[]
-  User      User?       @relation(fields: [userId], references: [id])
   userId    Int?
+  Rank      Rank?       @relation(fields: [rankId], references: [id])
+  rankId    Int?
+  User      User[]
 }
 
 model IconBadge {

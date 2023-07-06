@@ -44,7 +44,7 @@ export async function DELETE(request: Request, {params}: { params: { userId: num
 }
 
 /**
- * Récupère toutes les données du user en fonction de l'id connecter
+ * Récupère toutes les données d'un utilisateur en fonction de l'id connecter
  *
  * @param request
  * @param params
