@@ -68,11 +68,11 @@ const ProfilHomePage = (user: { user: UserDataProps }) => {
                     </button>
                 </div>
 
-                <div className={'flex flex-row flex-nowrap gap-7 overflow-x-scroll no-scrollbar'}>
+                <div className={'flex flex-row flex-nowrap gap-7 overflow-x-scroll no-scrollbar mx-[-15px] px-[15px]'}>
                     {instruments.map((instrument) => (
-                        <div key={instrument.id}>
+                        <button key={instrument.id}>
                            <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50} iconAlt={instrument.name} containerClass={'w-[110px] bg-white rounded-square p-2 flex items-center justify-center'}/>
-                        </div>
+                        </button>
                     ))}
                 </div>
             </div>
