@@ -6,7 +6,7 @@
     bio: string | null;
     birthDate: Date;
     dateCreation: Date;
-    instrumentId:number | null;
+    instrumentId:object | number | null;
     lastName:string;
     lessonId:number | null;
     phoneNumber:string;
