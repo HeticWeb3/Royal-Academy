@@ -1,6 +1,5 @@
-import {PrismaClient} from "@prisma/client";
 import {NextResponse} from "next/server";
-import {prismaClient} from "../../../../../prisma/prisma";
+import {Users} from "../../../../../prisma/repository/user/user";
 
 //TODO : Add logged user
 
@@ -11,19 +10,19 @@ import {prismaClient} from "../../../../../prisma/prisma";
  * @param params
  * @return Promise<NextResponse> (Utilisateur update)
  */
-export async function PATCH(request: Request, params: { userId: number }) {
+export async function PATCH(request: Request, {params}: { params:{ userId: number }}) {
     const res = await request.json()
 
-    const user = await prismaClient.user.update({
+    const users = new Users()
+    const user = await users.execute().update({
         where: {
-            id: params.userId,
-            email: "test@test.com"
+            id: Number(params.userId),
         },
         data: {
             firstName: res.firstName,
         }
     })
-    return NextResponse.json(user, {status: 200,})
+    return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
 }
 
 /**
@@ -33,12 +32,12 @@ export async function PATCH(request: Request, params: { userId: number }) {
  * @param params
  * @return Promise<NextResponse>
  */
-export async function DELETE(request: Request, params: { userId: number }) {
+export async function DELETE(request: Request, {params}: { params:{ userId: number }}) {
 
-    const user = await prismaClient.user.delete({
+    const users = new Users()
+    const user = await users.execute().delete({
         where: {
-            id: params.userId,
-            email: "test@test.com"
+            id: Number(params.userId),
         },
     })
     return NextResponse.json(user, {status: 200,})
@@ -51,12 +50,13 @@ export async function DELETE(request: Request, params: { userId: number }) {
  * @param params
  * @return Promise<NextResponse> (les informations de l'utilisateur)
  */
-export async function GET(request: Request, params: { userId: number }) {
-    const user = await prismaClient.user.findUnique({
+export async function GET(request: Request, {params}: { params:{ userId: number }}) {
+
+    const users = new Users()
+    const user = await users.execute().findUnique({
         where: {
-            id: params.userId,
-            email: "test@test.com"
+            id: Number(params.userId),
         }
     })
-    return NextResponse.json(user, {status: 200,})
+    return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
 }
