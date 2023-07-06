@@ -29,7 +29,6 @@ model User {
   style          Style?           @relation(fields: [styleId], references: [id])
   lastLesson     Lesson?          @relation(fields: [lessonId], references: [id])
   rank           Rank?            @relation(fields: [rankId], references: [id])
-  badge          Badge[]
   bio            String?
   uploadFileUser UploadFileUser[]
   school         School?          @relation(fields: [schoolId], references: [id])
@@ -42,6 +41,7 @@ model User {
   instrument     Instrument[]
   instrumentId   Int?
   course         Course[]
+  badge          Badge[]
 }
 
 model Teacher {
