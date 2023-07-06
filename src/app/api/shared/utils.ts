@@ -1,5 +1,5 @@
 /**
- * Crée la date de création d'un utilisateur
+ * Crée une date dans le futur
  * @param days
  */
 export const getFutureDate = (days: number) => {

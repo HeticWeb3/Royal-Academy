@@ -1,14 +1,14 @@
-import {PrismaClient, User} from "@prisma/client";
-import {NextResponse} from "next/server";
+import { PrismaClient } from "@prisma/client";
+import { prismaClient } from "../../prisma";
 
 
 
 
 export class Teachers {
-    constructor(private prisma: PrismaClient['teacher'] = new PrismaClient().teacher) {}
+    constructor(private prismaService: PrismaClient['teacher'] = prismaClient.teacher) {}
 
-    execute(prismaUser = this.prisma) {
-        return Object.assign(prismaUser, {
+    execute(service = this.prismaService) {
+        return Object.assign(service, {
 
         })
     }
