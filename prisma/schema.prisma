@@ -41,6 +41,7 @@ model User {
   dateCreation   DateTime         @db.Date
   instrument     Instrument[]
   instrumentId   Int?
+  course         Course[]
 }
 
 model Teacher {
@@ -142,6 +143,8 @@ model Course {
   teacherId    Int
   instrumentId Int
   badge        Badge[]
+  User         User[]
+  userId       Int?
 }
 
 model Instrument {
