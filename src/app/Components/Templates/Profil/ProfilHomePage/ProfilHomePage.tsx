@@ -5,12 +5,11 @@ import baseAvatar from '/public/images/user/avatar.jpg'
 import Image from "next/image";
 import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
+import ChooseInstruments from "@/app/Components/Organisms/User/ChooseInstruments/ChooseInstruments";
 
 const ProfilHomePage = (user: { user: UserDataProps }) => {
 
     const userInfo = user.user
-
-    console.log( userInfo)
     const instruments = [
         {
             id: 1,
@@ -132,7 +131,7 @@ const ProfilHomePage = (user: { user: UserDataProps }) => {
                 </div>
             </div>
 
-
+        <ChooseInstruments UserInstruments={instruments}/>
 
         </div>
     );
