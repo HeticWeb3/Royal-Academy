@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     const user = await users.execute().findUnique({
         where: {
             id: Number(userID),
-        }
+        },
     })
 
     return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})

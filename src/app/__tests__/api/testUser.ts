@@ -1,4 +1,4 @@
-import { MockContext, Context, createMockContext } from '../../sharedTests/context'
+import { MockContext, Context, createMockContext } from '../../sharedTests/configTests/context'
 import { createUser, updateUsername } from '../../sharedTests/sharedTestUser'
 
 let mockCtx: MockContext
