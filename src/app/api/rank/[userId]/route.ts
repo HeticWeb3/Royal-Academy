@@ -1,21 +1,26 @@
 import {NextResponse} from "next/server";
+import {Users} from "../../../../../prisma/repository/user/user";
 
-const { PrismaClient } = require('@prisma/client');
+const {PrismaClient} = require('@prisma/client');
 
-const prisma = new PrismaClient();
-
-export async function GET({params}: { params:{ userId: number }}) {
-    const user = await prisma.user.findUnique({
-        where: { id: Number(params.userId),},
-        include: { badges: true },
+export async function GET(request: Request, {params}: { params: { userId: number }}) {
+    const users = new Users()
+    const user = await users.execute().findUnique({
+        where: {
+            id: Number(params.userId),
+        },
+        include: {
+            badge: true
+        },
     });
 
     let totalPoints = 0;
 
-
+    // @ts-ignore
     for (const badge of user.badge) {
         totalPoints += badge.point;
     }
-
-    return NextResponse.json({pointUser: totalPoints}, {status: 200})
+    // @ts-ignore
+    user.totalPoint = totalPoints;
+    return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
 }
