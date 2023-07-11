@@ -9,7 +9,14 @@ import ChooseInstruments from "@/app/Components/Organisms/User/ChooseInstruments
 
 const ProfilHomePage = (user: { user: UserDataProps }) => {
 
+    const [showChooseInstruments,setShowChooseInstruments]=useState(false)
+
     const userInfo = user.user
+
+    const quitChooseWindow = () => {
+        setShowChooseInstruments(false);
+    };
+
     const instruments = [
         {
             id: 1,
@@ -17,19 +24,9 @@ const ProfilHomePage = (user: { user: UserDataProps }) => {
             description: 'The Violin'
         },
         {
-            id: 2,
-            name: 'Voice',
-            description: 'The Voice'
-        },
-        {
             id : 5,
             name : 'piano',
             description : 'blablabla'
-        },
-        {
-            id: 12,
-            name: 'flute',
-            description: 'The Violin'
         },
         {
             id: 14,
@@ -54,7 +51,7 @@ const ProfilHomePage = (user: { user: UserDataProps }) => {
 
 
     return (
-        <div className={'col-span-full my-lg flex flex-col gap-lg'}>
+        <div className={`${showChooseInstruments?'overflow-hidden':''} col-span-full my-lg flex flex-col gap-lg`}>
 
             <div className={"flex flex-row flex-nowrap items-center gap-6"}>
                 <div className={'rounded-square block relative w-[80px] h-[80px] overflow-hidden'}>
@@ -86,7 +83,7 @@ const ProfilHomePage = (user: { user: UserDataProps }) => {
             <div className={'flex flex-col gap-6'}>
                 <div className={'flex flex-row flex-nowrap gap-3 items-center'}>
                     <h2 className={'uppercase text-lg'}>My instruments</h2>
-                    <button >
+                    <button onClick={()=>setShowChooseInstruments(true)} >
                         <Icon iconContent={'/icons/plus.svg'} iconSize={20} iconAlt={''} containerClass={''}/>
                     </button>
                 </div>
@@ -130,9 +127,14 @@ const ProfilHomePage = (user: { user: UserDataProps }) => {
                     </button>
                 </div>
             </div>
-
-        <ChooseInstruments UserInstruments={instruments}/>
-
+            {showChooseInstruments?  (
+                <div className={'bg-grey-darker/75 w-screen h-screen absolute top-0 left-0 '}>
+                    <div className={'bg-white py-lg px-7 rounded-base m-6'}>
+                        <h3 className={'text-black text-lg mb-xl text-center font-bold'}>Chose the other(s) instrument(s) you want to learn: </h3>
+                        <ChooseInstruments UserInstruments={instruments} onQuitChooseWindow={quitChooseWindow} />
+                    </div>
+                </div>
+                ):null}
         </div>
     );
 };

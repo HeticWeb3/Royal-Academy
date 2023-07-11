@@ -1,10 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState } from "react";
 import {Icon} from "@/app/Components/Atoms";
 
-const ChooseInstruments = (UserInstruments: any) => {
+interface ChooseInstrumentsProps {
+    UserInstruments: any;
+    onQuitChooseWindow: () => void;
+}
 
-    const [userInstruments, setUserInstruments] = useState(UserInstruments.UserInstruments);
-    const initialsInstruments = UserInstruments.UserInstruments;
+const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
+    UserInstruments,
+    onQuitChooseWindow,
+}) => {
+
+    const [userInstruments, setUserInstruments] = useState(UserInstruments);
+    const initialsInstruments = UserInstruments;
     const AllInstruments = [
         {
             id: 1,
@@ -43,6 +51,7 @@ const ChooseInstruments = (UserInstruments: any) => {
         }
     ]
 
+
     const checkInstrumentSelected = (id: number) => {
         let isHere;
         console.log(userInstruments)
@@ -72,17 +81,26 @@ const ChooseInstruments = (UserInstruments: any) => {
 
 
     return (
-        <div className={'flex flex-row flex-wrap gap-7 no-scrollbar mx-[-15px] px-[15px]'}>
-            {AllInstruments?.map((instrument) => {
-
-                return initialsInstruments.find(e => e.id == instrument.id) ? (
-                <button key={instrument.id} value={instrument.id} onClick={handleClick}>
-                    <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50}
-                          iconAlt={instrument.name}
-                          containerClass={`w-[110px] ${checkInstrumentSelected(instrument.id) == undefined ? 'opacity-40' : 'opacity-100'} bg-blue-extralight rounded-square p-2 flex items-center justify-center`}/>
-                </button>
-                ): null
-            } )}
+        <div className={'flex flex-col items-center'}>
+            <div className={'flex flex-row flex-wrap gap-7 no-scrollbar mx-[-15px] px-[15px]'}>
+                {AllInstruments?.map((instrument) => {
+                    return !initialsInstruments.find(e => e.id == instrument.id) ? (
+                        <button key={instrument.id} value={instrument.id} onClick={handleClick}>
+                            <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50}
+                                  iconAlt={instrument.name}
+                                  containerClass={`w-[85px] ${checkInstrumentSelected(instrument.id) == undefined ? '' : 'border-green border-2 bg-white'} transition bg-blue-extralight rounded-square p-2 flex items-center justify-center`}/>
+                        </button>
+                    ): null
+                } )}
+            </div>
+            <button
+                onClick={onQuitChooseWindow}
+                type="button"
+                form={'chooseInstruments'}
+                className={'button bg-blue-lightbis text-white font-normal text-base antialiased col-span-full mt-xl py-6 px-lg'}
+            >
+                Validate
+            </button>
         </div>
 
     )
