@@ -111,7 +111,7 @@ const ProfilHomePage = (user: { user: UserDataProps }) => {
                 </div>
 
                 <div className={'flex flex-row flex-nowrap gap-7 overflow-x-scroll no-scrollbar mx-[-15px] px-[15px]'}>
-                    <button className={'relative w-[120px] h-[70px] rounded-t-base overflow-hidden'}>
+                    <button className={'relative w-[120px] lg:w-[524px] h-[70px] lg:h-[313px] rounded-t-base lg:rounded-none overflow-hidden'}>
                         <Image
                             src={LastLesson[0].thumbnail}
                             alt={'Last lesson thumbnail'}
@@ -129,7 +129,7 @@ const ProfilHomePage = (user: { user: UserDataProps }) => {
             </div>
             {showChooseInstruments?  (
                 <div className={'bg-grey-darker/75 w-screen h-screen absolute top-0 left-0 '}>
-                    <div className={'bg-white py-lg px-7 rounded-base m-6'}>
+                    <div className={'bg-white py-lg px-7 rounded-base m-6 lg:w-1/3 lg:mx-auto'}>
                         <h3 className={'text-black text-lg mb-xl text-center font-bold'}>Chose the other(s) instrument(s) you want to learn: </h3>
                         <ChooseInstruments UserInstruments={instruments} onQuitChooseWindow={quitChooseWindow} />
                     </div>
