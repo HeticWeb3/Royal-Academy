@@ -54,8 +54,7 @@ const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
 
     const checkInstrumentSelected = (id: number) => {
         let isHere;
-        console.log(userInstruments)
-        userInstruments?.forEach((item: object, index: number) => {
+        userInstruments?.forEach((item: any, index: number) => {
             if (item.id == id) {
                 isHere = index;
             }
@@ -71,10 +70,10 @@ const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
     const handleClick = (event: any) => {
         if (event.currentTarget.value) {
             if (checkInstrumentSelected(event?.currentTarget.value) !== undefined) {
-                setUserInstruments(userInstruments.filter(el => el.id != event?.currentTarget.value));
+                setUserInstruments(userInstruments.filter((el:any) => el.id != event?.currentTarget.value));
             } else {
                 const foundInstrument = AllInstruments.find(e => e.id == event?.currentTarget?.value)
-                setUserInstruments((prev) => [...prev, foundInstrument])
+                setUserInstruments((prev:Array<any>) => [...prev, foundInstrument])
             }
         }
     }
@@ -84,7 +83,7 @@ const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
         <div className={'flex flex-col items-center'}>
             <div className={'flex flex-row flex-wrap gap-7 no-scrollbar mx-[-15px] px-[15px]'}>
                 {AllInstruments?.map((instrument) => {
-                    return !initialsInstruments.find(e => e.id == instrument.id) ? (
+                    return !initialsInstruments.find((el:any) => el.id == instrument.id) ? (
                         <button key={instrument.id} value={instrument.id} onClick={handleClick}>
                             <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50}
                                   iconAlt={instrument.name}
