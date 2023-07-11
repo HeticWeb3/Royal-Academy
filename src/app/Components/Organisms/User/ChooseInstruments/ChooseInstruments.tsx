@@ -4,6 +4,7 @@ import {Icon} from "@/app/Components/Atoms";
 const ChooseInstruments = (UserInstruments: any) => {
 
     const [userInstruments, setUserInstruments] = useState(UserInstruments.UserInstruments);
+    const initialsInstruments = UserInstruments.UserInstruments;
     const AllInstruments = [
         {
             id: 1,
@@ -72,13 +73,16 @@ const ChooseInstruments = (UserInstruments: any) => {
 
     return (
         <div className={'flex flex-row flex-wrap gap-7 no-scrollbar mx-[-15px] px-[15px]'}>
-            {AllInstruments?.map((instrument) => (
+            {AllInstruments?.map((instrument) => {
+
+                return initialsInstruments.find(e => e.id == instrument.id) ? (
                 <button key={instrument.id} value={instrument.id} onClick={handleClick}>
                     <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50}
                           iconAlt={instrument.name}
                           containerClass={`w-[110px] ${checkInstrumentSelected(instrument.id) == undefined ? 'opacity-40' : 'opacity-100'} bg-blue-extralight rounded-square p-2 flex items-center justify-center`}/>
                 </button>
-            ))}
+                ): null
+            } )}
         </div>
 
     )
