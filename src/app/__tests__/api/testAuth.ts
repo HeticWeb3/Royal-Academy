@@ -1,4 +1,5 @@
-import {POST as signupPost} from "@/app/api/auth/signup/route"
+import {POST as signupAPI} from "@/app/api/auth/signup/route"
+import {POST as loginAPI} from "@/app/api/auth/login/route"
 
 
 const BASE_URL = `http://${process.env.HOST}:${process.env.PORT}`
@@ -13,8 +14,7 @@ const mockRequest = (url: string, method: string = 'GET', body: {} | null = null
         })
 }
 
-describe('api/auth/signup', () => {
-
+describe('/api/auth/signup', () => {
     test('Should create a user', async () => {
         const request = mockRequest("/api/auth/signup", 'POST', {
             firstName: 'James',
@@ -26,8 +26,8 @@ describe('api/auth/signup', () => {
             confirmPassword: 'mdppass',
         })
 
+        const signup = await signupAPI(request)
 
-        let signup = await signupPost(request)
         if (signup) {
             const data = await signup.json()
             expect(data).toEqual(expect.objectContaining({id: 1, instrumentId: null}))
@@ -45,11 +45,42 @@ describe('api/auth/signup', () => {
             confirmPassword: 'mdppass',
         })
 
+        const signup = await signupAPI(request)
 
-        let signup = await signupPost(request)
         if (signup) {
             const data = await signup.json()
             expect(data).toMatchObject({error: {type: "ValidationEmailError"}})
+        }
+    })
+})
+
+
+describe("/api/auth/login", () => {
+
+    test("Should return an access token and a refresh token", async () => {
+        const request = mockRequest("/api/auth/login", 'POST', {
+            loginEmail: 'test1@prisma.io',
+            loginPassword: 'mdppass',
+        })
+        const login = await loginAPI(request)
+
+        if(login){
+            const data = await login.json()
+            expect(data).toEqual(expect.objectContaining({accessToken: expect.any(String)}))
+        }
+    })
+
+
+    test("Should return an error", async () => {
+        const request = mockRequest("/api/auth/login", 'POST', {
+            loginEmail: 'test1@prisma.io',
+            loginPassword: 'mdppass!',
+        })
+        const login = await loginAPI(request)
+
+        if(login){
+            const data = await login.json()
+            expect(data).toMatchObject({error: "Authentication error"})
         }
     })
 })
