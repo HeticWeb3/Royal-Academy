@@ -9,6 +9,17 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: test_royalacademydb
+          PGUSER: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: root
+        ports:
+          - 5432:5432
+
     steps:
       - uses: actions/checkout@v3
 
@@ -16,6 +27,17 @@ jobs:
         name: Setup Node
         with:
           node-version: 20
+
+      - uses: SpicyPizza/create-envfile@v2.0
+        name: Make envfile
+        with:
+          envkey_DATABASE_URL: "postgresql://postgres:root@localhost:5432/test_royalacademydb?schema=public&connect_timeout=300"
+          envkey_ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+          envkey_REFRESH_TOKEN_SECRET: ${{secrets.REFRESH_TOKEN_SECRET}}
+          envkey_HOST: localhost
+          envkey_PORT: 3000
+          directory: ./
+          file_name: .env.test
 
       - run: npm install
       - run: npm run lint
