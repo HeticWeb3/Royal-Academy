@@ -83,12 +83,12 @@ model Style {
 model Rank {
   id      Int     @id @default(autoincrement())
   place   Int
-  style   Style   @relation(fields: [styleId], references: [id])
-  ecole   School  @relation(fields: [ecoleId], references: [id])
+  style   Style?  @relation(fields: [styleId], references: [id])
+  ecole   School?  @relation(fields: [ecoleId], references: [id])
   point   Int
   badge   Badge[]
-  styleId Int
-  ecoleId Int
+  styleId Int?
+  ecoleId Int?
   user    User[]
 }
 
