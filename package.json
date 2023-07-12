@@ -10,8 +10,8 @@
     "type-check": "tsc --noemit",
     "lint": "next lint",
     "test:setup": "dotenv -e .env.test -- npx prisma migrate dev",
-    "test": "npm run test:setup && jest --detectOpenHandles",
-    "test:ci": "npm run test:setup && jest --ci --detectOpenHandles"
+    "test": "npm run test:setup && jest",
+    "test:ci": "npm run test:setup && jest --ci"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
