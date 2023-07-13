@@ -1,2 +1,2 @@
 export * from './Forms'
-export * from './Biography/Biography.'
+export * from './Biography/Biography'
