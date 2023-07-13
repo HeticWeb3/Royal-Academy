@@ -8,7 +8,7 @@ import {Teachers} from "../../../../../prisma/repository/user/teacher";
  * @param params
  * @return Promise<NextResponse> (Information professeur)
  */
-export async function GET(request: Request, params: { teacherId: number }) {
+export async function GET(request: Request, {params}: { params: {teacherId: number }}) {
 
     const teachers = new Teachers()
 
