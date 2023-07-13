@@ -1,18 +1,7 @@
 import {POST as signupAPI} from "@/app/api/auth/signup/route"
 import {POST as loginAPI} from "@/app/api/auth/login/route"
 
-
-const BASE_URL = `http://${process.env.HOST}:${process.env.PORT}`
-const mockRequest = (url: string, method: string = 'GET', body: {} | null = null) => {
-
-    return new Request(BASE_URL+url, {
-            method: method,
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-}
+import {mockRequest} from "@/app/__tests__/_shared/request";
 
 describe('/api/auth/signup', () => {
     test('Should create a user', async () => {
@@ -67,6 +56,7 @@ describe("/api/auth/login", () => {
         if(login){
             const data = await login.json()
             expect(data).toEqual(expect.objectContaining({accessToken: expect.any(String)}))
+            expect(login.cookies.get('refreshToken')?.value).toEqual(expect.any(String))
         }
     })
 
@@ -84,3 +74,12 @@ describe("/api/auth/login", () => {
         }
     })
 })
+
+/*
+describe('/api/auth/refreshtoken', () => {
+    test('Should return a new access token', async ()=> {
+        const [accessToken, refreshToken] = await getLogged('test1@prisma.io', 'mdppass!')
+
+        const request =  mockRequest("/api/auth/refreshtoken")
+    })
+})*/

@@ -6,14 +6,14 @@ const createJestConfig = nextJest({
     clearMocks: true,
     preset: 'ts-jest',
     testEnvironment: 'node',
-    setupFilesAfterEnv: ['./jest.setup.ts']
-
+    setupFilesAfterEnv: ['./jest.setup.ts'],
 });
 
 // Add any custom config to be passed to Jest
 /** @type {import('jest').Config} */
 const config = {
     setupFilesAfterEnv: ['./jest.setup.ts'],
+    modulePathIgnorePatterns: ["./__tests__/_shared"],
     testEnvironment: 'node',
 };
 
