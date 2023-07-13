@@ -7,7 +7,7 @@ export interface BiographyProps {
     firstName: string;
     id: number;
     lastName: string;
-    photo: string[];
+    photo: Array<any>;
     school: string;
     titleWin: null | string;
 }
