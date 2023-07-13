@@ -39,7 +39,7 @@ const ProfessorPage = () => {
     }
     return (
         <>
-            <div>
+            <div className={'col-span-full mt-lg'}>
                 <Biography data={teacherData}/>
             </div>
         </>
