@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ['picsum.photos']
+  },
+  output: 'standalone',
   eslint: {
     dirs: ['src'],
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   webpack: (config, context) => {
     if(process.env.NEXT_WEBPACK_USEPOLLING) {

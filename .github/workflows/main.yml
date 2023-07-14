@@ -1,0 +1,67 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: test_royalacademydb
+          PGUSER: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: root
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        name: Setup Node
+        with:
+          node-version: 20
+
+      - uses: SpicyPizza/create-envfile@v2.0
+        name: Make envfile
+        with:
+          envkey_DATABASE_URL: "postgresql://postgres:root@localhost:5432/test_royalacademydb?schema=public&connect_timeout=300"
+          envkey_ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+          envkey_REFRESH_TOKEN_SECRET: ${{secrets.REFRESH_TOKEN_SECRET}}
+          envkey_HOST: localhost
+          envkey_PORT: 3000
+          directory: ./
+          file_name: .env.test
+
+      - run: npm install
+      - run: npm run lint
+      - run: npm run type-check
+      - run: npm run test:ci
+
+      - uses: SpicyPizza/create-envfile@v2.0
+        name: Make envfile
+        with:
+          envkey_DATABASE_URL: ${{secrets.DATABASE_URL}}
+          envkey_ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+          envkey_REFRESH_TOKEN_SECRET: ${{secrets.REFRESH_TOKEN_SECRET}}
+          envkey_HOST: ${{secrets.HOST}}
+          envkey_PORT: ${{secrets.PORT}}
+          envkey_PGUSER: ${{secrets.PGUSER}}
+          envkey_POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+          envkey_POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+          envkey_POSTGRES_DB: ${{secrets.POSTGRES_DB}}
+          directory: ./
+          file_name: .env.production
+
+      - uses: HeticWeb3/github-action-ssh-docker-compose@master
+        name: Docker-Compose Remote Deployment
+        with:
+          ssh_host: hetic-projects.arcplex.tech
+          ssh_port: 9119
+          ssh_private_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          ssh_user: ${{ secrets.DEPLOY_USER }}
+          docker_compose_prefix: royal_academy

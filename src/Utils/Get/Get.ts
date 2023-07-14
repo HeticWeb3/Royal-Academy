@@ -1,8 +1,10 @@
 
 import { instance } from "../Instance/instance"
+import {Props} from "next/script";
 
 export interface PropsGET{
     url: string;
+    params: object
 }
 
 export const GET = async ({ url }: PropsGET) => {
