@@ -1,10 +1,11 @@
 const util = require('util');
-const exec =  util.promisify(require('child_process').exec);
+const exec = require('child_process').execSync;
 
-afterAll(async () => {
-    try {
-        await exec('npx prisma migrate reset --force --skip-generate')
-    } catch(e: any) {
-        return
-    }
+const resetDB =  () => {
+    return exec('npx prisma migrate reset --force --skip-generate')
+
+}
+
+afterAll( () => {
+    return resetDB()
 });
