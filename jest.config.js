@@ -13,7 +13,7 @@ const createJestConfig = nextJest({
 /** @type {import('jest').Config} */
 const config = {
     setupFilesAfterEnv: ['./jest.setup.ts'],
-    modulePathIgnorePatterns: ["./__tests__/_shared"],
+    modulePathIgnorePatterns: ["./__tests__/_lib"],
     testEnvironment: 'node',
 };
 

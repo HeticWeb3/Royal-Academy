@@ -1,7 +1,11 @@
+import * as nextHeaders from 'next/headers';
+
 import {POST as signupAPI} from "@/app/api/auth/signup/route"
 import {POST as loginAPI} from "@/app/api/auth/login/route"
+import {GET as refreshAPI} from "@/app/api/auth/refreshtoken/route"
 
-import {mockRequest} from "@/app/__tests__/_shared/request";
+import {getLogged, mockRequest} from "@/app/__tests__/_lib/request";
+import {RequestCookies} from "next/dist/compiled/@edge-runtime/cookies";
 
 describe('/api/auth/signup', () => {
     test('Should create a user', async () => {
@@ -75,11 +79,20 @@ describe("/api/auth/login", () => {
     })
 })
 
-/*
 describe('/api/auth/refreshtoken', () => {
     test('Should return a new access token', async ()=> {
-        const [accessToken, refreshToken] = await getLogged('test1@prisma.io', 'mdppass!')
 
-        const request =  mockRequest("/api/auth/refreshtoken")
+        const [accessToken, refreshToken] = await getLogged('test1@prisma.io', 'mdppass')
+
+
+
+        const request =  mockRequest("/api/auth/refreshtoken", 'GET', null, null, `refreshToken=${refreshToken}`)
+
+        const refresh = await refreshAPI(request)
+
+        if(refresh){
+            const data = await refresh.json()
+            expect(data).toEqual(expect.objectContaining({accessToken: expect.any(String)}))
+        }
     })
-})*/
+})
