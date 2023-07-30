@@ -104,4 +104,23 @@ describe('/api/auth/refreshtoken', () => {
             expect(data).toEqual(expect.objectContaining({accessToken: expect.any(String)}))
         }
     })
+
+    test('Should return an error', async ()=> {
+        const mockCookies = cookies as jest.Mock;
+
+        const [accessToken, refreshToken] = await getLogged('test1@prisma.io', 'mdppass')
+
+        mockCookies.mockImplementation(() => ({
+            get: jest.fn().mockReturnValue(undefined)
+        }))
+
+        const request =  mockRequest("/api/auth/refreshtoken", 'GET', null, null, `refreshToken=${refreshToken}`)
+
+        const refresh = await refreshAPI(request)
+
+        if(refresh){
+            const data = await refresh.json()
+            expect(data).toEqual({'error': {'type': 'TokenError'}})
+        }
+    })
 })
