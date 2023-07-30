@@ -1,11 +1,17 @@
-import * as nextHeaders from 'next/headers';
+import { cookies } from 'next/headers';
 
 import {POST as signupAPI} from "@/app/api/auth/signup/route"
 import {POST as loginAPI} from "@/app/api/auth/login/route"
 import {GET as refreshAPI} from "@/app/api/auth/refreshtoken/route"
 
 import {getLogged, mockRequest} from "@/app/__tests__/_lib/request";
-import {RequestCookies} from "next/dist/compiled/@edge-runtime/cookies";
+
+
+jest.mock('next/headers')
+
+afterEach(() => {
+    jest.resetAllMocks();
+});
 
 describe('/api/auth/signup', () => {
     test('Should create a user', async () => {
@@ -81,10 +87,13 @@ describe("/api/auth/login", () => {
 
 describe('/api/auth/refreshtoken', () => {
     test('Should return a new access token', async ()=> {
+        const mockCookies = cookies as jest.Mock;
 
         const [accessToken, refreshToken] = await getLogged('test1@prisma.io', 'mdppass')
 
-
+        mockCookies.mockImplementation(() => ({
+            get: jest.fn().mockReturnValue({"value": refreshToken})
+        }))
 
         const request =  mockRequest("/api/auth/refreshtoken", 'GET', null, null, `refreshToken=${refreshToken}`)
 
