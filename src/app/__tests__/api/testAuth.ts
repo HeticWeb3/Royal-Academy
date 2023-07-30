@@ -1,10 +1,10 @@
-import { cookies } from 'next/headers';
+import {cookies} from 'next/headers';
 
 import {POST as signupAPI} from "@/app/api/auth/signup/route"
 import {POST as loginAPI} from "@/app/api/auth/login/route"
 import {GET as refreshAPI} from "@/app/api/auth/refreshtoken/route"
 
-import {getLogged, mockRequest} from "@/app/__tests__/_lib/request";
+import {getLogged, mockRequest} from "@/app/__tests__/__lib__/request";
 
 
 jest.mock('next/headers')
@@ -29,7 +29,7 @@ describe('/api/auth/signup', () => {
 
         if (signup) {
             const data = await signup.json()
-            expect(data).toEqual(expect.objectContaining({id: 1, instrumentId: null}))
+            expect(data).toEqual(expect.objectContaining({id: expect.any(Number), instrumentId: null}))
         }
     })
 
@@ -87,7 +87,7 @@ describe("/api/auth/login", () => {
 
 describe('/api/auth/refreshtoken', () => {
     test('Should return a new access token', async ()=> {
-        const mockCookies = cookies as jest.Mock;
+        const mockCookies = cookies as jest.Mock
 
         const [accessToken, refreshToken] = await getLogged('test1@prisma.io', 'mdppass')
 
