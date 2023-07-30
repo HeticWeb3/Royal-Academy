@@ -1,9 +1,13 @@
 import {headers} from "next/headers";
+import {User} from "@prisma/client";
+
+import {GET as meAPI} from "../../api/user/me/route";
+
+import {GET as userGET, PATCH as userPATCH, DELETE as userDELETE} from "../../api/user/[userId]/route"
 
 import {getLogged, mockRequest} from "../__lib__/request";
-import {GET as meAPI} from "../../api/user/me/route";
 import {userGenerator} from "../__lib__/seeder";
-import {User} from "@prisma/client";
+
 
 let user: User
 
@@ -36,5 +40,22 @@ describe('/api/user/me', () => {
             expect(data).toEqual(user)
         }
     })
+})
 
+describe('/api/user/[userId]', () => {
+    test('Should return the informations of a user', async ()=> {
+        const request = mockRequest(`/api/user/${user.id}`)
+
+        const res = await userGET(request,{'params': {'userId': user.id}})
+
+        if(res){
+            const data = await res.json()
+            expect(data).toEqual(expect.objectContaining({
+                lastLesson: null,
+                instrument: [],
+                school: null,
+                style: null,
+            }))
+        }
+    })
 })
