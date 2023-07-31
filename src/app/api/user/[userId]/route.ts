@@ -53,16 +53,20 @@ export async function DELETE(request: Request, {params}: { params: { userId: num
 export async function GET(request: Request, {params}: { params: { userId: number } }) {
 
     const users = new Users()
-    const user = await users.execute().findUnique({
-        where: {
-            id: Number(params.userId),
-        }, include: {
-            instrument: true,
-            lastLesson: true,
-            school: true,
-            style: true,
-            course: true,
-        }
-    })
-    return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
+    try {
+        const user = await users.execute().findUnique({
+            where: {
+                id: Number(params.userId),
+            }, include: {
+                instrument: true,
+                lastLesson: true,
+                school: true,
+                style: true,
+                course: true,
+            }
+        })
+        return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
+    } catch(e: any){
+        return NextResponse.json({'error': {"type": "UserNotFound"}}, {status: 401})
+    }
 }

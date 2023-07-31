@@ -58,4 +58,15 @@ describe('/api/user/[userId]', () => {
             }))
         }
     })
+
+    test('Should return an error', async ()=> {
+        const request = mockRequest(`/api/user/8090`)
+
+        const res = await userGET(request,{'params': {'userId': 8090}})
+
+        if(res){
+            const data = await res.json()
+            expect(data).toEqual({'error': {"type": "UserNotFound"}})
+        }
+    })
 })
