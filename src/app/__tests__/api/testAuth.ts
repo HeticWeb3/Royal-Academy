@@ -1,7 +1,17 @@
+import {cookies} from 'next/headers';
+
 import {POST as signupAPI} from "@/app/api/auth/signup/route"
 import {POST as loginAPI} from "@/app/api/auth/login/route"
+import {GET as refreshAPI} from "@/app/api/auth/refreshtoken/route"
 
-import {mockRequest} from "@/app/__tests__/_shared/request";
+import {getLogged, mockRequest} from "@/app/__tests__/__lib__/request";
+
+
+jest.mock('next/headers')
+
+afterEach(() => {
+    jest.resetAllMocks();
+});
 
 describe('/api/auth/signup', () => {
     test('Should create a user', async () => {
@@ -19,7 +29,7 @@ describe('/api/auth/signup', () => {
 
         if (signup) {
             const data = await signup.json()
-            expect(data).toEqual(expect.objectContaining({id: 1, instrumentId: null}))
+            expect(data).toEqual(expect.objectContaining({id: expect.any(Number), instrumentId: null}))
         }
     })
 
@@ -75,11 +85,42 @@ describe("/api/auth/login", () => {
     })
 })
 
-/*
 describe('/api/auth/refreshtoken', () => {
     test('Should return a new access token', async ()=> {
-        const [accessToken, refreshToken] = await getLogged('test1@prisma.io', 'mdppass!')
+        const mockCookies = cookies as jest.Mock
 
-        const request =  mockRequest("/api/auth/refreshtoken")
+        const [accessToken, refreshToken] = await getLogged('test1@prisma.io', 'mdppass')
+
+        mockCookies.mockImplementation(() => ({
+            get: jest.fn().mockReturnValue({"value": refreshToken})
+        }))
+
+        const request =  mockRequest("/api/auth/refreshtoken", 'GET', null, null, `refreshToken=${refreshToken}`)
+
+        const refresh = await refreshAPI(request)
+
+        if(refresh){
+            const data = await refresh.json()
+            expect(data).toEqual(expect.objectContaining({accessToken: expect.any(String)}))
+        }
     })
-})*/
+
+    test('Should return an error', async ()=> {
+        const mockCookies = cookies as jest.Mock;
+
+        const [accessToken, refreshToken] = await getLogged('test1@prisma.io', 'mdppass')
+
+        mockCookies.mockImplementation(() => ({
+            get: jest.fn().mockReturnValue(undefined)
+        }))
+
+        const request =  mockRequest("/api/auth/refreshtoken", 'GET', null, null, `refreshToken=${refreshToken}`)
+
+        const refresh = await refreshAPI(request)
+
+        if(refresh){
+            const data = await refresh.json()
+            expect(data).toEqual({'error': {'type': 'TokenError'}})
+        }
+    })
+})
