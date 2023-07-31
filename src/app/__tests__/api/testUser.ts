@@ -1,9 +1,8 @@
 import {headers} from "next/headers";
 import {User} from "@prisma/client";
 
-import {GET as meAPI} from "../../api/user/me/route";
-
-import {GET as userGET, PATCH as userPATCH, DELETE as userDELETE} from "../../api/user/[userId]/route"
+import {GET as meGET, PATCH as mePATCH} from "../../api/user/me/route";
+import {GET as userGET, DELETE as userDELETE} from "../../api/user/[userId]/route"
 
 import {getLogged, mockRequest} from "../__lib__/request";
 import {userGenerator} from "../__lib__/seeder";
@@ -33,11 +32,29 @@ describe('/api/user/me', () => {
 
         const request = mockRequest("/api/user/me", 'GET', null, accessToken, `refreshToken=${refreshToken}`)
 
-        const res = await meAPI(request)
+        const res = await meGET(request)
 
         if(res){
             const data = await res.json()
             expect(data).toEqual(user)
+        }
+    })
+
+    test('Should update the logged user\'s informations', async ()=> {
+        const mockHeaders = headers as jest.Mock
+        mockHeaders.mockImplementation(() => ({
+            get: jest.fn().mockReturnValue(user.id)
+        }))
+
+        const [accessToken, refreshToken]= await getLogged('user@user.com', 'mdppass')
+
+        const request = mockRequest("/api/user/me", 'PATCH', {firstName: "new firstname"}, accessToken, `refreshToken=${refreshToken}`)
+
+        const res = await mePATCH(request)
+
+        if(res){
+            const data = await res.json()
+            expect(data).toEqual(expect.objectContaining({firstName: "new firstname"}))
         }
     })
 })

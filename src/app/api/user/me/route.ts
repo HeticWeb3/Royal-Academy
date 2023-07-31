@@ -20,3 +20,31 @@ export async function GET(request: Request) {
 
     return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
 }
+
+/**
+ *  Update d'un utilisateur
+ *
+ * @param request
+ * @param params
+ * @return Promise<NextResponse> (Utilisateur mis à jour)
+ */
+export async function PATCH(request: Request) {
+    const headersList = headers()
+    const userID: string = <string>headersList.get('userID')
+
+    const res = await request.json()
+
+    const users = new Users()
+    const user = await users.execute().update({
+        where: {
+            id: Number(userID),
+        },
+        data: {
+            firstName: res.firstName || undefined,
+            lastName: res.lastName || undefined,
+            phoneNumber: res.phoneNumber || undefined,
+            birthDate: res.birthDate || undefined,
+        }
+    })
+    return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
+}

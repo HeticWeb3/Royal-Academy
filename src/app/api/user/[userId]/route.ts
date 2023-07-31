@@ -1,29 +1,7 @@
 import {NextResponse} from "next/server";
 import {Users} from "../../../../../prisma/repository/user/user";
 
-//TODO : Add logged user
 
-/**
- *  Update d'un utilisateur connecté
- *
- * @param request
- * @param params
- * @return Promise<NextResponse> (Utilisateur update)
- */
-export async function PATCH(request: Request, {params}: { params: { userId: number } }) {
-    const res = await request.json()
-
-    const users = new Users()
-    const user = await users.execute().update({
-        where: {
-            id: Number(params.userId),
-        },
-        data: {
-            firstName: res.firstName,
-        }
-    })
-    return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
-}
 
 /**
  * Supprime le user connecter
