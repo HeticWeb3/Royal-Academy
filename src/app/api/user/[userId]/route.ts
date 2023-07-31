@@ -1,26 +1,6 @@
 import {NextResponse} from "next/server";
 import {Users} from "../../../../../prisma/repository/user/user";
 
-
-
-/**
- * Supprime le user connecter
- *
- * @param request
- * @param params
- * @return Promise<NextResponse>
- */
-export async function DELETE(request: Request, {params}: { params: { userId: number } }) {
-
-    const users = new Users()
-    const user = await users.execute().delete({
-        where: {
-            id: Number(params.userId),
-        },
-    })
-    return NextResponse.json(user, {status: 200,})
-}
-
 /**
  * Récupère toutes les données du user en fonction de l'id connecter
  *

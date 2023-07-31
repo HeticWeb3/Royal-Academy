@@ -2,7 +2,8 @@ import {headers} from "next/headers";
 import {User} from "@prisma/client";
 
 import {GET as meGET, PATCH as mePATCH} from "../../api/user/me/route";
-import {GET as userGET, DELETE as userDELETE} from "../../api/user/[userId]/route"
+import {DELETE as userDELETE} from "../../api/user/delete/route";
+import {GET as userGET} from "../../api/user/[userId]/route"
 
 import {getLogged, mockRequest} from "../__lib__/request";
 import {userGenerator} from "../__lib__/seeder";
@@ -85,5 +86,29 @@ describe('/api/user/[userId]', () => {
             const data = await res.json()
             expect(data).toEqual({'error': {"type": "UserNotFound"}})
         }
+    })
+
+    describe('/api/user/delete', ()=> {
+        test('Should delete a user', async () => {
+            const userDelete = await userGenerator('user@delete.com')
+
+            const mockHeaders = headers as jest.Mock
+            mockHeaders.mockImplementation(() => ({
+                get: jest.fn().mockReturnValue(userDelete.id)
+            }))
+
+
+
+            const [accessToken, refreshToken]= await getLogged('user@delete.com', 'mdppass')
+
+            const request = mockRequest(`/api/user/delete`,'DELETE', null, accessToken)
+
+            const res = await userDELETE(request)
+
+            if(res){
+                const data = await res.json()
+                expect(data).toEqual(expect.objectContaining(userDelete))
+            }
+        })
     })
 })
