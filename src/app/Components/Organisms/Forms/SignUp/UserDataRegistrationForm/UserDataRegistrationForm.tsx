@@ -139,20 +139,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                                     <ErrorMessage name="lastName" component="div" className="formInput__error" />
                                 </div>
 
-                                <div className={`${errors.birthDate && touched.birthDate?'error':''} formInput__wrapper`}>
-                                    <FormikDatePicker
-                                        className={'formInput DateInput w-full'}
-                                        name="birthDate"
-                                        label="Birthdate"
-                                        value={values.birthDate}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    />
-                                    <ErrorMessage name="birthDate" component="div" className="formInput__error" />
-                                </div>
-
-                                <div></div>
-
+                                
                                 <div className={`${errors.email && touched.email?'error':''} formInput__wrapper`}>
                                     <Field
                                         className={'formInput w-full'}
