@@ -139,7 +139,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                                     <ErrorMessage name="lastName" component="div" className="formInput__error" />
                                 </div>
 
-                                
+
                                 <div className={`${errors.email && touched.email?'error':''} formInput__wrapper`}>
                                     <Field
                                         className={'formInput w-full'}
