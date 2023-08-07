@@ -9,12 +9,6 @@ import {
     PasswordConfirmationValidationSchema,
     PhoneValidationSchema,
     PhoneConfirmationValidationSchema,
-    EmailUpdateValidationSchema,
-    EmailUpdateConfirmationValidationSchema,
-    PasswordUpdateValidationSchema,
-    PasswordUpdateConfirmationValidationSchema,
-    PhoneUpdateValidationSchema,
-    PhoneUpdateConfirmationValidationSchema,
 } from "@/app/Components/Atoms";
 
 export const SignupSchema = () =>{
@@ -28,18 +22,6 @@ export const SignupSchema = () =>{
         confirmPassword: PasswordConfirmationValidationSchema('password'),
         phoneNumber: PhoneValidationSchema(),
         confirmPhoneNumber: PhoneConfirmationValidationSchema('phoneNumber'),
-    });
-}
-
-export const UpdateSchema = () =>{
-    return Yup.object().shape({
-        birthDate: BirthdateValidationSchema(),
-        email: EmailUpdateValidationSchema(),
-        confirmEmail: EmailUpdateConfirmationValidationSchema('email'),
-        password: PasswordUpdateValidationSchema(),
-        confirmPassword: PasswordUpdateConfirmationValidationSchema('password'),
-        phoneNumber: PhoneUpdateValidationSchema(),
-        confirmPhoneNumber: PhoneUpdateConfirmationValidationSchema('phoneNumber'),
     });
 }
 
