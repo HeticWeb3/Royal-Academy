@@ -23,7 +23,6 @@ export function AuthProvider({ children }: any) {
 
     useLayoutEffect(() => {
             if (!userConnected ) {
-
                 getAccessToken()
                     .then(response => {
                         if (response?.ok) {

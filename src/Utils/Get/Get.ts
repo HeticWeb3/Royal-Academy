@@ -1,6 +1,5 @@
 
 import { instance } from "../Instance/instance"
-import {PropsPOST} from "@/Utils/Post/post";
 
 export interface PropsGET{
     url: string;

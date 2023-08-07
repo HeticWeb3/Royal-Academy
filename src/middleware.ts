@@ -8,10 +8,12 @@ export async function middleware(request: NextRequest) {
     }
 }
 
+
 export const config = {
     matcher: ['/api/user/:path*', '/api/course/:path*'],
 }
 
 const protectedAPIRoutes = [
-    '/api/user/.*', '/api/course',
+    '/api/user/.*',
+    '/api/course/.*',
 ]
