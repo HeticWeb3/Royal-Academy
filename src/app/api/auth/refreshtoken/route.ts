@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers'
-import { redirect } from "next/navigation";
+import { cookies } from 'next/headers';
 import * as jose from "jose"
 
 import {generateTokens} from "@/app/api/shared/api/auth";

@@ -1,7 +1,6 @@
 const nextJest = require("next/jest");
 
 const createJestConfig = nextJest({
-    // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
     dir: './',
     clearMocks: true,
     preset: 'ts-jest',
@@ -13,7 +12,7 @@ const createJestConfig = nextJest({
 /** @type {import('jest').Config} */
 const config = {
     setupFilesAfterEnv: ['./jest.setup.ts'],
-    modulePathIgnorePatterns: ["./__tests__/_shared"],
+    modulePathIgnorePatterns: ["./__tests__/__lib__"],
     testEnvironment: 'node',
 };
 
