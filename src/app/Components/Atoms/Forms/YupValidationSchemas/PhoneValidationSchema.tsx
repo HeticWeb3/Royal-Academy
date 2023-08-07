@@ -7,10 +7,3 @@ export const PhoneValidationSchema = () => {
             /^(\+\d{1,3}\s?)?(\(\d{1,3}\)\s?)?\d{1,14}$/,
             'Invalid phone number')
 }
-
-export const PhoneUpdateValidationSchema = () => {
-    return Yup.string()
-        .matches(
-            /^(\+\d{1,3}\s?)?(\(\d{1,3}\)\s?)?\d{1,14}$/,
-            'Invalid phone number')
-}

@@ -1,7 +1,7 @@
 
 export interface RegistrationInputTypes {
-    firstName? : string,
-    lastName? : string,
+    firstName : string,
+    lastName : string,
     birthDate : Date,
     email : string,
     confirmEmail : string,

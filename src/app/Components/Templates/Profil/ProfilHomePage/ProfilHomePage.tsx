@@ -6,12 +6,10 @@ import Image from "next/image";
 import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
 import ChooseInstruments from "@/app/Components/Organisms/User/ChooseInstruments/ChooseInstruments";
-import ModifyUser from "../../../Organisms/User/Modify/ModifyUser";
 
 const ProfilHomePage = (user: { user: UserDataProps }) => {
 
     const [showChooseInstruments,setShowChooseInstruments]=useState(false)
-    const [showEditingPage,setShowEditingPage]=useState(false);
 
     const userInfo = user.user
 
@@ -51,17 +49,11 @@ const ProfilHomePage = (user: { user: UserDataProps }) => {
         }    ]
     const lastLessonThumbnailsProgression = 'w-[' + LastLesson[0].timeCode + ']';
 
-    if (showEditingPage) {
-
-        return(
-            <ModifyUser userData={userInfo}/>
-        )
-    }
 
     return (
         <div className={`${showChooseInstruments?'overflow-hidden':''} col-span-full my-lg flex flex-col gap-lg`}>
 
-            <div className={"flex flex-row flex-nowrap items-center gap-6"} onClick={()=>setShowEditingPage(true)}>
+            <div className={"flex flex-row flex-nowrap items-center gap-6"}>
                 <div className={'rounded-square block relative w-[80px] h-[80px] overflow-hidden'}>
                     <Image
                         src={userInfo.avatar?userInfo.avatar:baseAvatar}
