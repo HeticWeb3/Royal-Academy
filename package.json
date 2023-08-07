@@ -9,8 +9,9 @@
     "start": "next start",
     "type-check": "tsc --noemit",
     "lint": "next lint",
-    "test": "jest --watch",
-    "test:ci": "jest --ci --passWithNoTests"
+    "test:setup": "dotenv -e .env.test -- npx prisma migrate dev",
+    "test": "npm run test:setup && jest",
+    "test:ci": "npm run test:setup && jest --ci"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -24,10 +25,10 @@
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
-    "dotenv-cli": "^7.2.1",
-    "dotenv": "^16.3.1",
     "cookies-next": "^2.1.2",
     "dayjs": "^1.11.8",
+    "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.2.1",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "formik": "^2.4.1",

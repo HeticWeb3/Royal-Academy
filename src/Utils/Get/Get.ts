@@ -1,15 +1,15 @@
 
 import { instance } from "../Instance/instance"
-import {PropsPOST} from "@/Utils/Post/post";
+import {Props} from "next/script";
 
 export interface PropsGET{
     url: string;
-    params: object;
+    params: object
 }
 
-export const GET = async ({ url, params }: PropsGET) => {
+export const GET = async ({ url }: PropsGET) => {
   try {
-    const response = await instance.get(url, params);
+    const response = await instance.get(url);
     return response.data;
   } catch (error: any) {
     throw new Error(error);

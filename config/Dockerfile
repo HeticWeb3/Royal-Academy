@@ -38,4 +38,4 @@ EXPOSE 80
 ENV PORT=80
 
 # Commande de démarrage de l'application
-CMD ["./startup.sh"]
+CMD ["sh", "startup.sh"]
