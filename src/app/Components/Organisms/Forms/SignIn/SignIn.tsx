@@ -10,6 +10,7 @@ import {
 import {SigninSchema} from "@/app/Components/Atoms";
 import {useAuth} from "@/Utils/Contexts/AuthContext";
 import {useRouter} from "next/navigation";
+import {POST} from "@/Utils/Post/post";
 
 const formStatusProps: IFormStatusProps = {
     success: {
@@ -32,15 +33,17 @@ const UserLogin: React.FunctionComponent = () => {
         type: '',
     })
 
+
     const connectUser = async (data: LoginInputTypes, resetForm: Function) => {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/login', {
-                method: 'POST',
+            const response = await POST({url: 'auth/login', params: {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
-            });
+                body: (data),
+            }
+            })
+
 
             if (response.ok) {
                 const token = await response.text();
