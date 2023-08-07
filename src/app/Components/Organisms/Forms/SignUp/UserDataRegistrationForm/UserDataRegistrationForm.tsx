@@ -10,8 +10,7 @@ import {
 } from "@/app/Components/Types";
 import {SignupSchema} from "@/app/Components/Atoms/Forms";
 import {FormikDatePicker} from "@/app/Components/Atoms/Forms";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from '@mui/x-date-pickers';
+
 
 
 const formStatusProps: IFormStatusProps = {
@@ -74,7 +73,6 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
     }
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
             <div className=''>
                 <Formik
                     initialValues={{
@@ -138,21 +136,6 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                                     />
                                     <ErrorMessage name="lastName" component="div" className="formInput__error" />
                                 </div>
-
-                                <div className={`${errors.birthDate && touched.birthDate?'error':''} formInput__wrapper`}>
-                                    <FormikDatePicker
-                                        className={'formInput DateInput w-full'}
-                                        name="birthDate"
-                                        label="Birthdate"
-                                        value={values.birthDate}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    />
-                                    <ErrorMessage name="birthDate" component="div" className="formInput__error" />
-                                </div>
-
-                                <div></div>
-
                                 <div className={`${errors.email && touched.email?'error':''} formInput__wrapper`}>
                                     <Field
                                         className={'formInput w-full'}
@@ -271,7 +254,6 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                     }}
                 </Formik>
             </div>
-        </LocalizationProvider>
     )
 }
 

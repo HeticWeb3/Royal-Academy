@@ -10,6 +10,6 @@ export const POST = async ({ url, params }: PropsPOST) => {
     const response = await instance.post(url, params);
     return response.data;
   } catch (error: any) {
-    throw new Error(error);
+    return error;
   }
 };
