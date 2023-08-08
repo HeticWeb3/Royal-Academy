@@ -37,7 +37,7 @@ describe('/api/user/me', () => {
 
         if(res){
             const data = await res.json()
-            expect(data).toEqual(user)
+            expect(data).toEqual(expect.objectContaining(user))
         }
     })
 

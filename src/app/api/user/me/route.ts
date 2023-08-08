@@ -15,7 +15,10 @@ export async function GET(request: Request) {
     const user = await users.execute().findUnique({
         where: {
             id: Number(userID),
-        },
+        }, include: {
+            instrument: true,
+            course: true
+        }
     })
 
     return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
@@ -38,12 +41,16 @@ export async function PATCH(request: Request) {
     const user = await users.execute().update({
         where: {
             id: Number(userID),
+        }, include: {
+            instrument: true,
+            course: true
         },
         data: {
             firstName: res.firstName || undefined,
             lastName: res.lastName || undefined,
             phoneNumber: res.phoneNumber || undefined,
             birthDate: res.birthDate || undefined,
+            instrument: res.instrument || undefined,
         }
     })
     return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
