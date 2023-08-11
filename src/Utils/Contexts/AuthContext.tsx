@@ -37,6 +37,19 @@ export function AuthProvider({ children }: any) {
         }
     }
 
+    const deleteRefreshToken = async () => {
+        const response = await fetch('http://localhost:3000/api/auth/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if(response.ok){
+            return await response.json();
+        }
+    }
+
     useLayoutEffect(() => {
             if (!hasCookie('accesstoken')) {
                 getAccessToken()
@@ -61,9 +74,11 @@ export function AuthProvider({ children }: any) {
         getUserInfo();
     };
 
-    const logout = () => {
+    const logout = async () => {
         deleteCookie('accesstoken')
+        const res = await deleteRefreshToken()
         setUserConnected(null);
+        return res.success
     };
 
     const value = {
