@@ -17,7 +17,7 @@ const ProfilHomePage = (user: { user: UserProps }) => {
     const quitChooseWindow = () => {
         setShowChooseInstruments(false);
     };
-
+console.log(userInfo)
     const instruments = [
         {
             id: 1,
@@ -90,18 +90,18 @@ const ProfilHomePage = (user: { user: UserProps }) => {
                 </div>
 
                 <div className={'flex flex-row flex-nowrap gap-7 overflow-x-scroll no-scrollbar mx-[-15px] px-[15px]'}>
-                    {instruments?.map((instrument) => (
-                        <button key={instrument.id}>
-                           <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50} iconAlt={instrument.name} containerClass={'w-[110px] bg-white rounded-square p-2 flex items-center justify-center'}/>
-                        </button>
-                    ))}
 
-                    {}
-                    {!instruments? (
+                    {userInfo?.instrument?.length > 0 ? (
+                        userInfo.instrument.map((instrument) => (
+                            <button key={instrument.id}>
+                               <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50} iconAlt={instrument.name} containerClass={'w-[110px] bg-white rounded-square p-2 flex items-center justify-center'}/>
+                            </button>
+                        ))
+                        ) :
                         <div>
                             <p className={'text-sm'}>No instrument selected</p>
                         </div>
-                    ) : null}
+                    }
 
                 </div>
             </div>
