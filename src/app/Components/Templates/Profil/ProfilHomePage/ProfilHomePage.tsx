@@ -6,8 +6,9 @@ import Image from "next/image";
 import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
 import ChooseInstruments from "@/app/Components/Organisms/User/ChooseInstruments/ChooseInstruments";
+import {UserProps} from "@/app/Components/Types/User/UserType";
 
-const ProfilHomePage = (user: { user: UserDataProps }) => {
+const ProfilHomePage = (user: { user: UserProps }) => {
 
     const [showChooseInstruments,setShowChooseInstruments]=useState(false)
 

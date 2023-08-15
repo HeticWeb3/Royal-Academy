@@ -1,14 +1,23 @@
 'use client'
 import { useEffect, useState } from 'react';
-import {GET} from "@/Utils/Get/Get";
 import {CookieValueTypes, getCookie} from 'cookies-next';
-import {UserDataProps} from "@/app/Components/Types";
 import ProfilHomePage from "@/app/Components/Templates/Profil/ProfilHomePage/ProfilHomePage";
+import {UserProps} from "@/app/Components/Types/User/UserType";
+import {useAuth} from "@/Utils/Contexts/AuthContext";
 
 const ProfilePage = () => {
 
-    const [userData, setUserData] = useState<UserDataProps | null>(null);
+    const [userLogged, setUserLogged] = useState<null | UserProps>(null)
+    const auth = useAuth()
 
+    useEffect(() => {
+        if(auth.userConnected){
+            setUserLogged(auth.userConnected)
+        } else {
+            setUserLogged(null)
+        }
+
+    }, [auth.userConnected])
 
     const fetchParams = (token: CookieValueTypes) => {
         return {
@@ -18,29 +27,14 @@ const ProfilePage = () => {
             },
         };
     };
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const user = await GET({url:`user/me`, params:fetchParams(getCookie('accesstoken'))});
-                const data: UserDataProps = await user;
-                setUserData(data);
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
-            }
-        };
 
-        if (!userData) {
-            fetchUserData();
-        }
-    }, []);
-
-    if (!userData) {
+    if (!userLogged) {
         return <div>Loading...</div>;
     }
     // Affichez les données de l'utilisateur sur la page de profil
     return (
         <>
-            <ProfilHomePage user={userData}/>
+            <ProfilHomePage user={userLogged} isMyAccount={true}/>
         </>
     );
 };

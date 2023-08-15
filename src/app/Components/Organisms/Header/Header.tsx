@@ -24,21 +24,21 @@ const Header = () => {
 }, [auth.userConnected])
 
     return (
-        <div className={'flex w-full my-3 lg:my-6 px-6 lg:px-12 justify-between items-center'}>
+        <div className={'flex w-full py-3 lg:py-6 px-6 lg:px-12 justify-between items-center sticky top-0 bg-black z-20'}>
             <div className={'w-[42px] lg:w-[54px]'}>
                 <Link href="/">
-                    <Image src={logo} alt={"Logo de la Saline Royal Academy"} className={'w-full h-full'}/>
+                    <Image src={logo} alt={"Saline Royal Academy"} className={'w-full h-full'}/>
                 </Link>
             </div>
             {userLogged != null ?
-                <div className={'flex items-center'}>
-                    <Link href="/" className={'w-[33px] lg:w-[36px]'}>
-                        <Image src={user} alt={"Logo de la Saline Royal Academy"} className={'w-full h-full'}/>
+                <div className={'flex items-center gap-3'}>
+                    <div className='text-[14px] lg:text-base'>{userLogged.firstName}</div>
+                    <Link href="/profil/me" className={'w-[33px] lg:w-[36px]'}>
+                        <Image src={user} alt={"My accound icon"} className={'w-full h-full'}/>
                     </Link>
-                    <div className='text-[14px] lg:text-base'>{userLogged.email}</div>
                 </div>
             :
-            <Link href="/login" className='text-[14px] lg:text-base'>Se connecter</Link> 
+            <Link href="/login" className='text-[14px] lg:text-base'>Log in</Link>
         }
         </div>
     )
