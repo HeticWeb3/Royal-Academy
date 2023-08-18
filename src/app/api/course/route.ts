@@ -18,11 +18,13 @@ export async function GET() {
         }
     })
 
-    const course = await prismaClient.course.findMany({
-        //TODO : On peut ajouter le niveau dans la querry (niveau du user)
-        where: {
-            instrumentId: user.instrumentId != null ? user.instrumentId : undefined,
-        },
-    });
-    return NextResponse.json(course, {status: 200,})
+    // TODO: Fix this
+
+//     const course = await prismaClient.course.findMany({
+//         //TODO : On peut ajouter le niveau dans la querry (niveau du user)
+//         where: {
+//             instrumentId: user.instrumentId != null ? user.instrumentId : undefined,
+//         },
+// });
+    return NextResponse.json(user, {status: 200,})
 }

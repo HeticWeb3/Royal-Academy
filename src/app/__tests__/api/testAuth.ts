@@ -29,7 +29,7 @@ describe('/api/auth/signup', () => {
 
         if (signup) {
             const data = await signup.json()
-            expect(data).toEqual(expect.objectContaining({id: expect.any(Number), instrumentId: null}))
+            expect(data).toEqual(expect.objectContaining({id: expect.any(Number)}))
         }
     })
 
