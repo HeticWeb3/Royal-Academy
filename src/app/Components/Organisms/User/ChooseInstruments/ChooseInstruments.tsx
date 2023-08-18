@@ -1,60 +1,52 @@
 import React, {useEffect, useState } from "react";
 import {Icon} from "@/app/Components/Atoms";
+import {CookieValueTypes, getCookie, setCookie} from "cookies-next";
+import {GET} from "@/Utils/Get/Get";
+import {instrumentDataJSON, instrumentsDataProps, LoginInputTypes} from "@/app/Components/Types";
+import {PATCH} from "@/Utils/Patch/Patch";
+import {array} from "zod";
 
 interface ChooseInstrumentsProps {
-    UserInstruments: any;
+    userInstruments: any;
     onQuitChooseWindow: () => void;
 }
 
 const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
-    UserInstruments,
+    userInstruments,
     onQuitChooseWindow,
 }) => {
 
-    const [userInstruments, setUserInstruments] = useState(UserInstruments);
-    const initialsInstruments = UserInstruments;
-    const AllInstruments = [
-        {
-            id: 1,
-            name: 'Violin',
-            description: 'The Violin'
-        },
-        {
-            id: 2,
-            name: 'Voice',
-            description: 'The Voice'
-        },
-        {
-            id: 5,
-            name: 'piano',
-            description: 'blablabla'
-        },
-        {
-            id: 12,
-            name: 'flute',
-            description: 'The Violin'
-        },
-        {
-            id: 14,
-            name: 'viola',
-            description: 'The Voice'
-        },
-        {
-            id: 20,
-            name: 'oboe',
-            description: 'blablabla'
-        },
-        {
-            id: 25,
-            name: 'Jembé',
-            description: 'blablabla'
-        }
-    ]
+    const [newUserInstruments, setNewUserInstruments] = useState(userInstruments);
+    const initialsInstruments = userInstruments;
+    const [allInstruments,setAllInstruments]= useState<instrumentsDataProps | null>(null);
+
+    useEffect(() => {
+        const fetchParams = (token: CookieValueTypes) => {
+            return {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            };
+        };
+
+        const fetchInstruments = async () => {
+            try {
+                const instruments = await GET({url:`instrument/all`, params:fetchParams(getCookie('accesstoken'))});
+                const data: instrumentsDataProps = await instruments;
+                setAllInstruments(data);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des données des instruments :', error);
+            }
+        };
+            fetchInstruments();
+
+    }, []);
 
 
     const checkInstrumentSelected = (id: number) => {
         let isHere;
-        userInstruments?.forEach((item: any, index: number) => {
+        newUserInstruments?.forEach((item: any, index: number) => {
             if (item.id == id) {
                 isHere = index;
             }
@@ -62,18 +54,39 @@ const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
         return isHere
     }
 
-    useEffect(() => {
-        console.log("Update")
-        console.log(userInstruments)
-    }, [userInstruments]);
+
+    const validateInstrumentsForm = async () => {
+
+        const instrumentJSON : any = {
+            instrument: newUserInstruments,
+        };
+        try {
+            const response = await fetch('http://localhost:3000/api/user/me', {
+                method: 'PATCH',
+                headers: {
+                    Authorization: `Bearer `+getCookie('accesstoken'),
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(instrumentJSON),
+            });
+            if (response.ok) {
+                console.log('Success')
+            }
+            if (!response.ok) {
+                console.error(response);
+            }
+        } finally {
+            onQuitChooseWindow()
+        }
+    };
 
     const handleClick = (event: any) => {
         if (event.currentTarget.value) {
             if (checkInstrumentSelected(event?.currentTarget.value) !== undefined) {
-                setUserInstruments(userInstruments.filter((el:any) => el.id != event?.currentTarget.value));
+                setNewUserInstruments(newUserInstruments.filter((el:any) => el.id != event?.currentTarget.value).id);
             } else {
-                const foundInstrument = AllInstruments.find(e => e.id == event?.currentTarget?.value)
-                setUserInstruments((prev:Array<any>) => [...prev, foundInstrument])
+                const foundInstrument = allInstruments.find(e => e.id == event?.currentTarget?.value)
+                setNewUserInstruments((prev:Array<any>) => [...prev, foundInstrument])
             }
         }
     }
@@ -82,7 +95,7 @@ const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
     return (
         <div className={'flex flex-col items-center'}>
             <div className={'flex flex-row flex-wrap gap-7 no-scrollbar mx-[-15px] px-[15px]'}>
-                {AllInstruments?.map((instrument) => {
+                {allInstruments?.map((instrument) => {
                     return !initialsInstruments.find((el:any) => el.id == instrument.id) ? (
                         <button key={instrument.id} value={instrument.id} onClick={handleClick}>
                             <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50}
@@ -93,7 +106,7 @@ const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
                 } )}
             </div>
             <button
-                onClick={onQuitChooseWindow}
+                onClick={validateInstrumentsForm}
                 type="button"
                 form={'chooseInstruments'}
                 className={'button bg-blue-lightbis text-white font-normal text-base antialiased col-span-full mt-xl py-6 px-lg'}

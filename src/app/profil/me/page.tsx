@@ -19,15 +19,6 @@ const ProfilePage = () => {
 
     }, [auth.userConnected])
 
-    const fetchParams = (token: CookieValueTypes) => {
-        return {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        };
-    };
-
     if (!userLogged) {
         return <div>Loading...</div>;
     }

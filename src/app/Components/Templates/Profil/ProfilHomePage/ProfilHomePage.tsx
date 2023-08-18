@@ -1,45 +1,28 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import {UserDataProps} from "@/app/Components/Types";
+import {instrumentsDataProps} from "@/app/Components/Types";
 import baseAvatar from '/public/images/user/avatar.jpg'
 import Image from "next/image";
 import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
 import ChooseInstruments from "@/app/Components/Organisms/User/ChooseInstruments/ChooseInstruments";
 import {UserProps} from "@/app/Components/Types/User/UserType";
+import {GET} from "@/Utils/Get/Get";
+import {CookieValueTypes, getCookie} from "cookies-next";
+import {array} from "prop-types";
 
 const ProfilHomePage = (user: { user: UserProps }) => {
 
     const [showChooseInstruments,setShowChooseInstruments]=useState(false)
-
     const userInfo = user.user
+    const [userInstruments,setUserInstrument] = useState<array|null>(userInfo.instrument)
 
     const quitChooseWindow = () => {
         setShowChooseInstruments(false);
     };
-console.log(userInfo)
-    const instruments = [
-        {
-            id: 1,
-            name: 'Violin',
-            description: 'The Violin'
-        },
-        {
-            id : 5,
-            name : 'piano',
-            description : 'blablabla'
-        },
-        {
-            id: 14,
-            name: 'viola',
-            description: 'The Voice'
-        },
-        {
-            id : 20,
-            name : 'oboe',
-            description : 'blablabla'
-        }
-    ]
+
+    console.log(userInfo)
+
     const LastLesson = [
         {
             id: 20,
@@ -132,7 +115,7 @@ console.log(userInfo)
                 <div className={'bg-grey-darker/75 w-screen h-screen absolute top-0 left-0 '}>
                     <div className={'bg-white py-lg px-7 rounded-base m-6 lg:w-1/3 lg:mx-auto'}>
                         <h3 className={'text-black text-lg mb-xl text-center font-bold'}>Chose the other(s) instrument(s) you want to learn: </h3>
-                        <ChooseInstruments UserInstruments={instruments} onQuitChooseWindow={quitChooseWindow} />
+                        <ChooseInstruments userInstruments={userInstruments} onQuitChooseWindow={quitChooseWindow} />
                     </div>
                 </div>
                 ):null}
