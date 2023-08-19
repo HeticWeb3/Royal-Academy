@@ -50,7 +50,7 @@ export async function PATCH(request: Request) {
             lastName: res.lastName || undefined,
             phoneNumber: res.phoneNumber || undefined,
             birthDate: res.birthDate || undefined,
-            instrument: res.instrument || undefined,
+            instrument: { connect: res.addInstrument, disconnect: res.delInstrument} || undefined,
         }
     })
     return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
