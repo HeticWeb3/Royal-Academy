@@ -3,6 +3,7 @@ import {Users} from "../../../../../prisma/repository/user/user";
 import {headers} from "next/headers";
 
 /**
+ * Get de l'utilisateur
  *
  * @param request
  * @return Promise<NextResponse> (Informations d'un utilisateur)
