@@ -15,13 +15,13 @@ const ProfilHomePage = (user: { user: UserProps }) => {
 
     const [showChooseInstruments,setShowChooseInstruments]=useState(false)
     const userInfo = user.user
-    const [userInstruments,setUserInstrument] = useState<array|null>(userInfo.instrument)
+    const [userInstruments,setUserInstrument] = useState<array|null>(user.user.instrument)
+
+    console.log(user.user)
 
     const quitChooseWindow = () => {
         setShowChooseInstruments(false);
     };
-
-    console.log(userInfo)
 
     const LastLesson = [
         {
@@ -32,7 +32,6 @@ const ProfilHomePage = (user: { user: UserProps }) => {
             timeCode : '80%'
         }    ]
     const lastLessonThumbnailsProgression = 'w-[' + LastLesson[0].timeCode + ']';
-
 
     return (
         <div className={`${showChooseInstruments?'overflow-hidden':''} col-span-full my-lg flex flex-col gap-lg`}>
@@ -74,8 +73,8 @@ const ProfilHomePage = (user: { user: UserProps }) => {
 
                 <div className={'flex flex-row flex-nowrap gap-7 overflow-x-scroll no-scrollbar mx-[-15px] px-[15px]'}>
 
-                    {userInfo?.instrument?.length > 0 ? (
-                        userInfo.instrument.map((instrument) => (
+                    {userInstruments.length > 0 ? (
+                            userInstruments.map((instrument) => (
                             <button key={instrument.id}>
                                <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50} iconAlt={instrument.name} containerClass={'w-[110px] bg-white rounded-square p-2 flex items-center justify-center'}/>
                             </button>
@@ -113,9 +112,9 @@ const ProfilHomePage = (user: { user: UserProps }) => {
             </div>
             {showChooseInstruments?  (
                 <div className={'bg-grey-darker/75 w-screen h-screen absolute top-0 left-0 '}>
-                    <div className={'bg-white py-lg px-7 rounded-base m-6 lg:w-1/3 lg:mx-auto'}>
+                    <div className={'bg-white py-lg px-7 rounded-base m-6 lg:w-1/3 mt-[10%] lg:mx-auto'}>
                         <h3 className={'text-black text-lg mb-xl text-center font-bold'}>Chose the other(s) instrument(s) you want to learn: </h3>
-                        <ChooseInstruments userInstruments={userInstruments} onQuitChooseWindow={quitChooseWindow} />
+                        <ChooseInstruments userInstruments={userInstruments} setUserInstrument={setUserInstrument} onQuitChooseWindow={quitChooseWindow} />
                     </div>
                 </div>
                 ):null}

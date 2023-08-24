@@ -9,12 +9,14 @@ import {array} from "zod";
 interface ChooseInstrumentsProps {
     userInstruments: any;
     onQuitChooseWindow: () => void;
+    setUserInstrument : React.Dispatch<React.SetStateAction<any>>;
 }
 
-const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
-    userInstruments,
-    onQuitChooseWindow,
-}) => {
+    const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
+        userInstruments,
+        setUserInstrument,
+        onQuitChooseWindow,
+    }) => {
 
     const [newUserInstruments, setNewUserInstruments] = useState(userInstruments);
     const initialsInstruments = userInstruments;
@@ -57,8 +59,11 @@ const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
 
     const validateInstrumentsForm = async () => {
 
+        const newUserInstrumentsById = newUserInstruments.map(item => ({ id: item.id }));
+
+
         const instrumentJSON : any = {
-            instrument: newUserInstruments,
+            addInstrument: newUserInstrumentsById,
         };
         try {
             const response = await fetch('http://localhost:3000/api/user/me', {
@@ -70,6 +75,7 @@ const ChooseInstruments: React.FC<ChooseInstrumentsProps> = ({
                 body: JSON.stringify(instrumentJSON),
             });
             if (response.ok) {
+                setUserInstrument(newUserInstruments);
                 console.log('Success')
             }
             if (!response.ok) {
