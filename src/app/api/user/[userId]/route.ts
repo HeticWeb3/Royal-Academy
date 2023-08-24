@@ -2,7 +2,7 @@ import {NextResponse} from "next/server";
 import {Users} from "../../../../../prisma/repository/user/user";
 
 /**
- * Récupère toutes les données du user en fonction de l'id connecter
+ * Récupère toutes les données de l'utilisateur en fonction de l'id connecter
  *
  * @param request
  * @param params
