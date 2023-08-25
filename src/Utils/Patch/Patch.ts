@@ -1,12 +1,12 @@
 
 import { instance } from "../Instance/instance"
 
-export interface PropsGET{
+export interface PropsPATCH{
     url: string;
     params: object;
 }
 
-export const GET = async ({ url, params }: PropsGET) => {
+export const PATCH = async ({ url, params }: PropsPATCH) => {
   try {
     const response = await instance.get(url, params);
     return response.data;
