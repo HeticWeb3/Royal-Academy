@@ -1,17 +1,15 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import {instrumentsDataProps} from "@/app/Components/Types";
 import baseAvatar from '/public/images/user/avatar.jpg'
 import Image from "next/image";
 import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
 import ChooseInstruments from "@/app/Components/Organisms/User/ChooseInstruments/ChooseInstruments";
 import {UserProps} from "@/app/Components/Types/User/UserType";
-import {GET} from "@/Utils/Get/Get";
-import {CookieValueTypes, getCookie} from "cookies-next";
+
 import {array} from "prop-types";
 
-const ProfilHomePage = (user: { user: UserProps }) => {
+const ProfilHomePage = (user: { user: UserProps },isMyAccount : boolean) => {
 
     const [showChooseInstruments,setShowChooseInstruments]=useState(false)
     const userInfo = user.user
@@ -31,6 +29,7 @@ const ProfilHomePage = (user: { user: UserProps }) => {
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elit at purus mattis cursus ut sit amet dolor. Nulla aliquet varius velit vitae molestie. Nunc convallis augue sit amet orci hendrerit pretium vel nec tellus. Maecenas turpis mi, egestas vitae dui vitae, semper maximus nunc. Pellentesque quis pretium orci. Maecenas lacinia nisl tincidunt, pretium dolor nec, laoreet libero. Vivamus vel orci purus. Etiam lobortis fringilla dolor, in egestas arcu posuere vel Nulla facilisi. Suspendisse viverra nisl sed auctor blandit. Mauris vel leo ullamcorper, semper lacus id, congue lectus. Maecenas in sollicitudin lacus. Nulla consequat massa metus, rutrum sodales ex tristique sed. Curabitur et sagittis ante, vitae eleifend ipsum. Curabitur fringilla magna lectus, malesuada gravida nisl placerat quis.',
             timeCode : '80%'
         }    ]
+
     const lastLessonThumbnailsProgression = 'w-[' + LastLesson[0].timeCode + ']';
 
     return (
@@ -52,7 +51,11 @@ const ProfilHomePage = (user: { user: UserProps }) => {
                     <h1 className={'text-lg'}>Hello <span className={'font-bold'}>{userInfo.firstName}</span></h1>
                     {userInfo?.schoolId?  (
                         <Link href={'/school/' + userInfo.schoolId}> Hetic </Link>
-                    ) : null}
+                    ) : <p>No School</p>}
+
+                    {isMyAccount?  (
+                        <button className="!text-grey-base text-[13px] hover:!text-white">Modify</button>
+                        ): null}
                 </div>
             </div>
             <div className={"flex flex-row flex-nowrap items-center gap-6"}>
@@ -66,9 +69,11 @@ const ProfilHomePage = (user: { user: UserProps }) => {
             <div className={'flex flex-col gap-6'}>
                 <div className={'flex flex-row flex-nowrap gap-3 items-center'}>
                     <h2 className={'uppercase text-lg'}>My instruments</h2>
-                    <button onClick={()=>setShowChooseInstruments(true)} >
-                        <Icon iconContent={'/icons/plus.svg'} iconSize={20} iconAlt={''} containerClass={''}/>
-                    </button>
+                    {isMyAccount? (
+                        <button onClick={()=>setShowChooseInstruments(true)} >
+                            <Icon iconContent={'/icons/plus.svg'} iconSize={20} iconAlt={''} containerClass={''}/>
+                        </button>
+                    ) : null}
                 </div>
 
                 <div className={'flex flex-row flex-nowrap gap-7 overflow-x-scroll no-scrollbar mx-[-15px] px-[15px]'}>
