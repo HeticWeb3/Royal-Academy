@@ -26,5 +26,5 @@ export async function GET() {
 //             instrumentId: user.instrumentId != null ? user.instrumentId : undefined,
 //         },
 // });
-    return NextResponse.json(user, {status: 200,})
+    return NextResponse.json(user, {status: 200})
 }
