@@ -89,7 +89,7 @@ interface ChooseInstrumentsProps {
     const handleClick = (event: any) => {
         if (event.currentTarget.value) {
             if (checkInstrumentSelected(event?.currentTarget.value) !== undefined) {
-                setNewUserInstruments(newUserInstruments.filter((el:any) => el.id != event?.currentTarget.value).id);
+                setNewUserInstruments(newUserInstruments.filter((el:any) => el.id != event?.currentTarget.value));
             } else {
                 const foundInstrument = allInstruments.find(e => e.id == event?.currentTarget?.value)
                 setNewUserInstruments((prev:Array<any>) => [...prev, foundInstrument])
