@@ -5,13 +5,11 @@ import Image from "next/image";
 import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
 import ChooseInstruments from "@/app/Components/Organisms/User/ChooseInstruments/ChooseInstruments";
-import {UserProps} from "@/app/Components/Types/User/UserType";
-
 import {array} from "prop-types";
 import ModifyUser from "@/app/Components/Organisms/User/ModifyUser/ModifyUser";
 import {UserDataProps} from "@/app/Components/Types";
 
-const ProfilHomePage = (user: { user: UserProps },isMyAccount : boolean) => {
+const ProfilHomePage = (user: { user: UserDataProps },isMyAccount : boolean) => {
 
     const [showChooseInstruments,setShowChooseInstruments]=useState(false)
     const [showModifyUser,setShowModifyUser]=useState(false)
@@ -24,7 +22,7 @@ const ProfilHomePage = (user: { user: UserProps },isMyAccount : boolean) => {
     const OpenModifyUser = () => {
         setShowModifyUser(!showModifyUser);
     };
-console.log(showModifyUser)
+
     const LastLesson = [
         {
             id: 20,
