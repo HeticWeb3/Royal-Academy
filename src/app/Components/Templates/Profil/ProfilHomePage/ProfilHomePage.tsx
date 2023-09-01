@@ -11,10 +11,10 @@ import {UserDataProps} from "@/app/Components/Types";
 
 const ProfilHomePage = (user: { user: UserDataProps },isMyAccount : boolean) => {
 
-    const [showChooseInstruments,setShowChooseInstruments]=useState(false)
-    const [showModifyUser,setShowModifyUser]=useState(false)
-    const userInfo = user.user
-    const [userInstruments,setUserInstrument] = useState<array|null>(user.user.instrument)
+    const [showChooseInstruments,setShowChooseInstruments]=useState(false);
+    const [showModifyUser,setShowModifyUser]=useState(false);
+    const [userInfo,setUserInfo] = useState<UserDataProps>(user.user);
+    const [userInstruments,setUserInstrument] = useState<array|null>(user.user.instrument);
 
     const OpenChooseIntruments = () => {
         setShowChooseInstruments(!showChooseInstruments);
@@ -131,7 +131,7 @@ const ProfilHomePage = (user: { user: UserDataProps },isMyAccount : boolean) => 
                 <div className={'bg-grey-darker/75 w-screen h-screen absolute top-0 left-0 '}>
                     <div className={'bg-white py-lg px-7 rounded-base m-6 lg:w-1/3 mt-[10%] lg:mx-auto'}>
                         <h3 className={'text-black text-lg mb-xl text-center font-bold'}>Modify your profil</h3>
-                        <ModifyUser userInfo={userInfo} onQuitChooseWindow={OpenModifyUser}/>
+                        <ModifyUser userInfo={userInfo} setUserInfo={setUserInfo} onQuitChooseWindow={OpenModifyUser}/>
                     </div>
                 </div>
                 ):null}
