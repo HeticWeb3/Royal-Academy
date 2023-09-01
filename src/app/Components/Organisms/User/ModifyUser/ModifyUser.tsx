@@ -59,13 +59,15 @@ const ModifyUser: React.FC<ModifyUserProps> = ({
                 <ModifyInput inputName={'lastName'} inputType={'text'} inputValue={newUserData.lastName} updateUser={updateUser} validationSchema={LastNameValidationSchema}/>
                 <ModifyInput inputName={'phoneNumber'} inputType={'text'} inputValue={newUserData.phoneNumber} updateUser={updateUser} validationSchema={PhoneValidationSchema} />
             </div>
-            <button
-                onClick={PatchUser}
-                type="button"
-                className={'button bg-blue-lightbis text-white font-normal text-base antialiased col-span-full mt-xl py-6 px-lg'}
-            >
-                Validate
-            </button>
+            <div className={'flex flex-row justify-center'}>
+                <button
+                    onClick={PatchUser}
+                    type="button"
+                    className={'button bg-blue-lightbis text-white font-normal text-base antialiased mt-xl py-6 px-lg'}
+                >
+                    Validate
+                </button>
+            </div>
         </>
     )
 }
