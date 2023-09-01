@@ -5,20 +5,22 @@ import Image from "next/image";
 import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
 import ChooseInstruments from "@/app/Components/Organisms/User/ChooseInstruments/ChooseInstruments";
-import {UserProps} from "@/app/Components/Types/User/UserType";
-
 import {array} from "prop-types";
+import ModifyUser from "@/app/Components/Organisms/User/ModifyUser/ModifyUser";
+import {UserDataProps} from "@/app/Components/Types";
 
-const ProfilHomePage = (user: { user: UserProps },isMyAccount : boolean) => {
+const ProfilHomePage = (user: { user: UserDataProps },isMyAccount : boolean) => {
 
-    const [showChooseInstruments,setShowChooseInstruments]=useState(false)
-    const userInfo = user.user
-    const [userInstruments,setUserInstrument] = useState<array|null>(user.user.instrument)
+    const [showChooseInstruments,setShowChooseInstruments]=useState(false);
+    const [showModifyUser,setShowModifyUser]=useState(false);
+    const [userInfo,setUserInfo] = useState<UserDataProps>(user.user);
+    const [userInstruments,setUserInstrument] = useState<array|null>(user.user.instrument);
 
-    console.log(user.user)
-
-    const quitChooseWindow = () => {
-        setShowChooseInstruments(false);
+    const OpenChooseIntruments = () => {
+        setShowChooseInstruments(!showChooseInstruments);
+    };
+    const OpenModifyUser = () => {
+        setShowModifyUser(!showModifyUser);
     };
 
     const LastLesson = [
@@ -54,7 +56,9 @@ const ProfilHomePage = (user: { user: UserProps },isMyAccount : boolean) => {
                     ) : <p>No School</p>}
 
                     {isMyAccount?  (
-                        <button className="!text-grey-base text-[13px] hover:!text-white">Modify</button>
+                        <button
+                            onClick={ OpenModifyUser}
+                            className="!text-grey-base text-[13px] hover:!text-white">Modify</button>
                         ): null}
                 </div>
             </div>
@@ -70,7 +74,7 @@ const ProfilHomePage = (user: { user: UserProps },isMyAccount : boolean) => {
                 <div className={'flex flex-row flex-nowrap gap-3 items-center'}>
                     <h2 className={'uppercase text-lg'}>My instruments</h2>
                     {isMyAccount? (
-                        <button onClick={()=>setShowChooseInstruments(true)} >
+                        <button onClick={OpenChooseIntruments} >
                             <Icon iconContent={'/icons/plus.svg'} iconSize={20} iconAlt={''} containerClass={''}/>
                         </button>
                     ) : null}
@@ -119,7 +123,15 @@ const ProfilHomePage = (user: { user: UserProps },isMyAccount : boolean) => {
                 <div className={'bg-grey-darker/75 w-screen h-screen absolute top-0 left-0 '}>
                     <div className={'bg-white py-lg px-7 rounded-base m-6 lg:w-1/3 mt-[10%] lg:mx-auto'}>
                         <h3 className={'text-black text-lg mb-xl text-center font-bold'}>Chose the other(s) instrument(s) you want to learn: </h3>
-                        <ChooseInstruments userInstruments={userInstruments} setUserInstrument={setUserInstrument} onQuitChooseWindow={quitChooseWindow} />
+                        <ChooseInstruments userInstruments={userInstruments} setUserInstrument={setUserInstrument} onQuitChooseWindow={OpenChooseIntruments} />
+                    </div>
+                </div>
+                ):null}
+            {showModifyUser?  (
+                <div className={'bg-grey-darker/75 w-screen h-screen absolute top-0 left-0 '}>
+                    <div className={'bg-white py-lg px-7 rounded-base m-6 lg:w-1/3 mt-[10%] lg:mx-auto'}>
+                        <h3 className={'text-black text-lg mb-xl text-center font-bold'}>Modify your profil</h3>
+                        <ModifyUser userInfo={userInfo} setUserInfo={setUserInfo} onQuitChooseWindow={OpenModifyUser}/>
                     </div>
                 </div>
                 ):null}

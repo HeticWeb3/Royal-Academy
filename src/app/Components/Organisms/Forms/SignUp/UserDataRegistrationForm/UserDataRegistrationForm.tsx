@@ -9,7 +9,6 @@ import {
     RegistrationInputTypes
 } from "@/app/Components/Types";
 import {SignupSchema} from "@/app/Components/Atoms/Forms";
-import {FormikDatePicker} from "@/app/Components/Atoms/Forms";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
@@ -30,11 +29,13 @@ const formStatusProps: IFormStatusProps = {
 }
 
 const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> = ({setRegistrationStepNumber}) => {
+
     const [displayFormStatus, setDisplayFormStatus] = useState(false);
     const [formStatus, setFormStatus] = useState<IFormStatusTypes>({
         message: '',
         type: '',
     })
+
     const changeRegistrationStepNumber = (number: number) => {
         setRegistrationStepNumber(number)
     };
