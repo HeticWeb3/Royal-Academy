@@ -6,6 +6,8 @@ import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
 import ChooseInstruments from "@/app/Components/Organisms/User/ChooseInstruments/ChooseInstruments";
 import {array} from "prop-types";
+import {Courses} from "@/app/Components/Organisms/Course/Course";
+import {Lessons} from "@/app/Components/Organisms/Lesson/Lesson";
 import ModifyUser from "@/app/Components/Organisms/User/ModifyUser/ModifyUser";
 import {UserDataProps} from "@/app/Components/Types";
 
@@ -135,6 +137,10 @@ const ProfilHomePage = (user: { user: UserDataProps },isMyAccount : boolean) => 
                     </div>
                 </div>
                 ):null}
+            <div>
+                <Courses/>
+                <Lessons/>
+            </div>
         </div>
     );
 };

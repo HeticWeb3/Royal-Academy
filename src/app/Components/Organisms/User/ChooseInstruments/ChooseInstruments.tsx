@@ -1,10 +1,9 @@
-import React, {useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import {Icon} from "@/app/Components/Atoms";
-import {CookieValueTypes, getCookie, setCookie} from "cookies-next";
+import {CookieValueTypes, getCookie} from "cookies-next";
 import {GET} from "@/Utils/Get/Get";
-import {instrumentDataJSON, instrumentsDataProps, LoginInputTypes} from "@/app/Components/Types";
+import {instrumentsDataProps} from "@/app/Components/Types";
 import {PATCH} from "@/Utils/Patch/Patch";
-import {array} from "zod";
 
 interface ChooseInstrumentsProps {
     userInstruments: any;
