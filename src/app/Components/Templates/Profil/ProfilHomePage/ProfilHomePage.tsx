@@ -135,6 +135,8 @@ const ProfilHomePage = ({user, isMyAccount}: {user: UserDataProps; isMyAccount: 
                     </div>
                 </div>
                 ):null}
+            <div>
+            </div>
         </div>
     );
 };

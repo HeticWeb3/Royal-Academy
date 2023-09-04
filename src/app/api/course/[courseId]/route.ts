@@ -15,6 +15,9 @@ export async function GET(request: Request, {params}: { params: {courseId: numbe
             id: Number(params.courseId),
         }, include: {
             lesson: true,
+            style: true,
+            level: true,
+            instrument: true,
         }
     })
     return NextResponse.json(course, {status: 200,})
