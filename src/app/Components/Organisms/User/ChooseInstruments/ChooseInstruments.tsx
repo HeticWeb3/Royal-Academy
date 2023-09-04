@@ -20,7 +20,7 @@ interface ChooseInstrumentsProps {
 
     const [newUserInstruments, setNewUserInstruments] = useState(userInstruments);
     const initialsInstruments = userInstruments;
-    const [allInstruments,setAllInstruments]= useState<instrumentsDataProps | null>(null);
+    const [allInstruments,setAllInstruments]= useState<instrumentsDataProps[] | null>(null);
 
     useEffect(() => {
         const fetchParams = (token: CookieValueTypes) => {
@@ -35,7 +35,7 @@ interface ChooseInstrumentsProps {
         const fetchInstruments = async () => {
             try {
                 const instruments = await GET({url:`instrument/all`, params:fetchParams(getCookie('accesstoken'))});
-                const data: instrumentsDataProps = await instruments;
+                const data: instrumentsDataProps[] = await instruments;
                 setAllInstruments(data);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données des instruments :', error);
@@ -59,7 +59,7 @@ interface ChooseInstrumentsProps {
 
     const validateInstrumentsForm = async () => {
 
-        const newUserInstrumentsById = newUserInstruments.map(item => ({ id: item.id }));
+        const newUserInstrumentsById = newUserInstruments.map((item: Record<string, any>) => ({ id: item.id }));
 
 
         const instrumentJSON : any = {
@@ -91,7 +91,7 @@ interface ChooseInstrumentsProps {
             if (checkInstrumentSelected(event?.currentTarget.value) !== undefined) {
                 setNewUserInstruments(newUserInstruments.filter((el:any) => el.id != event?.currentTarget.value));
             } else {
-                const foundInstrument = allInstruments.find(e => e.id == event?.currentTarget?.value)
+                const foundInstrument = allInstruments?.find(e => e.id == event?.currentTarget?.value)
                 setNewUserInstruments((prev:Array<any>) => [...prev, foundInstrument])
             }
         }
@@ -101,7 +101,7 @@ interface ChooseInstrumentsProps {
     return (
         <div className={'flex flex-col items-center'}>
             <div className={'flex flex-row flex-wrap gap-7 no-scrollbar mx-[-15px] px-[15px]'}>
-                {allInstruments?.map((instrument) => {
+                {allInstruments?.map((instrument: Record<string, any>) => {
                     return !initialsInstruments.find((el:any) => el.id == instrument.id) ? (
                         <button key={instrument.id} value={instrument.id} onClick={handleClick}>
                             <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50}

@@ -43,7 +43,7 @@ const ProfilePage = () => {
     // Affichez les données de l'utilisateur sur la page de profil
     return (
         <>
-            <ProfilHomePage user={userData}/>
+            <ProfilHomePage user={userData} isMyAccount={false}/>
         </>
     );
 };

@@ -23,7 +23,7 @@ const ModifyUser: React.FC<ModifyUserProps> = ({
 }) => {
     const [newUserData,setNewUserData] = useState<UserDataProps>(userInfo);
 
-    function updateUser(value) {
+    function updateUser(value: Record<string, any>) {
         const inputKey = Object.keys(value).toString()
         const inputValue = Object.values(value).toString()
          setNewUserData({...newUserData, [inputKey] : inputValue})

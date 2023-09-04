@@ -8,7 +8,7 @@ interface ModifyInputProps {
     inputName: string;
     inputType: string;
     inputValue : string;
-    updateUser : (any) => void;
+    updateUser : ({}) => void;
     validationSchema : any;
 }
 

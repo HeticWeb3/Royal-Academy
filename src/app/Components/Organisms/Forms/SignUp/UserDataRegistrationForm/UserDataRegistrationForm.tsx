@@ -98,7 +98,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                     }}
                     validationSchema={SignupSchema}
                 >
-                    {(props: FormikProps<RegistrationInputTypes>) => {
+                    {(props: FormikProps<any>) => {
                         const {
                             values,
                             handleBlur,

@@ -1,5 +1,5 @@
 "use client"
-import {authContextType} from "@/app/Components/Types";
+import {authContextType, UserDataProps} from "@/app/Components/Types";
 import {createContext,useContext,useState,useLayoutEffect} from "react";
 import { useRouter } from "next/navigation";
 import {getCookie, hasCookie, setCookie, deleteCookie} from 'cookies-next';
@@ -20,7 +20,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }: any) {
     const router = useRouter();
-    const [userConnected, setUserConnected] = useState<null | UserProps>(null);
+    const [userConnected, setUserConnected] = useState<null | UserDataProps>(null);
 
     const getUserInfo = async () => {
         const response = await fetch('http://localhost:3000/api/user/me', {
@@ -68,7 +68,7 @@ export function AuthProvider({ children }: any) {
                 getUserInfo();
             }
       
-    }, []);
+    }, [router]);
 
     const login = () => {
         getUserInfo();

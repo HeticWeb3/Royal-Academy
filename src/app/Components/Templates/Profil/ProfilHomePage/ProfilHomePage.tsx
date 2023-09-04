@@ -9,12 +9,12 @@ import {array} from "prop-types";
 import ModifyUser from "@/app/Components/Organisms/User/ModifyUser/ModifyUser";
 import {UserDataProps} from "@/app/Components/Types";
 
-const ProfilHomePage = (user: { user: UserDataProps },isMyAccount : boolean) => {
+const ProfilHomePage = ({user, isMyAccount}: {user: UserDataProps; isMyAccount: boolean}) => {
 
-    const [showChooseInstruments,setShowChooseInstruments]=useState(false);
-    const [showModifyUser,setShowModifyUser]=useState(false);
-    const [userInfo,setUserInfo] = useState<UserDataProps>(user.user);
-    const [userInstruments,setUserInstrument] = useState<array|null>(user.user.instrument);
+    const [showChooseInstruments,setShowChooseInstruments]= useState(false);
+    const [showModifyUser,setShowModifyUser]= useState(false);
+    const [userInfo,setUserInfo] = useState(user.user);
+    const [userInstruments,setUserInstrument] = useState(user.user.instrument);
 
     const OpenChooseIntruments = () => {
         setShowChooseInstruments(!showChooseInstruments);
@@ -83,7 +83,7 @@ const ProfilHomePage = (user: { user: UserDataProps },isMyAccount : boolean) => 
                 <div className={'flex flex-row flex-nowrap gap-7 overflow-x-scroll no-scrollbar mx-[-15px] px-[15px]'}>
 
                     {userInstruments.length > 0 ? (
-                            userInstruments.map((instrument) => (
+                            userInstruments.map((instrument: Record<string, any>) => (
                             <button key={instrument.id}>
                                <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50} iconAlt={instrument.name} containerClass={'w-[110px] bg-white rounded-square p-2 flex items-center justify-center'}/>
                             </button>

@@ -4,10 +4,11 @@ import {CookieValueTypes, getCookie} from 'cookies-next';
 import ProfilHomePage from "@/app/Components/Templates/Profil/ProfilHomePage/ProfilHomePage";
 import {UserProps} from "@/app/Components/Types/User/UserType";
 import {useAuth} from "@/Utils/Contexts/AuthContext";
+import {UserDataProps} from "@/app/Components/Types";
 
 const ProfilePage = () => {
 
-    const [userLogged, setUserLogged] = useState<null | UserProps>(null)
+    const [userLogged, setUserLogged] = useState<null | UserDataProps>(null)
     const auth = useAuth()
 
     useEffect(() => {

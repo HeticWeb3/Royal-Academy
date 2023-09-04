@@ -1,4 +1,5 @@
  export interface UserDataProps {
+    user?: any;
     id: number;
     firstName: string;
     email: string;
@@ -13,6 +14,6 @@
     rankId:number | null;
     schoolId:number | null;
     styleId:number | null;
-
+    instrument: any[]
 }
 
