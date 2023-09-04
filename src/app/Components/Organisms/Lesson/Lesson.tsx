@@ -1,63 +1,17 @@
-import React, {useEffect, useState} from "react";
-import {CookieValueTypes, getCookie} from "cookies-next";
-import {GET} from "@/Utils/Get/Get";
-import {coursesDataProps} from "@/app/Components/Types/Courses/coursesDataProps";
-import {useParams} from "next/navigation";
-import {dividerClasses} from "@mui/material";
-import Image from "next/image";
 import {lessonsDataProps} from "@/app/Components/Types/Lessons/lessonsDataProps";
 
-
-interface LessonsProps {
-    userLessons?: any;
-    onQuitChooseWindow?: any;
-    setUserLesson?: React.Dispatch<React.SetStateAction<any>>;
-}
-
-export const Lessons: React.FC<LessonsProps> = ({
-                                                    userLessons,
-                                                    onQuitChooseWindow,
-                                                    setUserLesson,
-                                                }) => {
-
-
-    const [newUserLessons, setNewUserLessons] = useState(userLessons);
-    const [singleLessons, setSingleLessons] = useState<lessonsDataProps>();
-
-    const params = useParams();
-    const uid = params.uid;
-
-    useEffect(() => {
-        const fetchParams = (token: CookieValueTypes) => {
-            return {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            };
-        };
-
-        // useEffect(()=> {
-        //     setNewUserCourses(uid)
-        // }, [newUserCourses]);
-
-        const fetchLessons = async () => {
-            try {
-                const lessons = await GET({url: `lesson/2`, params: fetchParams(getCookie('accesstoken'))});
-                const data: lessonsDataProps = await lessons;
-                setSingleLessons(data);
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données de la leçon :', error);
-            }
-        };
-        fetchLessons();
-    }, []);
-
-
+const Lesson = (data: { data: lessonsDataProps }) => {
+    const singleLesson = data
+    console.log(singleLesson.data, 'ddd');
     return (
-        <div>
-            <h1 className={'text-base lg:text-subheading lg:text-center lg:mb-lg'}>{singleLessons?.nom}</h1>
-            <p className={'text-base  lg:text-center '}>{singleLessons?.description}</p>
+        <div className={' flex flex-col gap-lg lg:lg:gap-[120px] col-span-full my-lg'}>
+            <h1 className={'text-base lg:text-subheading lg:text-center lg:mb-lg'}>{singleLesson.data.nom}</h1>
+
+            <div className={'text-center lg:w-2/5 self-center leading-9 lg:text-lg flex flex-col lg:gap-7'}>
+                <p className={'text-sm lg:text-base'}>{singleLesson.data.description}</p>
+                <p>Il faut affiche la vidéo aussi</p>
+            </div>
         </div>
     )
 }
+export default Lesson;
