@@ -1,6 +1,6 @@
 import {coursesDataProps} from "@/app/Components/Types/Courses/coursesDataProps";
 
-const Course = (data: { data: coursesDataProps }) => {
+const Competition = (data: { data: coursesDataProps }) => {
     const singleCourses = data
 
     const lesssons = singleCourses?.data.lesson.map(lessons => {
@@ -24,4 +24,4 @@ const Course = (data: { data: coursesDataProps }) => {
         </div>
     )
 }
-export default Course;
+export default Competition;
