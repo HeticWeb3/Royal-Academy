@@ -1,10 +1,7 @@
 'use client'
 import {CookieValueTypes, getCookie} from "cookies-next";
 import {useEffect, useState} from "react";
-import Course from "@/app/Components/Organisms/Course/Course"
 import {GET} from "@/Utils/Get/Get";
-import {useParams} from "next/navigation";
-import {coursesDataProps} from "@/app/Components/Types/Courses/coursesDataProps";
 import {competitionsDataProps} from "@/app/Components/Types/Competitions/competitionsDataProps";
 import Competition from "@/app/Components/Organisms/Competition/Competition";
 
@@ -33,8 +30,8 @@ const CompetitionPage = () => {
 
     }, []);
 
-    const competition = competitionData?.map(competition => {
-        return (<Competition data={competition} />)
+    const competition = competitionData?.map((competition: competitionsDataProps, index: number) => {
+        return (<Competition data={competition} key={index} />)
     })
 
     // Affichez les données de l'utilisateur sur la page de profil
