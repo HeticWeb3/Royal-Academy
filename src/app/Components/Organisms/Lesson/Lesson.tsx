@@ -6,18 +6,26 @@ import {Icon} from "@/app/Components/Atoms";
 const Lesson = (data: { data: lessonsDataProps }) => {
     const singleLesson = data
     const [isStarted, setIsStarted] = useState<string>('started');
-
-    const lessonStatus = ['started' , 'finished' , 'sent'];
     let buttonLabel = '';
-
     switch (isStarted) {
-
         case 'started':  buttonLabel = 'LESSON FINISHED'; break;
         case 'finished':  buttonLabel = 'UPLOAD YOUR VIDEO'; break;
         case 'sent':  buttonLabel = 'VIDEO SENT'; break;
-
         default: console.log("unknown error")
     }
+
+    const updateLessonStatus = () => {
+        if (isStarted === 'started') {
+            setIsStarted('finished')
+        } else if (isStarted === 'finished'){
+            setIsStarted('sent')
+        }
+        else {
+            return;
+        }
+    }
+
+
 
     return (
         <div>
@@ -37,24 +45,24 @@ const Lesson = (data: { data: lessonsDataProps }) => {
                 <div>
                     <div className={'flex flex-row justify-center items-center text-[15px]'}>
 
-                        <div className={`${ isStarted !== lessonStatus[0]? 'opacity-30':''} flex flex-col justify-center items-center gap-2`}>
+                        <div className={`${ isStarted !== 'started'? 'opacity-30':''} flex flex-col justify-center items-center gap-2`}>
                             <Icon iconContent={'/icons/utils/done.svg'} iconSize={34} iconAlt={''}
                                   containerClass={`block border-[1px] border-white w-[45px] text-blue-dark rounded-square text-[30px] flex flex-nowrap justify-center`}/>
                             <p className={'max-w-[70px] text-center'}>Lesson finished</p>
                         </div>
 
-                        <Icon iconContent={'/icons/arrow-right.svg'} iconSize={25} iconAlt={''} containerClass={`${ isStarted !== lessonStatus[0]? 'opacity-30':''} text-white flex flex-col justify-center mx-2  max-w-[25px]`}/>
+                        <Icon iconContent={'/icons/arrow-right.svg'} iconSize={25} iconAlt={''} containerClass={`${ isStarted !== 'started'? 'opacity-30':''} text-white flex flex-col justify-center mx-2  max-w-[25px]`}/>
 
 
-                        <div className={`${ isStarted !== lessonStatus[1]? 'opacity-30':''} flex flex-col justify-center items-center gap-2`}>
+                        <div className={`${ isStarted !== 'finished'? 'opacity-30':''} flex flex-col justify-center items-center gap-2`}>
                             <Icon iconContent={'/icons/utils/done.svg'} iconSize={34} iconAlt={''}
                                   containerClass={`block border-[1px] border-white w-[45px] text-blue-dark rounded-square text-[30px] flex flex-nowrap justify-center`}/>
                             <p className={'max-w-[70px] text-center'}>Vidéo sent</p>
                         </div>
 
-                            <Icon iconContent={'/icons/arrow-right.svg'} iconSize={25} iconAlt={''} containerClass={`${ isStarted !== lessonStatus[1]? 'opacity-30':''} text-white flex flex-col justify-center mx-2  max-w-[25px]`}/>
+                            <Icon iconContent={'/icons/arrow-right.svg'} iconSize={25} iconAlt={''} containerClass={`${ isStarted !== 'finished'? 'opacity-30':''} text-white flex flex-col justify-center mx-2  max-w-[25px]`}/>
 
-                        <div className={`${ isStarted !== lessonStatus[2]? 'opacity-30':''} flex flex-col justify-center items-center gap-2`}>
+                        <div className={`${ isStarted !== 'sent'? 'opacity-30':''} flex flex-col justify-center items-center gap-2`}>
                             <Icon iconContent={'/icons/utils/done.svg'} iconSize={34} iconAlt={''}
                                   containerClass={`block border-[1px] border-white w-[45px] text-blue-dark rounded-square text-[30px] flex flex-nowrap justify-center`}/>
                             <p className={'max-w-[70px] text-center'}>Correction available</p>
@@ -63,7 +71,9 @@ const Lesson = (data: { data: lessonsDataProps }) => {
                 </div>
 
                 <button
-                    className={'btn rounded-lg border-[1px] py-4 border-white w-1/2 mx-auto hover:bg-white hover:text-blue-dark hover:border-blue-dark'}>
+                    disabled={isStarted === 'sent'}
+                    onClick={updateLessonStatus}
+                    className={`btn rounded-lg border-[1px] py-4 w-1/2 mx-auto ${isStarted == 'sent'?'opacity-30': 'hover:bg-white hover:text-blue-dark hover:border-blue-dark'} border-white`}>
                     {buttonLabel}
                 </button>
             </div>
