@@ -90,8 +90,8 @@ interface ChooseInstrumentsProps {
             if (checkInstrumentSelected(event?.currentTarget.value) !== undefined) {
                 setNewUserInstruments(newUserInstruments.filter((el:any) => el.id != event?.currentTarget.value));
             } else {
-                const foundInstrument = allInstruments?.find(e => e.id == event?.currentTarget?.value)
-                setNewUserInstruments((prev:Array<any>) => [...prev, foundInstrument])
+                const foundInstrument = allInstruments.find(e => e.id == event?.currentTarget?.value)
+                setNewUserInstruments((prev) =>  [...prev, foundInstrument])
             }
         }
     }
@@ -101,7 +101,7 @@ interface ChooseInstrumentsProps {
         <div className={'flex flex-col items-center'}>
             <div className={'flex flex-row flex-wrap gap-7 no-scrollbar mx-[-15px] px-[15px]'}>
                 {allInstruments?.map((instrument: Record<string, any>) => {
-                    return !initialsInstruments.find((el:any) => el.id == instrument.id) ? (
+                    return !initialsInstruments?.find((el:any) => el.id == instrument.id) ? (
                         <button key={instrument.id} value={instrument.id} onClick={handleClick}>
                             <Icon iconContent={`/icons/${instrument.name.toLowerCase()}.svg`} iconSize={50}
                                   iconAlt={instrument.name}

@@ -40,7 +40,8 @@ const LessonPage = () => {
     if (!lessonId || !lessonData) {
         return <div>Loading...</div>;
     }
-    // Affichez les données de l'utilisateur sur la page de profil
+
+    console.log(lessonData)
     return (
         <>
             <Lessons data={lessonData}/>
