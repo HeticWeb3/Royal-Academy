@@ -28,18 +28,18 @@ const Lesson = (data: { data: lessonsDataProps }) => {
 
 
     return (
-        <div>
-            <nav className={'subheader grid grid-cols-6 '}>
+        <div className={'col-span-full'}>
+            <nav className={'subheader grid grid-cols-6 lg:py-7'}>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="62" height="57" viewBox="0 0 62 57" fill="none">
                         <path d="M20.9393 24.9393C20.3536 25.5251 20.3536 26.4749 20.9393 27.0607L30.4853 36.6066C31.0711 37.1924 32.0208 37.1924 32.6066 36.6066C33.1924 36.0208 33.1924 35.0711 32.6066 34.4853L24.1213 26L32.6066 17.5147C33.1924 16.9289 33.1924 15.9792 32.6066 15.3934C32.0208 14.8076 31.0711 14.8076 30.4853 15.3934L20.9393 24.9393ZM24 24.5L22 24.5L22 27.5L24 27.5L24 24.5Z" fill="white"/>
                     </svg>
                 </div>
-                <h1 className={'text-base lg:text-subheading self-center lg:mb-lg font-bold text-center text-lg col-start-2 col-end-6'}>{singleLesson.data.nom}</h1>
+                <h1 className={'text-base lg:text-subheading self-center font-bold text-center text-lg col-start-2 col-end-6'}>{singleLesson.data.nom}</h1>
             </nav>
             <div className={' flex flex-col gap-7'}>
-                <div>
-                    <ReactPlayer url='https://youtu.be/S_O0lUA_lPw?si=NEGessB78ulPNT-o' controls={true} width={'100%'} />
+                <div className={'aspect-video'}>
+                    <ReactPlayer url='https://youtu.be/S_O0lUA_lPw?si=NEGessB78ulPNT-o' controls={true} width={'100%'} height={'100%'} />
                 </div>
                 
                 <div>
