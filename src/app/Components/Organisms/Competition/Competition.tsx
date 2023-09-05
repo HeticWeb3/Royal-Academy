@@ -4,7 +4,9 @@ const Competition = (data: {data: competitionsDataProps }) => {
     const allCompetition = data
 
     return (
-        <div></div>
+        <div>
+            {allCompetition.data.name}
+        </div>
     )
-
 }
+export default Competition;
