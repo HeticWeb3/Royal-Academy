@@ -19,8 +19,8 @@ export default function Home() {
       <div className={' flex flex-col gap-lg lg:lg:gap-[120px] col-span-full my-lg'}>
         <section id={'homePresentation'} className="flex flex-col gap-lg lg:gap-[120px]">
 
-           <div className={'bg-grey-darker rounded-base w-full'}>
-               <div className={'relative h-[30vw] w-full rounded-base '}>
+           <div className={'w-full'}>
+               <div className={'relative h-[30vw] w-full '}>
                    <Image
                        src={headImage}
                        alt={'Study with the world’s best musicians!'}
@@ -35,9 +35,9 @@ export default function Home() {
 
                <div className={'p-4 lg:pb-lg flex flex-col gap-3 lg:gap-7'}>
                    <h2 className={'text-base lg:text-subheading lg:text-center lg:mb-lg'}>Study with the world’s best musicians!</h2>
-                   <p className={'text-sm lg:text-base'}>🧭  New masterclasses added every month.</p>
-                   <p className={'text-sm lg:text-base'}>🎥  Experience immersive video masterclasses wherever you are.</p>
-                   <p className={'text-sm lg:text-base'}>👨‍  Learn and progress alongside the most accomplished professors.</p>
+                   <p className={'text-sm lg:text-base lg:text-center'}>New masterclasses added every month.</p>
+                   <p className={'text-sm lg:text-base lg:text-center'}>Experience immersive video masterclasses wherever you are.</p>
+                   <p className={'text-sm lg:text-base lg:text-center'}>Learn and progress alongside the most accomplished professors.</p>
                </div>
            </div>
 

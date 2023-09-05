@@ -5,8 +5,8 @@ export interface RegistrationInputTypes {
     birthDate : Date,
     email : string,
     confirmEmail : string,
-    password : string,
-    confirmPassword : string,
+    password : string | undefined,
+    confirmPassword : string | undefined,
     phoneNumber : string,
     confirmPhoneNumber : string
 }

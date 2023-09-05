@@ -5,7 +5,6 @@ import {BiographyProps,} from "@/app/Components/Types";
 import Image from "next/image";
 
 
-
 const Biography = (data: { data: BiographyProps }) => {
 
 const biographyData = data.data;

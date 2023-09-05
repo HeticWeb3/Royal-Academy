@@ -9,7 +9,6 @@ import {
     RegistrationInputTypes
 } from "@/app/Components/Types";
 import {SignupSchema} from "@/app/Components/Atoms/Forms";
-import {FormikDatePicker} from "@/app/Components/Atoms/Forms";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
@@ -30,18 +29,20 @@ const formStatusProps: IFormStatusProps = {
 }
 
 const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> = ({setRegistrationStepNumber}) => {
+
     const [displayFormStatus, setDisplayFormStatus] = useState(false);
     const [formStatus, setFormStatus] = useState<IFormStatusTypes>({
         message: '',
         type: '',
     })
+
     const changeRegistrationStepNumber = (number: number) => {
         setRegistrationStepNumber(number)
     };
 
     const createNewUser = async (data: RegistrationInputTypes, resetForm: Function) => {
         try {
-            await fetch('http://localhost:3000/api/auth/signup', {
+            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -97,7 +98,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                     }}
                     validationSchema={SignupSchema}
                 >
-                    {(props: FormikProps<RegistrationInputTypes>) => {
+                    {(props: FormikProps<any>) => {
                         const {
                             values,
                             handleBlur,
@@ -139,19 +140,6 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                                     <ErrorMessage name="lastName" component="div" className="formInput__error" />
                                 </div>
 
-                                <div className={`${errors.birthDate && touched.birthDate?'error':''} formInput__wrapper`}>
-                                    <FormikDatePicker
-                                        className={'formInput DateInput w-full'}
-                                        name="birthDate"
-                                        label="Birthdate"
-                                        value={values.birthDate}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    />
-                                    <ErrorMessage name="birthDate" component="div" className="formInput__error" />
-                                </div>
-
-                                <div></div>
 
                                 <div className={`${errors.email && touched.email?'error':''} formInput__wrapper`}>
                                     <Field

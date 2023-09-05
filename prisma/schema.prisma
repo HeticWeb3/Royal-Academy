@@ -40,7 +40,6 @@ model User {
   rankId         Int?
   dateCreation   DateTime         @db.Date
   instrument     Instrument[]
-  instrumentId   Int?
   course         Course[]
 }
 
@@ -143,7 +142,7 @@ model Course {
   teacherId    Int
   instrumentId Int
   badge        Badge[]
-  User         User[]
+  User         User?      @relation(fields: [userId], references: [id])
   userId       Int?
 }
 
@@ -155,8 +154,7 @@ model Instrument {
   competition Competition[]
   teacher     Teacher?      @relation(fields: [teacherId], references: [id])
   teacherId   Int?
-  User        User?         @relation(fields: [userId], references: [id])
-  userId      Int?
+  User        User[]
 }
 
 model Badge {

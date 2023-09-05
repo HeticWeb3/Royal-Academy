@@ -15,14 +15,21 @@ export async function GET() {
     const user = <User>await prismaClient.user.findUnique({
         where: {
             id: Number(userID)
+        }, include: {
+            instrument: true,
         }
     })
+
+    return NextResponse.json(user, {status: 200})
 
     const course = await prismaClient.course.findMany({
         //TODO : On peut ajouter le niveau dans la querry (niveau du user)
         where: {
-            instrumentId: user.instrumentId != null ? user.instrumentId : undefined,
-        },
+            instrument: {
+                AND: [
+
+                ]
+            },
+        }
     });
-    return NextResponse.json(course, {status: 200,})
 }

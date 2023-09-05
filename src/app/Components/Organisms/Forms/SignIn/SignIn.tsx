@@ -34,7 +34,7 @@ const UserLogin: React.FunctionComponent = () => {
 
     const connectUser = async (data: LoginInputTypes, resetForm: Function) => {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/login', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,9 +43,9 @@ const UserLogin: React.FunctionComponent = () => {
             });
 
             if (response.ok) {
-                const token = await response.text();
+                const token = await response.json();
+                setCookie('accesstoken', token.accessToken,{maxAge:60 * 60 * 8,sameSite:true});
                 login();
-                setCookie('accesstoken', token,{maxAge:60 * 60 * 8,sameSite:true});
                 setFormStatus(formStatusProps.success);
                 resetForm({});
                 window.location.href = '/';
