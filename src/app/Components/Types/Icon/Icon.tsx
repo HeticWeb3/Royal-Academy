@@ -1,5 +1,5 @@
 export interface iconProps {
-    iconContent : string,
+    iconContent : any,
     iconSize : number,
     iconAlt : string,
     containerClass : string,

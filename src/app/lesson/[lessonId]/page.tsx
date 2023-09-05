@@ -40,8 +40,6 @@ const LessonPage = () => {
     if (!lessonId || !lessonData) {
         return <div>Loading...</div>;
     }
-
-    console.log(lessonData)
     return (
         <>
             <Lessons data={lessonData}/>
