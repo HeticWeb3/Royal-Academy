@@ -20,5 +20,5 @@ export async function GET(request: Request, {params}: { params: {courseId: numbe
             instrument: true,
         }
     })
-    return NextResponse.json(course, {status: 200,})
+    return NextResponse.json(course, {status: 200})
 }
