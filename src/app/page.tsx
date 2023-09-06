@@ -6,6 +6,10 @@ import RCMImage from '/public/images/home/partners/RCM-Primary.svg'
 import RIAMImage from '/public/images/home/partners/RIAM.svg'
 import ColburnImage from '/public/images/home/partners/Colburn.png'
 import AIENImage from '/public/images/home/partners/AIEN.png'
+import FacebookImage from '/public/images/home/socialmedia/Facebook.svg'
+import InstagramImage from '/public/images/home/socialmedia/Instagram.svg'
+import LinkedinImage from '/public/images/home/socialmedia/Linkedin.svg'
+import YoutubeImage from '/public/images/home/socialmedia/Youtube.svg'
 import {useRouter} from "next/navigation";
 import React from "react";
 import {Icon} from "@/app/Components/Atoms";
@@ -16,7 +20,7 @@ export default function Home() {
 
     const router = useRouter();
   return (
-      <div className={' flex flex-col gap-lg lg:lg:gap-[120px] col-span-full my-lg'}>
+      <div className={'flex flex-col gap-lg lg:lg:gap-[120px] col-span-full my-lg'}>
         <section id={'homePresentation'} className="flex flex-col gap-lg lg:gap-[120px]">
 
            <div className={'bg-grey-darker rounded-base w-full'}>
@@ -101,7 +105,7 @@ export default function Home() {
 
           <section id={'homePartners'} className={'flex flex-col gap-6 '}>
 
-                <h2 className={'text-sm lg:text-base lg:py-xl text-center'}>They trust us</h2>
+                <h2 className={'text-sm lg:text-xxl lg:py-xl text-center'}>They trust us</h2>
 
                 <div className={'grid grid-cols-4 gap-[30px] mx-xl justify-center lg:items-center'}>
                     <div className={'relative col-span-1'}>
@@ -153,60 +157,64 @@ export default function Home() {
           </section>
 
           <section id={'homeFooter'} className="flex flex-col gap-lg lg:gap-[120px]">
-
-            <div className={'bg-blueGrey-300 rounded-base w-full'}>
-            </div>
-              <div className={'relative col-span-1'}>
+            <div className="bg-slate-300 w-screen h-20">
+            <div className={'grid grid-cols-4 gap-[10px] mx-xl justify-center lg:items-center'}>
+                    <div className={'relative col-span-1'}>
                         <Image
-                            src={'/public/images/home/socialmedia/Facebook.svg'}
+                            src={FacebookImage}
                             className={'lg:w-1/3'}
-                            width={20}
-                            height={20}
                             alt={'Facebook'}
                             style={{
                                 alignSelf:'flex-start',
-                                margin:'0 auto',
-                            }}                        />
+                                margin: '19px',
+                                width: '40px',
+                                height: '40px'
+                            }}
+                        />
                     </div>
 
                     <div className={'relative col-span-1'}>
                         <Image
-                            src={'/public/images/home/socialmedia/Instagram.svg'}
+                            src={InstagramImage}
                             className={'lg:w-1/3'}
-                            width={20}
-                            height={20}
                             alt={'Instagram'}
                             style={{
                                 alignSelf:'flex-start',
-                                margin:'0 auto',
-                            }}                        />
+                                margin: '19px',
+                                width: '40px',
+                                height: '40px'
+                            }}
+                        />
                     </div>
 
                     <div className={'relative col-span-1'}>
-                        <Image
-                            src={'/public/images/home/socialmedia/Linkedin.svg'}
+                        <Image 
+                            src={LinkedinImage}
                             className={'lg:w-1/3'}
-                            width={20}
-                            height={20}
                             alt={'Linkedin'}
                             style={{
                                 alignSelf:'flex-start',
-                                margin:'0 auto',
+                                margin: '19px',
+                                width: '40px',
+                                height: '40px'
                             }}                        />
                     </div>
 
                     <div className={'relative col-span-1'}>
                         <Image
-                            src={'/public/images/home/socialmedia/Youtube.svg'}
+                            src={YoutubeImage}
                             className={'lg:w-1/3'}
-                            width={20}
-                            height={20}
                             alt={'Youtube'}
                             style={{
                                 alignSelf:'flex-start',
-                                margin:'0 auto',
+                                margin: '19px',
+                                width: '40px',
+                                height: '40px'
                             }}                        />
                     </div>
+                </div>          
+                </div>
+
           </section>
     </div>
   )
