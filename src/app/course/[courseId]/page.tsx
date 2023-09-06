@@ -19,7 +19,7 @@ const CoursePage = () => {
         };
     };
     useEffect(() => {
-        const fetchUserData = async () => {
+        const fetchCourseData = async () => {
             try {
                 const data: coursesDataProps = await GET({url:`course/${courseId}`, params:fetchParams(getCookie('accesstoken'))});
                 setCourseData(data);
@@ -29,7 +29,7 @@ const CoursePage = () => {
         };
 
         if (courseId) {
-            fetchUserData();
+            fetchCourseData();
         }
     }, [courseId]);
 

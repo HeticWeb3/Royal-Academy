@@ -1,6 +1,4 @@
-import {BiographyProps} from "@/app/Components/Types";
 import {coursesDataProps} from "@/app/Components/Types/Courses/coursesDataProps";
-import ProfessorPage from "@/app/professor/[professorID]/page";
 
 const Course = (data: { data: coursesDataProps }) => {
     const singleCourses = data
