@@ -1,6 +1,9 @@
 import {prismaClient} from "../../../../../prisma/prisma";
 import {NextResponse} from "next/server";
 
+// fix build
+export const dynamic = "force-dynamic";
+
 /**
  * Récupère toutes les compétitions
  *
