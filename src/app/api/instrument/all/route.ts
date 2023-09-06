@@ -1,6 +1,9 @@
 import {NextResponse} from "next/server";
 import {prismaClient} from "../../../../../prisma/prisma";
 
+// fix build
+export const dynamic = "force-dynamic";
+
 /**
  * Récupère tous les instruments
  *
