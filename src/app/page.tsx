@@ -213,10 +213,6 @@ export default function Home() {
                     </div>
                 </div>          
                 </div>
-
-                <div className="bg-white w-screen h-20">
-                    <p  className={'text-sm lg:text-base'}> © 2022 Musicampus - All rights reserved </p>
-                </div>
           </section>
     </div>
   )
