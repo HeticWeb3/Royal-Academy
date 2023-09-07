@@ -23,17 +23,6 @@ export default function Home() {
   return (
       <div className={'flex flex-col gap-lg lg:lg:gap-[120px] col-span-full my-lg'}>
         <section id={'homePresentation'} className="flex flex-col gap-lg lg:gap-[120px]">
-        <Image
-                            src={LogoImage}
-                            className={'lg:w-1/3'}
-                            alt={'Facebook'}
-                            style={{
-                                alignSelf:'center',
-                                width: '100px',
-                                height: '100px'
-                            }}
-                        />
-
            <div className={'bg-grey-darker rounded-base w-full'}>
                <div className={'relative h-[30vw] w-full rounded-base '}>
                    <Image
