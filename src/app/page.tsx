@@ -155,7 +155,7 @@ export default function Home() {
                 </div>
           </section>
 
-          <section id={'homeFooter'} className="flex flex-col gap-lg lg:gap-[120px]">
+          <section id={'homeFooter'} className="flex flex-col gap-lg lg:gap-[0px]">
             <div className="bg-slate-300 w-screen h-20">
             <div className={'grid grid-cols-4 gap-[10px] mx-xl justify-center lg:items-center'}>
                     <div className={'relative col-span-1'}>
@@ -213,6 +213,15 @@ export default function Home() {
                     </div>
                 </div>          
                 </div>
+
+                <div className="flex flex-col gap-6  bg-white w-screen h-20">
+                <p  className={'relative col-span-1 text-black space-x-56 lg:text-base'}>GTC</p>
+                <p  className={'relative col-span-1 text-black space-x-56 lg:text-base'}>General conditions of use</p>
+                <p  className={'relative col-span-1 text-black space-x-56 lg:text-base'}>Policy of the cookies deposited</p>
+                <p  className={'relative col-span-1 text-black space-x-56 lg:text-base'}>Privacy policy</p>
+                <p  className={'relative col-span-1 text-black space-x-56 lg:text-base'}>Sitemap</p>
+                <p  className={'relative col-span-1 text-black space-x-56 lg:text-base'}>Cookie management panel</p></div>
+                
 
           </section>
     </div>
