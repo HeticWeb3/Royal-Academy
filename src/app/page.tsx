@@ -6,11 +6,6 @@ import RCMImage from '/public/images/home/partners/RCM-Primary.svg'
 import RIAMImage from '/public/images/home/partners/RIAM.svg'
 import ColburnImage from '/public/images/home/partners/Colburn.png'
 import AIENImage from '/public/images/home/partners/AIEN.png'
-import FacebookImage from '/public/images/home/socialmedia/Facebook.svg'
-import InstagramImage from '/public/images/home/socialmedia/Instagram.svg'
-import LinkedinImage from '/public/images/home/socialmedia/Linkedin.svg'
-import YoutubeImage from '/public/images/home/socialmedia/Youtube.svg'
-import LogoImage from '/public/images/home/logo.webp'
 import {useRouter} from "next/navigation";
 import React from "react";
 import {Icon} from "@/app/Components/Atoms";
@@ -39,9 +34,9 @@ export default function Home() {
 
                <div className={'p-4 lg:pb-lg flex flex-col gap-3 lg:gap-7'}>
                    <h2 className={'text-base lg:text-subheading lg:text-center lg:mb-lg'}>Study with the world’s best musicians!</h2>
-                   <p className={'text-sm lg:text-base'}>🧭  New masterclasses added every month.</p>
-                   <p className={'text-sm lg:text-base'}>🎥  Experience immersive video masterclasses wherever you are.</p>
-                   <p className={'text-sm lg:text-base'}>👨‍  Learn and progress alongside the most accomplished professors.</p>
+                   <p className={'text-sm lg:text-base lg:text-center'}>New masterclasses added every month.</p>
+                   <p className={'text-sm lg:text-base lg:text-center'}>Experience immersive video masterclasses wherever you are.</p>
+                   <p className={'text-sm lg:text-base lg:text-center'}>Learn and progress alongside the most accomplished professors.</p>
                </div>
            </div>
 

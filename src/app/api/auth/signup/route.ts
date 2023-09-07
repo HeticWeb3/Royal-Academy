@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     try {
         user = await users.execute().signup(
             {
-                email: res.email,
+                email: res.email.toLowerCase(),
                 firstName: res.firstName,
                 lastName: res.lastName,
                 phoneNumber: res.phoneNumber,

@@ -1,3 +1,5 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "ignorePatterns": ["jest.setup.ts", "jest.config.js"],
+  "rules": { "react/no-unescaped-entities": 0 }
 }

@@ -1,12 +1,13 @@
 "use client"
-import {authContextType} from "@/app/Components/Types";
+import {authContextType, UserDataProps} from "@/app/Components/Types";
 import {createContext,useContext,useState,useLayoutEffect} from "react";
 import { useRouter } from "next/navigation";
-import {hasCookie, setCookie} from 'cookies-next';
+import {getCookie, hasCookie, setCookie, deleteCookie} from 'cookies-next';
 import {getAccessToken} from '@/Utils/Hooks/User/getAccessToken'
+import {UserProps} from "@/app/Components/Types/User/UserType";
 
 const authContextDefaultValues: authContextType = {
-    userConnected: false,
+    userConnected: null,
     login: () => {},
     logout: () => {},
 };
@@ -19,35 +20,65 @@ export function useAuth() {
 
 export function AuthProvider({ children }: any) {
     const router = useRouter();
-    const [userConnected, setUserConnected] = useState<boolean>(hasCookie('accesstoken'));
+    const [userConnected, setUserConnected] = useState<null | UserDataProps>(null);
+
+    const getUserInfo = async () => {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('accesstoken')}`
+            },
+        });
+
+        if(response.ok){
+            const data = await response.json();
+            setUserConnected(data)
+        }
+    }
+
+    const deleteRefreshToken = async () => {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if(response.ok){
+            return await response.json();
+        }
+    }
 
     useLayoutEffect(() => {
-            if (!userConnected && (window.location.pathname !== '/login'|| window.location.pathname !== '/register') ) {
+            if (!hasCookie('accesstoken')) {
                 getAccessToken()
                     .then(response => {
                         if (response?.ok) {
                             response?.json().then((data) => {
                                  setCookie('accesstoken', data.accessToken,{maxAge:60 * 60 * 24,sameSite:true});
+                                 getUserInfo()
                             })
                         }
                         else {
                            router.push('/login')
                         }
                     })
-
+            } else {
+                getUserInfo();
             }
-            else if (userConnected && (window.location.pathname == '/login' || window.location.pathname == '/register') ){
-                router.push('/');
-            }
-            []
-    });
+      
+    }, [router]);
 
     const login = () => {
-        setUserConnected(true);
+        getUserInfo();
     };
 
-    const logout = () => {
-        setUserConnected(false);
+    const logout = async () => {
+        deleteCookie('accesstoken')
+        const res = await deleteRefreshToken()
+        setUserConnected(null);
+        return res.success
     };
 
     const value = {

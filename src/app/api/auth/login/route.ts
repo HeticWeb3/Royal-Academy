@@ -32,8 +32,5 @@ export async function POST(request: Request){
             );
     }
 
-    return NextResponse.json(
-        {'error': 'Authentication error'},
-        {status: 401}
-    );
+    return NextResponse.json({'error': 'Authentication error'}, {status: 401});
 }

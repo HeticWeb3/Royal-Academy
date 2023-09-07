@@ -1,6 +1,7 @@
 import './globals.css'
 import {ContainerWide} from "@/app/Components/Atoms/";
 import {AuthProvider} from "@/Utils/Contexts/AuthContext";
+import Header from "@/app/Components/Organisms/Header/Header"
 
 
 export const metadata = {
@@ -16,11 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={'body'}>
-          <ContainerWide>
-              <AuthProvider>
-                  {children}
-              </AuthProvider>
-          </ContainerWide>
+      <AuthProvider>
+        <Header></Header>
+            <ContainerWide>
+              {children}
+            </ContainerWide>
+      </AuthProvider>
       </body>
     </html>
   )

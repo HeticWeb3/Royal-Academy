@@ -1,60 +1,114 @@
-import { MockContext, Context, createMockContext } from '../../sharedTests/context'
-import { createUser, updateUsername } from '../../sharedTests/sharedTestUser'
+import {headers} from "next/headers";
+import {User} from "@prisma/client";
 
-let mockCtx: MockContext
-let ctx: Context
+import {GET as meGET, PATCH as mePATCH} from "../../api/user/me/route";
+import {DELETE as userDELETE} from "../../api/user/delete/route";
+import {GET as userGET} from "../../api/user/[userId]/route"
 
-beforeEach(() => {
-    mockCtx = createMockContext()
-    ctx = mockCtx as unknown as Context
+import {getLogged, mockRequest} from "../__lib__/request";
+import {userGenerator} from "../__lib__/seeder";
+
+
+let user: User
+
+jest.mock('next/headers')
+
+beforeAll(async () => {
+    user = await userGenerator('user@user.com')
 })
 
-test('should create new user ', async () => {
-    const user = {
-        id: 3,
-        firstName: 'James',
-        lastName: 'Test',
-        birthDate: '2003-07-01',
-        phoneNumber: '0787989834',
-        email: 'hellotest@prisma.io',
-        password: 'mdppass',
-        dateCreation: '2023-07-03',
-    }
-    // @ts-ignore
-    mockCtx.prisma.user.create.mockResolvedValue(user)
+afterEach(() => {
+    jest.resetAllMocks();
+});
 
-    await expect(createUser(user, ctx)).resolves.toEqual({
-        id: 3,
-        firstName: 'James',
-        lastName: 'Test',
-        birthDate: '2003-07-01',
-        phoneNumber: '0787989834',
-        email: 'hellotest@prisma.io',
-        password: 'mdppass',
-        dateCreation: '2023-07-03',
+describe('/api/user/me', () => {
+    test('Should return the logged user informations', async ()=> {
+        const mockHeaders = headers as jest.Mock
+
+        mockHeaders.mockImplementation(() => ({
+            get: jest.fn().mockReturnValue(user.id)
+        }))
+
+        const [accessToken, refreshToken]= await getLogged('user@user.com', 'mdppass')
+
+        const request = mockRequest("/api/user/me", 'GET', null, accessToken, `refreshToken=${refreshToken}`)
+
+        const res = await meGET(request)
+
+        if(res){
+            const data = await res.json()
+            expect(data).toEqual(expect.objectContaining(user))
+        }
+    })
+
+    test('Should update the logged user\'s informations', async ()=> {
+        const mockHeaders = headers as jest.Mock
+        mockHeaders.mockImplementation(() => ({
+            get: jest.fn().mockReturnValue(user.id)
+        }))
+
+        const [accessToken, refreshToken]= await getLogged('user@user.com', 'mdppass')
+
+        const request = mockRequest("/api/user/me", 'PATCH', {firstName: "new firstname"}, accessToken, `refreshToken=${refreshToken}`)
+
+        const res = await mePATCH(request)
+
+        if(res){
+            const data = await res.json()
+            expect(data).toEqual(expect.objectContaining({firstName: "new firstname"}))
+        }
     })
 })
 
-test('should update a users name ', async () => {
-    const user = {
-        id: 3,
-        firstName: 'James',
-        lastName: 'Boss',
-        birthDate: '2003-07-01',
-        phoneNumber: '0787989834',
-        email: 'JamesBoss@prisma.io',
-        password: 'mdppass',
-    }
-    // @ts-ignore
-    mockCtx.prisma.user.update.mockResolvedValue(user)
+describe('/api/user/[userId]', () => {
+    test('Should return the informations of a user', async ()=> {
+        const request = mockRequest(`/api/user/${user.id}`)
 
-    await expect(updateUsername(user, ctx)).resolves.toEqual({
-        id: 3,
-        firstName: 'James',
-        lastName: 'Boss',
-        birthDate: '2003-07-01',
-        phoneNumber: '0787989834',
-        email: 'JamesBoss@prisma.io',
-        password: 'mdppass',
+        const res = await userGET(request,{'params': {'userId': user.id}})
+
+        if(res){
+            const data = await res.json()
+            expect(data).toEqual(expect.objectContaining({
+                lastLesson: null,
+                instrument: [],
+                school: null,
+                style: null,
+            }))
+        }
+    })
+
+    test('Should return an error', async ()=> {
+        const request = mockRequest(`/api/user/8090`)
+
+        const res = await userGET(request,{'params': {'userId': 8090}})
+
+        if(res){
+            const data = await res.json()
+            expect(data).toEqual({'error': {"type": "UserNotFound"}})
+        }
+    })
+
+    describe('/api/user/delete', ()=> {
+        test('Should delete a user', async () => {
+            const userDelete = await userGenerator('user@delete.com')
+
+            const mockHeaders = headers as jest.Mock
+            mockHeaders.mockImplementation(() => ({
+                get: jest.fn().mockReturnValue(userDelete.id)
+            }))
+
+
+
+            const [accessToken, refreshToken]= await getLogged('user@delete.com', 'mdppass')
+
+            const request = mockRequest(`/api/user/delete`,'DELETE', null, accessToken)
+
+            const res = await userDELETE(request)
+
+            if(res){
+                const data = await res.json()
+                expect(data).toEqual(expect.objectContaining(userDelete))
+            }
+        })
     })
 })

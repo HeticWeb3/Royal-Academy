@@ -1,62 +1,30 @@
-import {PrismaClient} from "@prisma/client";
 import {NextResponse} from "next/server";
-
-//TODO : Add logged user
-
-/**
- *  Update d'un utilisateur connecté
- *
- * @param request
- * @param params
- * @return Promise<NextResponse> (Utilisateur update)
- */
-export async function PATCH(request: Request, params: { userId: number }) {
-    const res = await request.json()
-    const updateUser = new PrismaClient()
-    const user = await updateUser.user.update({
-        where: {
-            id: params.userId,
-            email: "test@test.com"
-        },
-        data: {
-            firstName: res.firstName,
-        }
-    })
-    return NextResponse.json(user, {status: 200,})
-}
+import {Users} from "../../../../../prisma/repository/user/user";
 
 /**
- * Supprime le user connecter
- *
- * @param request
- * @param params
- * @return Promise<NextResponse>
- */
-export async function DELETE(request: Request, params: { userId: number }) {
-    const deleteUser = new PrismaClient()
-    const user = await deleteUser.user.delete({
-        where: {
-            id: params.userId,
-            email: "test@test.com"
-        },
-    })
-    return NextResponse.json(user, {status: 200,})
-}
-
-/**
- * Récupère toutes les données du user en fonction de l'id connecter
+ * Récupère toutes les données de l'utilisateur en fonction de l'id connecter
  *
  * @param request
  * @param params
  * @return Promise<NextResponse> (les informations de l'utilisateur)
  */
-export async function GET(request: Request, params: { userId: number }) {
-    const getUser = new PrismaClient()
-    const user = await getUser.user.findUnique({
-        where: {
-            id: params.userId,
-            email: "test@test.com"
-        }
-    })
-    return NextResponse.json(user, {status: 200,})
+export async function GET(request: Request, {params}: { params: { userId: number } }) {
+
+    const users = new Users()
+    try {
+        const user = await users.execute().findUnique({
+            where: {
+                id: Number(params.userId),
+            }, include: {
+                instrument: true,
+                lastLesson: true,
+                school: true,
+                style: true,
+                course: true,
+            }
+        })
+        return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
+    } catch(e: any){
+        return NextResponse.json({'error': {"type": "UserNotFound"}}, {status: 401})
+    }
 }

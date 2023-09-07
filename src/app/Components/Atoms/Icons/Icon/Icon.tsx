@@ -13,7 +13,7 @@ export const Icon  : React.FC<iconProps> = ({ iconContent, iconSize,iconAlt,cont
                         alt={iconAlt}
                         />
                     :   <div className={'flex h-full'}>
-                        <span className={'m-auto text-center'}>{iconContent}</span>
+                            <span className={'m-auto text-center'}>{iconContent}</span>
                         </div>
                 }
             </div>

@@ -20,7 +20,7 @@
 
 @layer components {
   .button {
-    @apply p-3 text-sm font-bold rounded-sm;
+    @apply p-3 text-sm lg:text-base font-bold rounded-sm;
   }
 
   .formInput__wrapper{
@@ -34,13 +34,23 @@
   .formInput__wrapper.error .formInput{
     @apply text-red-base border-b-red-base;
   }
-
   .formInput {
-    @apply text-white bg-transparent border-b-grey-lighter border-b-[1px] py-3 text-sm font-normal placeholder:text-sm placeholder:font-light placeholder:font-main antialiased;
+    @apply text-white bg-transparent border-b-grey-lighter border-b-[1px] py-3 text-sm lg:text-base font-normal placeholder:text-sm placeholder:lg:text-base placeholder:font-light placeholder:font-main antialiased;
   }
+}
 
-  .DateInput > *,.DateInput > * > * {
-    @apply text-grey-lighter bg-transparent border-grey-lighter  py-3 text-sm font-normal antialiased;
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
   }
 }
 
