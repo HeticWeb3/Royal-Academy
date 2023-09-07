@@ -10,6 +10,7 @@ import FacebookImage from '/public/images/home/socialmedia/Facebook.svg'
 import InstagramImage from '/public/images/home/socialmedia/Instagram.svg'
 import LinkedinImage from '/public/images/home/socialmedia/Linkedin.svg'
 import YoutubeImage from '/public/images/home/socialmedia/Youtube.svg'
+import LogoImage from '/public/images/home/logo.webp'
 import {useRouter} from "next/navigation";
 import React from "react";
 import {Icon} from "@/app/Components/Atoms";
@@ -22,6 +23,16 @@ export default function Home() {
   return (
       <div className={'flex flex-col gap-lg lg:lg:gap-[120px] col-span-full my-lg'}>
         <section id={'homePresentation'} className="flex flex-col gap-lg lg:gap-[120px]">
+        <Image
+                            src={LogoImage}
+                            className={'lg:w-1/3'}
+                            alt={'Facebook'}
+                            style={{
+                                alignSelf:'center',
+                                width: '100px',
+                                height: '100px'
+                            }}
+                        />
 
            <div className={'bg-grey-darker rounded-base w-full'}>
                <div className={'relative h-[30vw] w-full rounded-base '}>
@@ -105,7 +116,7 @@ export default function Home() {
 
           <section id={'homePartners'} className={'flex flex-col gap-6 '}>
 
-                <h2 className={'text-sm lg:text-xxl lg:py-xl text-center'}>They trust us</h2>
+                <h2 className={'text-white font-normal text-base lg:py-xl text-center'}>They trust us</h2>
 
                 <div className={'grid grid-cols-4 gap-[30px] mx-xl justify-center lg:items-center'}>
                     <div className={'relative col-span-1'}>
@@ -215,6 +226,9 @@ export default function Home() {
                 </div>          
                 </div>
 
+                <div className="bg-white w-screen h-20">
+                    <p  className={'text-sm lg:text-base'}> © 2022 Musicampus - All rights reserved </p>
+                </div>
           </section>
     </div>
   )
