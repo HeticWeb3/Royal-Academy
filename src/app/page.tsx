@@ -104,7 +104,7 @@ export default function Home() {
 
           <section id={'homePartners'} className={'flex flex-col gap-6 '}>
 
-                <h2 className={'text-white font-normal text-base lg:py-xl text-center'}>They trust us</h2>
+                <h2 className={'text-white font-normal text-2xl lg:py-xl text-center'}>They trust us</h2>
 
                 <div className={'grid grid-cols-4 gap-[30px] mx-xl justify-center lg:items-center'}>
                     <div className={'relative col-span-1'}>
@@ -213,6 +213,7 @@ export default function Home() {
                     </div>
                 </div>          
                 </div>
+
           </section>
     </div>
   )

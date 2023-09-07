@@ -23,7 +23,6 @@ export default function RootLayout({
             <ContainerWide>
               {children}
             </ContainerWide>
-        <Footer></Footer>
       </AuthProvider>
       </body>
     </html>
