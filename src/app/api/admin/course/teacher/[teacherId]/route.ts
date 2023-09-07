@@ -1,4 +1,4 @@
-import {Course} from "../../../../../../../prisma/repository/course/course";
+import {Courses} from "../../../../../../../prisma/repository/course/course";
 import {Teachers} from "../../../../../../../prisma/repository/user/teacher";
 import {NextResponse} from "next/server";
 
@@ -19,7 +19,7 @@ export async function GET(request: Request, {params}: { params: {teacherId: numb
         }
     })
 
-    const courses = new Course()
+    const courses = new Courses()
 
     const course = await courses.execute().findMany({
         where: {
@@ -37,7 +37,7 @@ export async function GET(request: Request, {params}: { params: {teacherId: numb
  * @return Promise<NextResponse> (École mis à jour)
  */
 export async function PATCH(request: Request,{params}: { params: {teacherId: number }}) {
-    const courses = new Course()
+    const courses = new Courses()
     const res = await request.json()
 
     const course = await courses.execute().update({
@@ -54,5 +54,5 @@ export async function PATCH(request: Request,{params}: { params: {teacherId: num
             badge: res.badge || undefined,
         }
     })
-    return NextResponse.json(Course.exclude(course,[]), {status: 200,})
+    return NextResponse.json(Courses.exclude(course,[]), {status: 200,})
 }

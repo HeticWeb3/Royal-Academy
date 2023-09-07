@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server";
-import {Course} from "../../../../../../../prisma/repository/course/course";
+import {Courses} from "../../../../../../../prisma/repository/course/course";
 
 /**
  * Supprime cours
@@ -9,7 +9,7 @@ import {Course} from "../../../../../../../prisma/repository/course/course";
  * @return Promise<NextResponse>
  */
 export async function DELETE(request: Request, {params}: { params: { courseId: number } }) {
-    const courses = new Course()
+    const courses = new Courses()
 
     const course = await courses.execute().delete({
         where: {
