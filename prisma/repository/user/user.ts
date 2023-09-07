@@ -1,5 +1,5 @@
-import { PrismaClient, User } from '@prisma/client'
-import { prismaClient } from "../../prisma";
+import {PrismaClient, User} from '@prisma/client'
+import {prismaClient} from "../../prisma";
 
 type Signup = {
     email: string,
