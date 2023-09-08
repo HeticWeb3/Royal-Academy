@@ -23,7 +23,7 @@ export function AuthProvider({ children }: any) {
     const [userConnected, setUserConnected] = useState<null | UserDataProps>(null);
 
     const getUserInfo = async () => {
-        const response = await fetch('http://localhost:3000/api/user/me', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export function AuthProvider({ children }: any) {
     }
 
     const deleteRefreshToken = async () => {
-        const response = await fetch('http://localhost:3000/api/auth/logout', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -31,7 +31,7 @@ const ModifyUser: React.FC<ModifyUserProps> = ({
 
     const PatchUser = async () => {
         try {
-            await fetch('http://localhost:3000/api/user/me', {
+            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, {
                 method: 'PATCH',
                 headers: {
                     Authorization: `Bearer `+getCookie('accesstoken'),

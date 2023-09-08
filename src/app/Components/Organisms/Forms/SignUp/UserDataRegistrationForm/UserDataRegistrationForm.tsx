@@ -42,7 +42,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
 
     const createNewUser = async (data: RegistrationInputTypes, resetForm: Function) => {
         try {
-            await fetch('http://localhost:3000/api/auth/signup', {
+            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -18,34 +18,88 @@ model UploadFileUser {
 }
 
 model User {
-  id             Int              @id @default(autoincrement())
-  email          String           @unique
+  id             Int                @id @default(autoincrement())
+  email          String             @unique
   phoneNumber    String?
   lastName       String?
   firstName      String?
-  birthDate      DateTime?        @db.Date
+  birthDate      DateTime?          @db.Date
   password       String
   avatar         String?
-  style          Style?           @relation(fields: [styleId], references: [id])
-  lastLesson     Lesson?          @relation(fields: [lessonId], references: [id])
-  rank           Rank?            @relation(fields: [rankId], references: [id])
-  badge          Badge[]
+  lastLesson     Lesson?            @relation(fields: [lessonId], references: [id])
+  rank           Rank?              @relation(fields: [rankId], references: [id])
   bio            String?
   uploadFileUser UploadFileUser[]
-  school         School?          @relation(fields: [schoolId], references: [id])
+  school         School?            @relation(fields: [schoolId], references: [id])
   schoolId       Int?
   subscription   Subscription[]
   styleId        Int?
   lessonId       Int?
   rankId         Int?
-  dateCreation   DateTime         @db.Date
-  instrument     Instrument[]
-  course         Course[]
+  dateCreation   DateTime           @db.Date
+  Instruments    InstrumentOnUser[]
+  Courses        CourseOnUser[]
+  Styles         StyleOnUser[]
+  Badges         BadgeOnUser[]
+}
+
+model InstrumentOnUser {
+  instrument   Instrument @relation(fields: [instrumentId], references: [id])
+  instrumentId Int
+  user         User       @relation(fields: [userId], references: [id])
+  userId       Int
+
+  @@id([userId, instrumentId])
+}
+
+model CourseOnUser {
+  course   Course @relation(fields: [courseId], references: [id])
+  courseId Int
+  user     User   @relation(fields: [userId], references: [id])
+  userId   Int
+
+  @@id([userId, courseId])
+}
+
+model StyleOnUser {
+  style   Style @relation(fields: [styleId], references: [id])
+  styleId Int
+  user    User  @relation(fields: [userId], references: [id])
+  userId  Int
+
+  @@id([userId, styleId])
+}
+
+model BadgeOnUser {
+  badge   Style @relation(fields: [badgeId], references: [id])
+  badgeId Int
+  user    User  @relation(fields: [userId], references: [id])
+  userId  Int
+
+  @@id([userId, badgeId])
+}
+
+model InstrumentOnTeacher {
+  instrument   Instrument @relation(fields: [instrumentId], references: [id])
+  instrumentId Int
+  teacher      Teacher    @relation(fields: [teacherId], references: [id])
+  teacherId    Int
+
+  @@id([teacherId, instrumentId])
+}
+
+model StyleOnTeacher {
+  style     Style   @relation(fields: [styleId], references: [id])
+  styleId   Int
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+  teacherId Int
+
+  @@id([teacherId, styleId])
 }
 
 model Teacher {
-  id          Int          @id @default(autoincrement())
-  email       String       @unique
+  id          Int                   @id @default(autoincrement())
+  email       String                @unique
   lastName    String?
   firstName   String?
   description String?
@@ -56,8 +110,8 @@ model Teacher {
   photo       String[]
   career      String?
   course      Course[]
-  instrument  Instrument[]
-  style       Style[]
+  Instruments InstrumentOnTeacher[]
+  Styles      StyleOnTeacher[]
 }
 
 model School {
@@ -68,15 +122,15 @@ model School {
 }
 
 model Style {
-  id          Int           @id @default(autoincrement())
-  name        String?
-  description String?
-  rank        Rank[]
-  course      Course[]
-  competition Competition[]
-  user        User[]
-  teacher     Teacher?      @relation(fields: [teacherId], references: [id])
-  teacherId   Int?
+  id             Int              @id @default(autoincrement())
+  name           String?
+  description    String?
+  rank           Rank[]
+  course         Course[]
+  competition    Competition[]
+  StyleOnUser    StyleOnUser[]
+  BadgeOnUser    BadgeOnUser[]
+  StyleOnTeacher StyleOnTeacher[]
 }
 
 model Rank {
@@ -129,32 +183,30 @@ model Lesson {
 }
 
 model Course {
-  id           Int        @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   name         String?
   description  String?
-  level        Level      @relation(fields: [levelId], references: [id])
-  style        Style      @relation(fields: [styleId], references: [id])
-  instrument   Instrument @relation(fields: [instrumentId], references: [id])
+  level        Level          @relation(fields: [levelId], references: [id])
+  style        Style          @relation(fields: [styleId], references: [id])
+  instrument   Instrument     @relation(fields: [instrumentId], references: [id])
   lesson       Lesson[]
-  teacher      Teacher    @relation(fields: [teacherId], references: [id])
+  teacher      Teacher        @relation(fields: [teacherId], references: [id])
   levelId      Int
   styleId      Int
   teacherId    Int
   instrumentId Int
   badge        Badge[]
-  User         User?      @relation(fields: [userId], references: [id])
-  userId       Int?
+  CourseOnUser CourseOnUser[]
 }
 
 model Instrument {
-  id          Int           @id @default(autoincrement())
-  name        String?
-  description String?
-  course      Course[]
-  competition Competition[]
-  teacher     Teacher?      @relation(fields: [teacherId], references: [id])
-  teacherId   Int?
-  User        User[]
+  id                  Int                   @id @default(autoincrement())
+  name                String?
+  description         String?
+  course              Course[]
+  competition         Competition[]
+  InstrumentOnUser    InstrumentOnUser[]
+  InstrumentOnTeacher InstrumentOnTeacher[]
 }
 
 model Badge {
@@ -169,8 +221,6 @@ model Badge {
   lessonId  Int
   courseId  Int
   iconBadge IconBadge[]
-  User      User?       @relation(fields: [userId], references: [id])
-  userId    Int?
 }
 
 model IconBadge {
