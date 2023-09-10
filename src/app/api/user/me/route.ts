@@ -67,21 +67,20 @@ export async function PATCH(request: Request) {
             phoneNumber: res.phoneNumber || undefined,
             birthDate: res.birthDate || undefined,
             Instruments: {
-                    create:
-                   [ res.addInstrument?.map((instrument: Record<"id", number>) =>
+                createMany: {
+                   data:
+                       res.addInstrument?.map((instrument: Record<"id", number>) =>
                         ({
-                            instrument: {connect: {id: instrument.id}},
-                        }))],
-                deleteMany: {
-                    instrumentId: {
-                        in: res.delInstrument || undefined
-                    }
-                }
+                            instrumentId: instrument.id || undefined,
+                        }))
+                   },
+                deleteMany:
+                    res.delInstrument?.map((instrument: Record<"id", number>) =>
+                        ({
+                            instrumentId: instrument.id || undefined,
+                        }))
+
             }
-                //     res.delInstrument?.map((instrument: Record<"id", number>) => (
-                //         {instrumentId: instrument.id}
-                //     ))
-                // } || [{instrumentId: undefined}]
         }
     })
     return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})
