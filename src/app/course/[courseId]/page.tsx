@@ -5,6 +5,7 @@ import Course from "@/app/Components/Organisms/Course/Course"
 import {GET} from "@/Utils/Get/Get";
 import {useParams} from "next/navigation";
 import {coursesDataProps} from "@/app/Components/Types/Courses/coursesDataProps";
+import {Loading} from "@/app/Components/Atoms/Utils";
 
 const CoursePage = () => {
     const params = useParams();
@@ -34,7 +35,7 @@ const CoursePage = () => {
     }, [courseId]);
 
     if (!courseId || !courseData) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
     // Affichez les données de l'utilisateur sur la page de profil
     return (

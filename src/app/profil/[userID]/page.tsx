@@ -5,6 +5,7 @@ import {GET} from "@/Utils/Get/Get";
 import {CookieValueTypes, getCookie} from 'cookies-next';
 import {UserDataProps} from "@/app/Components/Types";
 import ProfilHomePage from "@/app/Components/Templates/Profil/ProfilHomePage/ProfilHomePage";
+import {Loading} from "@/app/Components/Atoms/Utils";
 
 const ProfilePage = () => {
     const params = useParams();
@@ -38,7 +39,7 @@ const ProfilePage = () => {
     }, [userID]);
 
     if (!userID || !userData) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
     // Affichez les données de l'utilisateur sur la page de profil
     return (

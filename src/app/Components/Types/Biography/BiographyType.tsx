@@ -11,3 +11,8 @@ export interface BiographyProps {
     school: string;
     titleWin: null | string;
 }
+
+export interface TeachersTypes {
+    integer: BiographyProps[]
+
+}
