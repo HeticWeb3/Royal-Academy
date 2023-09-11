@@ -16,20 +16,24 @@ export async function GET() {
         where: {
             id: Number(userID)
         }, include: {
-            instrument: true,
+            Instruments: {
+                include: {
+                    instrument: true
+                }
+            },
         }
     })
 
     return NextResponse.json(user, {status: 200})
 
-    const course = await prismaClient.course.findMany({
-        //TODO : On peut ajouter le niveau dans la querry (niveau du user)
-        where: {
-            instrument: {
-                AND: [
-
-                ]
-            },
-        }
-    });
+    // const course = await prismaClient.course.findMany({
+    //     //TODO : On peut ajouter le niveau dans la querry (niveau du user)
+    //     where: {
+    //         instrument: {
+    //             AND: [
+    //
+    //             ]
+    //         },
+    //     }
+    // });
 }

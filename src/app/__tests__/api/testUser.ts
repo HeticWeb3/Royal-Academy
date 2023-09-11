@@ -70,9 +70,9 @@ describe('/api/user/[userId]', () => {
             const data = await res.json()
             expect(data).toEqual(expect.objectContaining({
                 lastLesson: null,
-                instrument: [],
+                Instruments: [],
                 school: null,
-                style: null,
+                Styles: [],
             }))
         }
     })

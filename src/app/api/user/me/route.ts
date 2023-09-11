@@ -17,8 +17,16 @@ export async function GET(request: Request) {
         where: {
             id: Number(userID),
         }, include: {
-            instrument: true,
-            course: true
+            Instruments: {
+                include: {
+                    instrument: true
+                }
+            },
+            Courses: {
+                include: {
+                    course: true
+                }
+            },
         }
     })
 
@@ -37,21 +45,42 @@ export async function PATCH(request: Request) {
     const userID: string = <string>headersList.get('userID')
 
     const res = await request.json()
-
     const users = new Users()
     const user = await users.execute().update({
         where: {
             id: Number(userID),
         }, include: {
-            instrument: true,
-            course: true
+            Instruments: {
+                include: {
+                    instrument: true
+                }
+            },
+            Courses: {
+                include: {
+                    course: true
+                }
+            },
         },
         data: {
             firstName: res.firstName || undefined,
             lastName: res.lastName || undefined,
             phoneNumber: res.phoneNumber || undefined,
             birthDate: res.birthDate || undefined,
-            instrument: { connect: res.addInstrument, disconnect: res.delInstrument} || undefined,
+            Instruments: {
+                createMany: {
+                   data:
+                       res.addInstrument?.map((instrument: Record<"id", number>) =>
+                        ({
+                            instrumentId: instrument.id || undefined,
+                        }))
+                   },
+                deleteMany:
+                    res.delInstrument?.map((instrument: Record<"id", number>) =>
+                        ({
+                            instrumentId: instrument.id || undefined,
+                        }))
+
+            }
         }
     })
     return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})

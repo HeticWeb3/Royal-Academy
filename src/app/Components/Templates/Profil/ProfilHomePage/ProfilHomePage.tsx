@@ -13,8 +13,8 @@ const ProfilHomePage = ({user, isMyAccount}: {user: UserDataProps; isMyAccount: 
 
     const [showChooseInstruments,setShowChooseInstruments]= useState(false);
     const [showModifyUser,setShowModifyUser]= useState(false);
-    const [userInfo,setUserInfo] = useState(user.user);
-    const [userInstruments,setUserInstrument] = useState(user.user.instrument);
+    const [userInfo,setUserInfo] = useState(user);
+    const [userInstruments,setUserInstrument] = useState(user.instrument?user.instrument:[]);
 
     const OpenChooseIntruments = () => {
         setShowChooseInstruments(!showChooseInstruments);

@@ -16,11 +16,23 @@ export async function GET(request: Request, {params}: { params: { userId: number
             where: {
                 id: Number(params.userId),
             }, include: {
-                instrument: true,
+                Instruments: {
+                    include: {
+                        instrument: true
+                    }
+                },
                 lastLesson: true,
                 school: true,
-                style: true,
-                course: true,
+                Styles: {
+                    include: {
+                        style: true
+                    }
+                },
+                Courses: {
+                    include: {
+                        course: true
+                    }
+                },
             }
         })
         return NextResponse.json(Users.exclude(user, ['password']), {status: 200,})

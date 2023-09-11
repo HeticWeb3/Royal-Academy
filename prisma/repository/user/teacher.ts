@@ -1,9 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { prismaClient } from "../../prisma";
 
-
-
-
 export class Teachers {
     constructor(private prismaService: PrismaClient['teacher'] = prismaClient.teacher) {}
 
