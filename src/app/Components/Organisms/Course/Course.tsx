@@ -9,10 +9,10 @@ const Course = (data: { data: coursesDataProps }) => {
 
     return (
 
-        <div className={' flex flex-col gap-7 lg:gap-[6] col-span-full overflow-none'}>
+        <div className={' flex flex-col gap-7 lg:gap-[6] col-span-full'}>
 
 
-            <div className={'bg-red-light aspect-video flex flex-col justify-center items-centers w-full -ml-[15px] -ml-[77px] '}>
+            <div className={'bg-red-light aspect-video flex flex-col justify-center items-centers -mx-[15px] -mx-[77px] '}>
                 <h1 className={'text-lg uppercase lg:text-heading lg:mb-lg text-center'}>{singleCourses.name}</h1>
             </div>
 
