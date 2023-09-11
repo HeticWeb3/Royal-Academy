@@ -1,0 +1,1 @@
+<p className='@apply text-white text-[30x] text-center not-italic font-normal leading-[normal];'>© 2022 Musicampus - All rights reserved</p>
