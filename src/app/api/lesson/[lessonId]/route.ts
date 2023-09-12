@@ -15,6 +15,7 @@ export async function GET(request: Request, {params}: { params: { lessonId: numb
 
         }, include: {
             video: true,
+            teacher: true,
         }
     })
     return NextResponse.json(lesson, {status: 200})
