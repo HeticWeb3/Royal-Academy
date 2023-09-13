@@ -49,7 +49,7 @@ describe('/api/user/me', () => {
 
         const [accessToken, refreshToken]= await getLogged('user@user.com', 'mdppass')
 
-        const request = mockRequest("/api/user/me", 'PATCH', {firstName: "new firstname"}, accessToken, `refreshToken=${refreshToken}`)
+        const request = mockRequest("/api/user/me", 'PATCH', {firstName: "new firstname", addInstrument: [], delInstrument: []}, accessToken, `refreshToken=${refreshToken}`)
 
         const res = await mePATCH(request)
 
