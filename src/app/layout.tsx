@@ -25,6 +25,7 @@ export default function RootLayout({
             </ContainerWide>
       </AuthProvider>
       </body>
+      <Footer></Footer>
     </html>
   )
 }

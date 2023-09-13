@@ -82,7 +82,7 @@ const UserLogin: React.FunctionComponent = () => {
                             touched
                         } = props
                         return (
-                            <div className={'col-span-full lg:col-start-5 lg:col-end-9'}>
+                            <div className={'mt-32 col-span-full lg:col-start-5 lg:col-end-9'}>
 
                                 <Form id={"loginForm"} className={'p-4 grid grid-cols-2 gap-x-[12px] gap-y-[31px]'}>
 

@@ -220,7 +220,6 @@ export default function Home() {
                 <p  className={'relative col-span-1 text-white space-x-56 lg:text-base mt-8 ml-47'}>Policy of the cookies deposited</p>
                 <p  className={'relative col-span-1 text-white space-x-56 lg:text-base mt-8 ml-47'}>Privacy policy</p></div>
           </section>
-          <p className='@apply text-white text-[30x] text-center not-italic font-normal leading-[normal];'>© 2022 Musicampus - All rights reserved</p>
     </div>
   )
 }
