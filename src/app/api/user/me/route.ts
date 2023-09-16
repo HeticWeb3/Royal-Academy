@@ -17,6 +17,7 @@ export async function GET(request: Request) {
         where: {
             id: Number(userID),
         }, include: {
+            Timestamp: true,
             Instruments: {
                 include: {
                     instrument: true
