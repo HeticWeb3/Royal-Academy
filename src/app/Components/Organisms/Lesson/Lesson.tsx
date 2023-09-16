@@ -1,17 +1,34 @@
 import {lessonsDataProps} from "@/app/Components/Types/Lessons/lessonsDataProps";
 import ReactPlayer from 'react-player'
-import React, {useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
+import {useAuth} from "@/Utils/Contexts/AuthContext";
+
+
 
 const Lesson = (data: { data: lessonsDataProps }) => {
     const singleLesson = data.data
     const [isStarted, setIsStarted] = useState<string>('started');
-    const [videoPlayedSeconds, setVideoPlayedSeconds] = useState<number>(12)
-    const [videoIsPlaying, setVideoIsPlaying] = useState<boolean>(false)
+    const [videoIsPlaying,setVideoIsPlaying] = useState<boolean>(false);
+    const [videoPlayedSeconds, setVideoPlayedSeconds] = useState<number>(0)
     let buttonLabel = '';
+    const usersTimestamps = useAuth().userConnected?.Timestamp
 
-    console.log(singleLesson)
+    useEffect(() => {
+        usersTimestamps?.forEach((timeMark,index) => {
+
+            console.log('foreach')
+            if (timeMark.lessonId === singleLesson.id) {
+                console.log('if')
+                setVideoPlayedSeconds(timeMark.timestamp);
+                setIsStarted(timeMark.status);
+                return;
+            }
+        })
+    }, []);
+
+
 
     switch (isStarted) {
         case 'started':  buttonLabel = 'LESSON FINISHED'; break;
@@ -47,16 +64,16 @@ const Lesson = (data: { data: lessonsDataProps }) => {
                         onProgress={(progress) => {
                             setVideoPlayedSeconds(progress.playedSeconds);
                         }}
-                        onPlay={() => {
-                            return setVideoIsPlaying(true)
-                        }}
-                        onPause={() => {
-                            return setVideoIsPlaying(false)
-                        }}
                         onReady={(player) => {
                             player.seekTo(videoPlayedSeconds,'seconds');
+                            setVideoIsPlaying(true)
                         }}
-                        url={singleLesson.video[0].nom} controls={true} width={'100%'} height={'100%'} />
+                        playing={videoIsPlaying}
+                        url={singleLesson.video[0].nom}
+                        controls={true}
+                        light={true}
+                        playIcon={<Icon iconContent={'/icons/utils/play.svg'} iconSize={90} iconAlt={'Play'}/>}
+                        width={'100%'} height={'100%'} />
                 </div>
                 
                 <div>

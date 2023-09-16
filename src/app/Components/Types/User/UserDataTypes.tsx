@@ -15,5 +15,6 @@
     schoolId:number | null;
     styleId:number | null;
     instrument: any[]
+    Timestamp: any[]
 }
 

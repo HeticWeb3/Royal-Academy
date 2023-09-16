@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {lessonsDataProps} from "@/app/Components/Types/Lessons/lessonsDataProps";
 import {GET} from "@/Utils/Get/Get";
 import lesson from "@/app/Components/Organisms/Lesson/Lesson";
+import {Loading} from "@/app/Components/Atoms/Utils";
 
 
 const LessonPage = () => {
@@ -38,7 +39,7 @@ const LessonPage = () => {
     }, [lessonId]);
 
     if (!lessonId || !lessonData) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
     return (
         <>
