@@ -1,4 +1,5 @@
 export interface lessonsDataProps {
+    id : number;
     nom: string;
     description: string;
     video: string;

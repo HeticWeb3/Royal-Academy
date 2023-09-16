@@ -1,5 +1,5 @@
 import {coursesDataProps} from "@/app/Components/Types/Courses/coursesDataProps";
-import React , {useState,useEffect} from "react";
+import React , {useState} from "react";
 import Link from "next/link";
 
 const Course = (data: { data: coursesDataProps }) => {

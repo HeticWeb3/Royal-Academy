@@ -1,7 +1,6 @@
 "use client"; // This is a client component 👈🏽
-import React, {useState, useEffect,MouseEventHandler} from 'react'
+import React, {useState, useEffect} from 'react'
 import {FormRegisterComponent} from "@/app/Components/Types";
-import {SubscriptionInputTypes} from "@/app/Components/Types";
 
 const UserSubscriptionForm: React.FunctionComponent<FormRegisterComponent> = ({setRegistrationStepNumber}) => {
 

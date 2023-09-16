@@ -1,6 +1,6 @@
 import {lessonsDataProps} from "@/app/Components/Types/Lessons/lessonsDataProps";
 import ReactPlayer from 'react-player'
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Icon} from "@/app/Components/Atoms";
 import Link from "next/link";
 import {useAuth} from "@/Utils/Contexts/AuthContext";
@@ -8,25 +8,23 @@ import {useAuth} from "@/Utils/Contexts/AuthContext";
 
 
 const Lesson = (data: { data: lessonsDataProps }) => {
-    const singleLesson = data.data
+
+    let buttonLabel = '';
+    const usersTimestamps = useAuth().userConnected?.Timestamp
+    const [singleLesson,setSingleLesson] = useState<lessonsDataProps>(data.data)
     const [isStarted, setIsStarted] = useState<string>('started');
     const [videoIsPlaying,setVideoIsPlaying] = useState<boolean>(false);
     const [videoPlayedSeconds, setVideoPlayedSeconds] = useState<number>(0)
-    let buttonLabel = '';
-    const usersTimestamps = useAuth().userConnected?.Timestamp
 
-    useEffect(() => {
-        usersTimestamps?.forEach((timeMark,index) => {
-
-            console.log('foreach')
-            if (timeMark.lessonId === singleLesson.id) {
-                console.log('if')
-                setVideoPlayedSeconds(timeMark.timestamp);
-                setIsStarted(timeMark.status);
-                return;
-            }
-        })
-    }, []);
+    useEffect(()=> {
+            usersTimestamps?.forEach((timeMark,index) => {
+                if (timeMark.lessonId == singleLesson.id ) {
+                    setVideoPlayedSeconds(timeMark.timestamp)
+                    setIsStarted(timeMark.status)
+                    return;
+                }
+            })
+    }, [usersTimestamps])
 
 
 
