@@ -5,14 +5,17 @@ const Course = (data: { data: coursesDataProps }) => {
     const singleCourses = data.data
     const [lessons,setLessons] = useState<any>(singleCourses.lesson.sort( (a, b) => a.id - b.id));
     const [professors,setProfessors] = useState<any>(null);
+    const backgroundImageUrl = singleCourses.imageUrl
 
+    console.log(singleCourses)
+    console.log(singleCourses)
 
     return (
 
         <div className={' flex flex-col gap-7 lg:gap-[6] col-span-full'}>
-
-
-            <div className={'bg-red-light aspect-video flex flex-col justify-center items-centers -mx-[15px] -mx-[77px] '}>
+            <div
+                style={{backgroundImage: `url(${backgroundImageUrl})`}}
+                className={ `bg-cover aspect-video flex flex-col justify-center items-centers -mx-[15px] -mx-[77px]`}>
                 <h1 className={'text-lg uppercase lg:text-heading lg:mb-lg text-center'}>{singleCourses.name}</h1>
             </div>
 
