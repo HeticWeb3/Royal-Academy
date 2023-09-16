@@ -6,13 +6,13 @@ import {useEffect, useState} from "react";
 
 import {lessonsDataProps} from "@/app/Components/Types/Lessons/lessonsDataProps";
 import {GET} from "@/Utils/Get/Get";
+import lesson from "@/app/Components/Organisms/Lesson/Lesson";
 
 
 const LessonPage = () => {
     const params = useParams();
     const { lessonId } = params;
     const [lessonData, setLessonData] = useState<lessonsDataProps | null>(null);
-
 
     const fetchParams = (token: CookieValueTypes) => {
         return {
