@@ -1,10 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react';
-import {CookieValueTypes, getCookie} from 'cookies-next';
 import ProfilHomePage from "@/app/Components/Templates/Profil/ProfilHomePage/ProfilHomePage";
-import {UserProps} from "@/app/Components/Types/User/UserType";
 import {useAuth} from "@/Utils/Contexts/AuthContext";
 import {UserDataProps} from "@/app/Components/Types";
+import {Loading} from "@/app/Components/Atoms/Utils";
 
 const ProfilePage = () => {
 
@@ -21,7 +20,7 @@ const ProfilePage = () => {
     }, [auth.userConnected])
 
     if (!userLogged) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
     // Affichez les données de l'utilisateur sur la page de profil
     return (
