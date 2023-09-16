@@ -5,6 +5,7 @@ import {GET} from "@/Utils/Get/Get";
 import {CookieValueTypes, getCookie} from 'cookies-next';
 import {BiographyProps} from "@/app/Components/Types";
 import Biography from "@/app/Components/Organisms/Biography/Biography";
+import {Loading} from "@/app/Components/Atoms/Utils";
 
 const ProfessorPage = () => {
     const params = useParams();
@@ -35,7 +36,7 @@ const ProfessorPage = () => {
     }, [professorID]);
 
     if (!professorID || !teacherData) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
     return (
         <>

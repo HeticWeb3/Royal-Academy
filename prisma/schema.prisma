@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["extendedWhereUnique"]
 }
 
 datasource db {
@@ -41,6 +42,7 @@ model User {
   Courses        CourseOnUser[]
   Styles         StyleOnUser[]
   Badges         BadgeOnUser[]
+  Timestamp      Timestamp[]
 }
 
 model InstrumentOnUser {
@@ -97,21 +99,31 @@ model StyleOnTeacher {
   @@id([teacherId, styleId])
 }
 
+model CourseOnTeacher {
+  course    Course  @relation(fields: [courseId], references: [id])
+  courseId  Int
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+  teacherId Int
+
+  @@id([teacherId, courseId])
+}
+
 model Teacher {
-  id          Int                   @id @default(autoincrement())
-  email       String                @unique
-  lastName    String?
-  firstName   String?
-  description String?
-  school      String?
-  dateOfBirth DateTime
-  titleWin    String?
-  diploma     String?
-  photo       String[]
-  career      String?
-  course      Course[]
-  Instruments InstrumentOnTeacher[]
-  Styles      StyleOnTeacher[]
+  id              Int                   @id @default(autoincrement())
+  email           String                @unique
+  lastName        String?
+  firstName       String?
+  description     String?
+  school          String?
+  dateOfBirth     DateTime
+  titleWin        String?
+  diploma         String?
+  photo           String[]
+  career          String?
+  Instruments     InstrumentOnTeacher[]
+  Styles          StyleOnTeacher[]
+  Lesson          Lesson[]
+  CourseOnTeacher CourseOnTeacher[]
 }
 
 model School {
@@ -174,29 +186,33 @@ model Lesson {
   nom         String?
   description String?
   niveau      Level[]
+  imageUrl    String
+  teacher     Teacher      @relation(fields: [teacherId], references: [id])
   lessonFile  LessonFile[]
   video       Video[]
   course      Course?      @relation(fields: [courseId], references: [id])
   courseId    Int?
   badge       Badge[]
   user        User[]
+  teacherId   Int
+  Timestamp   Timestamp[]
 }
 
 model Course {
-  id           Int            @id @default(autoincrement())
-  name         String?
-  description  String?
-  level        Level          @relation(fields: [levelId], references: [id])
-  style        Style          @relation(fields: [styleId], references: [id])
-  instrument   Instrument     @relation(fields: [instrumentId], references: [id])
-  lesson       Lesson[]
-  teacher      Teacher        @relation(fields: [teacherId], references: [id])
-  levelId      Int
-  styleId      Int
-  teacherId    Int
-  instrumentId Int
-  badge        Badge[]
-  CourseOnUser CourseOnUser[]
+  id              Int               @id @default(autoincrement())
+  name            String?
+  description     String?
+  imageUrl        String
+  level           Level             @relation(fields: [levelId], references: [id])
+  style           Style             @relation(fields: [styleId], references: [id])
+  instrument      Instrument        @relation(fields: [instrumentId], references: [id])
+  lesson          Lesson[]
+  levelId         Int
+  styleId         Int
+  instrumentId    Int
+  badge           Badge[]
+  CourseOnUser    CourseOnUser[]
+  CourseOnTeacher CourseOnTeacher[]
 }
 
 model Instrument {
@@ -262,4 +278,14 @@ model Competition {
   levelId      Int
   styleId      Int
   instrumentId Int
+}
+
+model Timestamp {
+  id        Int    @id @default(autoincrement())
+  timestamp String
+  status    String
+  lesson    Lesson @relation(fields: [lessonId], references: [id])
+  lessonId  Int    @unique
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int
 }
