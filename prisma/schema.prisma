@@ -285,7 +285,9 @@ model Timestamp {
   timestamp String
   status    String
   lesson    Lesson @relation(fields: [lessonId], references: [id])
-  lessonId  Int    @unique
+  lessonId  Int
   user      User   @relation(fields: [userId], references: [id])
   userId    Int
+
+  @@unique([lessonId, userId], name: "userLessonIdentifier")
 }
