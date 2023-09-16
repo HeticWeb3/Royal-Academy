@@ -17,11 +17,11 @@ const Course = (data: { data: coursesDataProps }) => {
                 <h1 className={'text-lg uppercase lg:text-heading lg:mb-lg text-center'}>{singleCourses.name}</h1>
             </div>
 
-            <div className={'flex justify-center my-lg'}>
+            <Link href={`/lesson/${lessons[0].id}`} className={'flex justify-center my-lg'}>
                 <button className={'button bg-white text-blue-light w-full lg:w-1/4 hover:bg-blue-light hover:text-white transition-colors'}>
                     Start the lessons
                 </button>
-            </div>
+            </Link>
 
 
             <div className={'text'}>
