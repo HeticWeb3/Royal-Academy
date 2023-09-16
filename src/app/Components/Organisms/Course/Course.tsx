@@ -1,5 +1,6 @@
 import {coursesDataProps} from "@/app/Components/Types/Courses/coursesDataProps";
 import React , {useState,useEffect} from "react";
+import Link from "next/link";
 
 const Course = (data: { data: coursesDataProps }) => {
     const singleCourses = data.data
@@ -7,15 +8,12 @@ const Course = (data: { data: coursesDataProps }) => {
     const [professors,setProfessors] = useState<any>(null);
     const backgroundImageUrl = singleCourses.imageUrl
 
-    console.log(singleCourses)
-    console.log(singleCourses)
-
     return (
 
         <div className={' flex flex-col gap-7 lg:gap-[6] col-span-full'}>
             <div
                 style={{backgroundImage: `url(${backgroundImageUrl})`}}
-                className={ `bg-cover aspect-video flex flex-col justify-center items-centers -mx-[15px] -mx-[77px]`}>
+                className={ `bg-cover bg-center aspect-video flex flex-col justify-center items-centers -mx-[15px] -mx-[77px]`}>
                 <h1 className={'text-lg uppercase lg:text-heading lg:mb-lg text-center'}>{singleCourses.name}</h1>
             </div>
 
@@ -43,10 +41,14 @@ const Course = (data: { data: coursesDataProps }) => {
                 <div className={'flex flex-row flex-nowrap gap-7 overflow-x-scroll no-scrollbar mx-[-15px] px-[15px]'}>
                     {lessons?.map((lesson: Record<string, any>) => {
                         return (
-                            <div key={lesson.id} className={'max-w-[120px]'} >
-                                <div className={'w-[120px] h-[70px] bg-red-light rounded-sm'}></div>
-                                <h3 className={'truncate'}>{lesson.nom}</h3>
-                            </div>
+                            <Link href={`/lesson/${lesson.id}`}
+                                key={'lesson-'+lesson.id}
+                                className={'max-w-[120px]'} >
+                                <div
+                                    style={{backgroundImage: `url(${lesson.imageUrl})`}}
+                                    className={'w-[120px] h-[70px] bg-red-light rounded-sm bg-center bg-cover'}></div>
+                                <h3 className={'truncate text-center'}>{lesson.nom}</h3>
+                            </Link>
                         )
                     })}
                 </div>
