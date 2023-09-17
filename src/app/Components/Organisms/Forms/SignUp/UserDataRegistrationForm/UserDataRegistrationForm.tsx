@@ -56,7 +56,7 @@ const UserDataRegistrationForm: React.FunctionComponent<FormRegisterComponent> =
                         changeRegistrationStepNumber(2);
                     }
                     else {
-                        response.json().then(json => {
+                        response?.json().then(json => {
                             if (
                                 json.error.type === 'ValidationEmailError' &&
                                 response.status === 401

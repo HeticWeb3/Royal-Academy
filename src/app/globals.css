@@ -20,7 +20,7 @@
 
 @layer components {
   .button {
-    @apply p-3 text-sm lg:text-base font-bold rounded-sm;
+    @apply p-3 text-base font-bold rounded-sm;
   }
 
   .formInput__wrapper{
