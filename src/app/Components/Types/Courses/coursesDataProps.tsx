@@ -9,6 +9,7 @@ export interface coursesDataProps {
     teacher: Teacher;
     lesson: Lesson[];
     badge: Badge[]
+    imageUrl: string;
 }
 
 export interface courseDataJSON {
