@@ -1,4 +1,3 @@
-import {PrismaClient} from "@prisma/client";
 import {NextResponse} from "next/server";
 import {Course} from "../../../../../prisma/repository/course/course";
 
@@ -14,6 +13,12 @@ export async function GET(request: Request, {params}: { params: {courseId: numbe
         where: {
             id: Number(params.courseId),
         }, include: {
+            CourseOnTeacher: {
+                include : {
+                    course: true,
+                    teacher: true,
+                }
+            },
             lesson: true,
             style: true,
             level: true,

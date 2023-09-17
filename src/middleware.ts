@@ -10,10 +10,11 @@ export async function middleware(request: NextRequest) {
 
 
 export const config = {
-    matcher: ['/api/user/:path*', '/api/course/:path*'],
+    matcher: ['/api/user/:path*', '/api/course/:path*', '/api/timestamp/:path*'],
 }
 
 const protectedAPIRoutes = [
     '/api/user/.*',
     '/api/course/.*',
+    '/api/timestamp/.*',
 ]

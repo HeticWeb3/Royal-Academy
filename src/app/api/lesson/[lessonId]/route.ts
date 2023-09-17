@@ -12,9 +12,10 @@ export async function GET(request: Request, {params}: { params: { lessonId: numb
     const lesson = await lessons.execute().findUnique({
         where: {
             id: Number(params.lessonId),
-
         }, include: {
+            lessonFile: true,
             video: true,
+            teacher: true,
         }
     })
     return NextResponse.json(lesson, {status: 200})

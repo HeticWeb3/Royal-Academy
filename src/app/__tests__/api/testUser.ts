@@ -49,7 +49,7 @@ describe('/api/user/me', () => {
 
         const [accessToken, refreshToken]= await getLogged('user@user.com', 'mdppass')
 
-        const request = mockRequest("/api/user/me", 'PATCH', {firstName: "new firstname"}, accessToken, `refreshToken=${refreshToken}`)
+        const request = mockRequest("/api/user/me", 'PATCH', {firstName: "new firstname", addInstrument: [], delInstrument: []}, accessToken, `refreshToken=${refreshToken}`)
 
         const res = await mePATCH(request)
 
@@ -70,9 +70,9 @@ describe('/api/user/[userId]', () => {
             const data = await res.json()
             expect(data).toEqual(expect.objectContaining({
                 lastLesson: null,
-                instrument: [],
+                Instruments: [],
                 school: null,
-                style: null,
+                Styles: [],
             }))
         }
     })

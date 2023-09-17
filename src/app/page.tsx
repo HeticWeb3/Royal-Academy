@@ -6,6 +6,10 @@ import RCMImage from '/public/images/home/partners/RCM-Primary.svg'
 import RIAMImage from '/public/images/home/partners/RIAM.svg'
 import ColburnImage from '/public/images/home/partners/Colburn.png'
 import AIENImage from '/public/images/home/partners/AIEN.png'
+import FacebookImage from '/public/images/home/socialmedia/Facebook.svg'
+import InstagramImage from '/public/images/home/socialmedia/Instagram.svg'
+import LinkedinImage from '/public/images/home/socialmedia/Linkedin.svg'
+import YoutubeImage from '/public/images/home/socialmedia/Youtube.svg'
 import {useRouter} from "next/navigation";
 import React from "react";
 import {Icon} from "@/app/Components/Atoms";
