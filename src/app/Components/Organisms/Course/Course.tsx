@@ -8,7 +8,7 @@ const Course = (data: { data: coursesDataProps }) => {
     const sortedLessons = lessonsArray.sort((a, b) => a.id - b.id);
     const [lessons, setLessons] = useState<any>(sortedLessons);
     const [professors, setProfessors] = useState<any>(null);
-    const backgroundImageUrl = singleCourses;
+    const backgroundImageUrl = singleCourses.imageUrl;
 
 
     console.log(singleCourses)
