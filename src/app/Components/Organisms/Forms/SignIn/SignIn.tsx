@@ -76,8 +76,6 @@ const UserLogin: React.FunctionComponent = () => {
                         const {
                             values,
                             handleBlur,
-                            handleChange,
-                            isSubmitting,
                             errors,
                             touched
                         } = props
