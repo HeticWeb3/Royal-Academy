@@ -3,10 +3,13 @@ import React , {useState,useEffect} from "react";
 import Link from "next/link";
 
 const Course = (data: { data: coursesDataProps }) => {
-    const singleCourses = data.data
-    const [lessons,setLessons] = useState<any>(singleCourses.lesson.sort( (a, b) => a.id - b.id));
-    const [professors,setProfessors] = useState<any>(null);
-    const backgroundImageUrl = singleCourses.imageUrl
+    const singleCourses = data.data;
+    const lessonsArray = singleCourses.lesson || [];
+    const sortedLessons = lessonsArray.sort((a, b) => a.id - b.id);
+    const [lessons, setLessons] = useState<any>(sortedLessons);
+    const [professors, setProfessors] = useState<any>(null);
+    const backgroundImageUrl = singleCourses.imageUrl;
+
 
     console.log(singleCourses)
 
@@ -19,9 +22,13 @@ const Course = (data: { data: coursesDataProps }) => {
                 <h1 className={'text-lg uppercase lg:text-heading lg:mb-lg text-center'}>{singleCourses.name}</h1>
             </div>
             <div className={'flex justify-center my-lg'}>
-                <Link href={`/lesson/${lessons[0].id}`} className={' button text-center bg-white text-blue-light w-full lg:w-1/4 hover:bg-blue-light hover:text-white transition-colors'}>
-                Start the lessons
-                </Link>
+                {lessons.length > 0 ? (
+                    <Link href={`/lesson/${lessons[0].id}`} className={'button text-center bg-white text-blue-light w-full lg:w-1/4 hover:bg-blue-light hover:text-white transition-colors'}>
+                        Start the lessons
+                    </Link>
+                ) : (
+                    <p>No lessons available</p>
+                )}
             </div>
 
             <div className={'lg:grid lg:gap-7 lg:grid-cols-12'}>
