@@ -15,7 +15,6 @@ export async function GET(request: Request, {params}: { params: {courseId: numbe
         }, include: {
             CourseOnTeacher: {
                 include : {
-                    course: true,
                     teacher: true,
                 }
             },
