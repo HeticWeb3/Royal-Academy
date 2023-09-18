@@ -25,15 +25,4 @@ export async function GET() {
     })
 
     return NextResponse.json(user, {status: 200})
-
-    // const course = await prismaClient.course.findMany({
-    //     //TODO : On peut ajouter le niveau dans la querry (niveau du user)
-    //     where: {
-    //         instrument: {
-    //             AND: [
-    //
-    //             ]
-    //         },
-    //     }
-    // });
 }
