@@ -33,7 +33,7 @@ interface ChooseInstrumentsProps {
 
         const fetchInstruments = async () => {
             try {
-                const instruments = await GET({url:`instrument/all`, params:fetchParams(getCookie('accesstoken'))});
+                const instruments = await GET({url:`/api/instrument/all`, params:fetchParams(getCookie('accesstoken'))});
                 const data: instrumentsDataProps[] = await instruments;
                 setAllInstruments(data);
             } catch (error) {
