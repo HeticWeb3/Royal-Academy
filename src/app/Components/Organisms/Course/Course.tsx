@@ -24,15 +24,6 @@ const Course = (data: { data: coursesDataProps }) => {
                 </Link>
             </div>
 
-
-            <div className={'text'}>
-                {//professors?.map((prof => {
-                    //  <p>{prof.firstName?prof.firstName:null} {prof.lastName?prof.lastName:null} </p>
-                    //   }
-                    //    ))
-                }
-
-            </div>
             <div className={'lg:grid lg:gap-7 lg:grid-cols-12'}>
                 <div className={'lg:mb-[120px] col-span-8 flex flex-col gap-lg'}>
                     <p className={'text-center'}>{singleCourses.level.nom} - {singleCourses.instrument.name}</p>
